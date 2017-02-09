@@ -6,12 +6,6 @@
   <componentIcon>icon-xl.png,icon-xs.png</componentIcon>
   <componentPid>component_pid_transfrom</componentPid>
   <params>
-    <param>
-      <name>conditionExpr</name>
-      <description>conditionExpr</description>
-      <type>text</type>
-      <nullable>false</nullable>
-    </param>
 
   </params>
 </component>
