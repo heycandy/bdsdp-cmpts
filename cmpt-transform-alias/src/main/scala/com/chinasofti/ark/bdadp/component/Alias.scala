@@ -15,7 +15,6 @@ class Alias(id: String, name: String, log: Logger)
   var newName: String = null
 
   override def apply(inputT: SparkData): SparkData = {
-    log.info("===========" + name)
     Builder.build(inputT.getRawData.withColumnRenamed(existingName, newName))
   }
 

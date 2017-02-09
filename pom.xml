@@ -29,6 +29,8 @@
     <module>cmpt-transform-derive</module>
     <module>cmpt-source-csv</module>
     <module>cmpt-sink-logger</module>
+    <module>cmpt-source-json</module>
+    <module>cmpt-source-jdbc</module>
 
   </modules>
 

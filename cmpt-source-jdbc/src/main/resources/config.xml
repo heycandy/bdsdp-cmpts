@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component>
+  <componentName>component_source_jdbc</componentName>
+  <componentDescription>component_source_csv</componentDescription>
+  <componentClass>com.chinasofti.ark.bdadp.component.JDBCSource</componentClass>
+  <componentIcon>icon-xl.png,icon-xs.png</componentIcon>
+  <componentPid>component_pid_transfrom</componentPid>
+  <params>
+    <param>
+      <name>conUrl</name>
+      <description>conUrl</description>
+      <type>text</type>
+      <nullable>false</nullable>
+    </param>
+    <param>
+      <name>table</name>
+      <description>table</description>
+      <type>text</type>
+      <nullable>true</nullable>
+    </param>
+    <param>
+      <name>userName</name>
+      <description>userName</description>
+      <type>text</type>
+      <nullable>true</nullable>
+    </param>
+    <param>
+      <name>passWord</name>
+      <description>passWord</description>
+      <type>text</type>
+      <nullable>true</nullable>
+    </param>
+
+  </params>
+</component>
