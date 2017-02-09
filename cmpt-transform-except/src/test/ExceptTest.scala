@@ -25,7 +25,7 @@ object ExceptTest {
     val input = options.getParameter.getOrDefault("pipeline.input",
       """[{"name": "zhang", "age": 18},{"name": "wang", "age": 25},{"name": "bai", "age": 30}]""")
     val input2 = options.getParameter.getOrDefault("pipeline.input2",
-      """[{"name": "liu", "money": 18},{"name": "xiao", "money": 25},{"name": "bai", "money": 30}]""")
+      """[{"name": "liu", "age": 18},{"name": "xiao", "age": 25},{"name": "bai", "age": 30}]""")
     val transform = options.getParameter.getOrDefault("pipeline.transform",
       """[{"id": "1", "name": "except"}]""")
 
