@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component>
+  <componentName>component_transform_filter</componentName>
+  <componentDescription>component_transform_filter</componentDescription>
+  <componentClass>com.chinasofti.ark.bdadp.component.Filter</componentClass>
+  <componentIcon>icon-xl.png,icon-xs.png</componentIcon>
+  <componentPid>component_pid_transfrom</componentPid>
+  <params>
+    <param>
+      <name>conditionExpr</name>
+      <description>conditionExpr</description>
+      <type>text</type>
+      <nullable>false</nullable>
+    </param>
+
+  </params>
+</component>

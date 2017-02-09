@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component>
+  <componentName>component_file_decompression</componentName>
+  <componentDescription>component_file_decompression</componentDescription>
+  <componentClass>com.chinasofti.ark.bdadp.component.sample.FileDecompressionRunnableComponent
+  </componentClass>
+  <componentIcon>icon-xl.png,icon-xs.png</componentIcon>
+  <!-- 60px * 60px, 20px * 20px -->
+  <componentPid>component_pid_common</componentPid>
+  <params>
+    <param>
+      <name>file_source</name>
+      <description>file_source</description>
+      <type>options</type>
+      <nullable>false</nullable>
+      <defaultOptions>
+        <option name="local" desc="local" value="0"/>
+        <option name="hdfs" desc="hdfs" value="1"/>
+      </defaultOptions>
+      <defaultValue>0</defaultValue>
+    </param>
+    <param>
+      <name>file_path</name>
+      <description>file_path</description>
+      <type>text</type>
+      <nullable>false</nullable>
+    </param>
+    <param>
+      <name>file_name</name>
+      <description>file_name</description>
+      <type>text</type>
+      <nullable>false</nullable>
+    </param>
+    <param>
+      <name>file_type</name>
+      <description>file_type</description>
+      <type>options</type>
+      <nullable>false</nullable>
+      <defaultOptions>
+        <option name="zip" desc="zip" value="0"/>
+        <option name="tar" desc="tar" value="1"/>
+        <option name="gz" desc="gz" value="2"/>
+      </defaultOptions>
+      <defaultValue>0</defaultValue>
+    </param>
+    <param>
+      <name>dest_source</name>
+      <description>dest_source</description>
+      <type>options</type>
+      <nullable>false</nullable>
+      <defaultOptions>
+        <option name="local" desc="local" value="0"/>
+        <option name="hdfs" desc="hdfs" value="1"/>
+      </defaultOptions>
+      <defaultValue>0</defaultValue>
+    </param>
+    <param>
+      <name>dest_path</name>
+      <description>dest_path</description>
+      <type>text</type>
+      <nullable>false</nullable>
+    </param>
+
+  </params>
+</component>
