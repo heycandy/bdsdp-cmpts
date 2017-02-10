@@ -7,6 +7,7 @@ import com.chinasofti.ark.bdadp.component.api.Configureable
 import com.chinasofti.ark.bdadp.component.api.data.{Builder, SparkData, StringData}
 import com.chinasofti.ark.bdadp.component.api.options.SparkScenarioOptions
 import com.chinasofti.ark.bdadp.component.api.source.{SourceComponent, SparkSourceAdapter}
+import org.apache.spark.sql.DataFrame
 import org.slf4j.Logger
 
 import scala.collection.JavaConversions._
@@ -21,9 +22,9 @@ class JSONSource(id: String, name: String, log: Logger)
   var charset: String = null
 
   override def call(): StringData = {
-    Builder.build(
-      ("" +: Files.readAllLines(Paths.get(path.replace("file:///", "")), Charset.forName(charset)))
-        .mkString("\n"))
+    val newPath = ("" +: Files.readAllLines(Paths.get(path.replace("file:///", "")), Charset.forName(charset)))
+      .mkString("\n")
+    Builder.build(newPath)
   }
 
   override def configure(componentProps: ComponentProps): Unit = {
@@ -32,6 +33,8 @@ class JSONSource(id: String, name: String, log: Logger)
   }
 
   override def spark(sparkScenarioOptions: SparkScenarioOptions): SparkData = {
-    Builder.build(sparkScenarioOptions.sqlContext().read.json(path))
+    val sqlContext = sparkScenarioOptions.sqlContext()
+    val jsonDF = sqlContext.read.json(path)
+    Builder.build(jsonDF)
   }
 }

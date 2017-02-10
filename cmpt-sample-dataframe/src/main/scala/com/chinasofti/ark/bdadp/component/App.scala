@@ -26,6 +26,8 @@ object App {
                                                       """[{"id": "1", "name": "distinct","withReplacement":"true","fraction":"0.7"}]""")
 
     options.setDebug(true)
+    options.setScenarioId("1")
+    options.setExecutionId("1")
 
     //制作RDD，Nil是一个空的List[Nothing]
 

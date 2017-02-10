@@ -1,3 +1,4 @@
+
 package com.chinasofti.ark.bdadp.component
 
 import com.chinasofti.ark.bdadp.component.api.Configureable

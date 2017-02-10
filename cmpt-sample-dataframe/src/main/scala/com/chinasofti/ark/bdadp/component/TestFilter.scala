@@ -13,7 +13,7 @@ import org.slf4j.LoggerFactory
 /**
  * Created by Administrator on 2017.1.16.
  */
-object TestAlias {
+object TestFilter {
 
   def main(args: Array[String]) {
 
@@ -21,10 +21,10 @@ object TestAlias {
     val options = PipelineOptionsFactory.fromArgs(args).as(classOf[ScenarioOptions])
 
     val input = options.getParameter.getOrDefault("pipeline.input",
-                                                  """[{"name": "xiao", "age": 25},{"name": "xiao", "age": 25},{"name": "bai", "age": 30}]""")
+                                                  """[{"name": "aaa", "age": 18},{"name": "bbb", "age": 25},{"name": "ccc", "age": 30}]""")
 
     val transform = options.getParameter.getOrDefault("pipeline.transform",
-                                                      """[{"id": "1", "name": "alias","existingName":"age","newName":"age2"}]""")
+                                                      """[{"id": "1", "name": "filter","conditionExpr":"name = 'aaa'"}]""")
 
     options.setDebug(true)
     options.setScenarioId("1")
@@ -52,8 +52,7 @@ object TestAlias {
       val task = new TransformableTask(f.id, f.name, options, clazz)
       val props = new ComponentProps()
 
-      props.setProperty("existingName", f.existingName)
-      props.setProperty("newName", f.newName)
+      props.setProperty("conditionExpr", f.conditionExpr)
 
       task.configure(props)
 
@@ -81,7 +80,7 @@ object TestAlias {
 
   }
 
-  case class TransformModel(id: String, name: String, existingName: String, newName: String)
+  case class TransformModel(id: String, name: String, conditionExpr: String)
 
 }
 
