@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component>
+  <componentName>component_source_parquet</componentName>
+  <componentDescription>component_source_parquet</componentDescription>
+  <componentClass>com.chinasofti.ark.bdadp.component.ParquetSource</componentClass>
+  <componentIcon>icon-xl.png,icon-xs.png</componentIcon>
+  <componentPid>component_pid_transfrom</componentPid>
+  <params>
+    <param>
+      <name>path</name>
+      <description>path</description>
+      <type>text</type>
+      <nullable>false</nullable>
+    </param>
+   </params>
+</component>
