@@ -1,16 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <component>
-  <componentName>component_transform_filter</componentName>
-  <componentDescription>component_transform_filter</componentDescription>
-  <componentClass>com.chinasofti.ark.bdadp.component.Filter</componentClass>
+  <componentName>component_transform_sample</componentName>
+  <componentDescription>component_transform_sample</componentDescription>
+  <componentClass>com.chinasofti.ark.bdadp.component.Sample</componentClass>
   <componentIcon>icon-xl.png,icon-xs.png</componentIcon>
   <componentPid>component_pid_transfrom</componentPid>
   <params>
     <param>
-      <name>conditionExpr</name>
-      <description>conditionExpr</description>
+      <name>withReplacement</name>
+      <description>withReplacement</description>
+      <type>option</type>
+      <nullable>false</nullable>
+    </param>
+    <param>
+      <name>fraction</name>
+      <description>fraction</description>
       <type>text</type>
       <nullable>false</nullable>
+    </param>
+    <param>
+      <name>seed</name>
+      <description>seed</description>
+      <type>text</type>
+      <nullable>true</nullable>
     </param>
 
   </params>

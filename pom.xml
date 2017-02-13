@@ -32,6 +32,10 @@
     <module>cmpt-source-json</module>
     <module>cmpt-source-jdbc</module>
     <module>cmpt-transform-fill</module>
+    <module>cmpt-transform-groupBy</module>
+    <module>cmpt-transform-select</module>
+    <module>cmpt-source-parquet</module>
+    <module>cmpt-transform-aggregate</module>
 
   </modules>
 
