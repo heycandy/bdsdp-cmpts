@@ -36,6 +36,7 @@
     <module>cmpt-transform-select</module>
     <module>cmpt-source-parquet</module>
     <module>cmpt-transform-aggregate</module>
+    <module>cmpt-transform-union</module>
 
   </modules>
 
