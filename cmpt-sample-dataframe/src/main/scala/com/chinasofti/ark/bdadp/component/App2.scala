@@ -29,6 +29,8 @@ object App2 {
                                                       """[{"id": "1", "name": "join", "conditionExpr": "name"}]""")
 
     options.setDebug(true)
+    options.setScenarioId("1")
+    options.setExecutionId("1")
 
     val json1 = options.as(classOf[SparkScenarioOptions]).sparkContext().parallelize(input :: Nil)
     val json2 = options.as(classOf[SparkScenarioOptions]).sparkContext().parallelize(input2 :: Nil)

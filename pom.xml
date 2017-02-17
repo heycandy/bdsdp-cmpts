@@ -31,6 +31,15 @@
     <module>cmpt-sink-logger</module>
     <module>cmpt-source-json</module>
     <module>cmpt-source-jdbc</module>
+    <module>cmpt-transform-fill</module>
+    <module>cmpt-transform-replace</module>
+    <module>cmpt-sink-jdbc</module>
+    <module>cmpt-sink-csv</module>
+    <module>cmpt-transform-groupBy</module>
+    <module>cmpt-transform-select</module>
+    <module>cmpt-source-parquet</module>
+    <module>cmpt-transform-aggregate</module>
+    <module>cmpt-transform-union</module>
 
   </modules>
 

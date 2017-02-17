@@ -27,6 +27,8 @@ object TestAlias {
                                                       """[{"id": "1", "name": "alias","existingName":"age","newName":"age2"}]""")
 
     options.setDebug(true)
+    options.setScenarioId("1")
+    options.setExecutionId("1")
 
     val json = options.as(classOf[SparkScenarioOptions]).sparkContext().parallelize(input :: Nil)
     val rawData = options.as(classOf[SparkScenarioOptions]).sqlContext().jsonRDD(json)
