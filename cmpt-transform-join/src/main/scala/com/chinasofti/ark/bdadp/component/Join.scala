@@ -19,6 +19,10 @@ class Join(id: String, name: String, log: Logger)
   var conditionExpr: String = null
 
   override def apply(inputT: util.Collection[SparkData]): SparkData = {
+    for(in <- inputT){
+      info("~~~~start~~~~~" + in.getRawData.collect().foreach(println) )
+
+    }
     Builder.build(inputT.map(_.getRawData).reduce((f, s) => f.join(s, conditionExpr)))
   }
 
