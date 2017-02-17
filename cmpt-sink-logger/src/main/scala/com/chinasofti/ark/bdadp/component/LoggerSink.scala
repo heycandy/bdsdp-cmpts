@@ -24,8 +24,7 @@ class LoggerSink(id: String, name: String, log: Logger)
   }
 
   override def apply(inputT: SparkData): Unit = {
-    info(("" :: inputT.getRawData.toString() ::
-          Nil ++ inputT.getRawData.take(numRows)).mkString("\n"))
-
+    ("" :: inputT.getRawData.toString() ::
+      Nil ++ inputT.getRawData.take(numRows)).foreach(row => info(row.toString()))
   }
 }

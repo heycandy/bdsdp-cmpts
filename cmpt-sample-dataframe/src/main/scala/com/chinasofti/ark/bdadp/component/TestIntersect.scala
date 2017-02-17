@@ -1,5 +1,3 @@
-package com.chinasofti.ark.bdadp.component.sample
-
 import java.util
 
 import com.chinasofti.ark.bdadp.component.ComponentProps
@@ -15,7 +13,7 @@ import org.slf4j.LoggerFactory
 /**
   * Created by White on 2017/1/3.
   */
-object ExceptTest {
+object TestIntersect {
 
   def main(args: Array[String]) {
     val log = LoggerFactory.getLogger(this.getClass)
@@ -23,11 +21,11 @@ object ExceptTest {
     val options = PipelineOptionsFactory.fromArgs(args).as(classOf[ScenarioOptions])
 
     val input = options.getParameter.getOrDefault("pipeline.input",
-      """[{"name": "zhang", "age": 18},{"name": "wang", "age": 25},{"name": "bai", "age": 30}]""")
-    val input2 = options.getParameter.getOrDefault("pipeline.input2",
       """[{"name": "liu", "age": 18},{"name": "xiao", "age": 25},{"name": "bai", "age": 30}]""")
+    val input2 = options.getParameter.getOrDefault("pipeline.input2",
+      """[{"name": "liu", "age": 11},{"name": "xiao", "age": 25},{"name": "bai", "age": 30}]""")
     val transform = options.getParameter.getOrDefault("pipeline.transform",
-      """[{"id": "1", "name": "except"}]""")
+      """[{"id": "1", "name": "intersect"}]""")
 
     options.setDebug(true)
 
