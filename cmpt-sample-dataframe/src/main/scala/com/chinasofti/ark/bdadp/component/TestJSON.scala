@@ -1,7 +1,7 @@
 package com.chinasofti.ark.bdadp.component
 
 import com.chinasofti.ark.bdadp.component.api.channel.MemoryChannel
-import com.chinasofti.ark.bdadp.component.api.data.{SparkData, Data}
+import com.chinasofti.ark.bdadp.component.api.data.Data
 import com.chinasofti.ark.bdadp.component.api.options.{PipelineOptionsFactory, ScenarioOptions}
 import com.chinasofti.ark.bdadp.component.api.sink.SinkComponent
 import com.chinasofti.ark.bdadp.component.api.source.SourceComponent
@@ -23,11 +23,11 @@ object TestJSON {
     options.setScenarioId("1")
     options.setExecutionId("1")
 
-    val source = options.getParameter.getOrDefault("pipeline.source",
+    val source = options.getSettings.getOrDefault("pipeline.source",
       """{"id": "1", "name": "JSONSource", "path": "D:\\2017sparkDev\\aaa.json"}""")
-    val transform = options.getParameter.getOrDefault("pipeline.transform",
+    val transform = options.getSettings.getOrDefault("pipeline.transform",
       """{"id": "2", "name": "Filter", "conditionExpr": "age > 20"}""")
-    val sink = options.getParameter.getOrDefault("pipeline.sink",
+    val sink = options.getSettings.getOrDefault("pipeline.sink",
       """{"id": "3", "name": "LoggerSink", "numRows": "20"}""")
 
     val mapper = new ObjectMapper() with ScalaObjectMapper

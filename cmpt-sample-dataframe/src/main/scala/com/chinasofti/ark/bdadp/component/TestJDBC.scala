@@ -36,15 +36,15 @@ object TestJDBC {
 
   def testSelect(options: ScenarioOptions,conditionExpr: String):Unit = {
 
-    val source = options.getParameter.getOrDefault("pipeline.source",
+    val source = options.getSettings.getOrDefault("pipeline.source",
       """{"id": "1", "name": "JDBCSource", "conUrl": "jdbc:mysql://localhost:3306/testjdbc?useUnicode=true&characterEncoding=UTF-8&autoReconnect=true", "table": "example", "userName": "root", "passWord": "mysql"}""")
-    val source2 = options.getParameter.getOrDefault("pipeline.source",
+    val source2 = options.getSettings.getOrDefault("pipeline.source",
       """{"id": "1", "name": "JDBCSource", "conUrl": "jdbc:mysql://localhost:3306/testjdbc2?useUnicode=true&characterEncoding=UTF-8&autoReconnect=true", "table": "example", "userName": "root", "passWord": "mysql"}""")
-//    val source3 = options.getParameter.getOrDefault("pipeline.source",
+    //    val source3 = options.getSettings.getOrDefault("pipeline.source",
 //      """{"id": "1", "name": "JDBCSource", "conUrl": "jdbc:mysql://localhost:3306/testjdbc3?useUnicode=true&characterEncoding=UTF-8&autoReconnect=true", "table": "example", "userName": "root", "passWord": "mysql"}""")
-    val transform = options.getParameter.getOrDefault("pipeline.transform",
+    val transform = options.getSettings.getOrDefault("pipeline.transform",
       """{"id": "2", "name": "Filter", "conditionExpr": "example_id = 11111"}""")
-    val sink = options.getParameter.getOrDefault("pipeline.sink",
+    val sink = options.getSettings.getOrDefault("pipeline.sink",
       """{"id": "3", "name": "LoggerSink", "numRows": "1"}""")
 
     val mapper = new ObjectMapper() with ScalaObjectMapper

@@ -23,11 +23,11 @@ object App3 {
     options.setScenarioId("1")
     options.setExecutionId("1")
 
-    val source = options.getParameter.getOrDefault("pipeline.source",
+    val source = options.getSettings.getOrDefault("pipeline.source",
       """{"id": "1", "name": "CSVSource", "path": "D:\\csv.csv", "header": "true"}""")
-    val transform = options.getParameter.getOrDefault("pipeline.transform",
+    val transform = options.getSettings.getOrDefault("pipeline.transform",
       """{"id": "2", "name": "Filter", "conditionExpr": "dac>100"}""")
-    val sink = options.getParameter.getOrDefault("pipeline.sink",
+    val sink = options.getSettings.getOrDefault("pipeline.sink",
       """{"id": "3", "name": "LoggerSink", "numRows": "20"}""")
 
     val mapper = new ObjectMapper() with ScalaObjectMapper

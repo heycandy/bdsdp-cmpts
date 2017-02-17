@@ -21,11 +21,11 @@ object App2 {
 
     val options = PipelineOptionsFactory.fromArgs(args).as(classOf[ScenarioOptions])
 
-    val input = options.getParameter.getOrDefault("pipeline.input",
+    val input = options.getSettings.getOrDefault("pipeline.input",
                                                   """[{"name": "liu", "age": 18},{"name": "xiao", "age": 25},{"name": "bai", "age": 30}]""")
-    val input2 = options.getParameter.getOrDefault("pipeline.input2",
+    val input2 = options.getSettings.getOrDefault("pipeline.input2",
                                                    """[{"name": "liu", "money": 18},{"name": "xiao", "money": 25},{"name": "bai", "money": 30}]""")
-    val transform = options.getParameter.getOrDefault("pipeline.transform",
+    val transform = options.getSettings.getOrDefault("pipeline.transform",
                                                       """[{"id": "1", "name": "join", "conditionExpr": "name"}]""")
 
     options.setDebug(true)
