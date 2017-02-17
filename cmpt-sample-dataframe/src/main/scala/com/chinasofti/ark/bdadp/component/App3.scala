@@ -24,11 +24,11 @@ object App3 {
     options.setExecutionId("1")
 
     val source = options.getParameter.getOrDefault("pipeline.source",
-                                                   """{"id": "1", "name": "CSVSource", "path": "/tmp/csv.csv", "header": "true"}""")
+      """{"id": "1", "name": "CSVSource", "path": "D:\\csv.csv", "header": "true"}""")
     val transform = options.getParameter.getOrDefault("pipeline.transform",
-                                                      """{"id": "2", "name": "Filter", "conditionExpr": "dac>100"}""")
+      """{"id": "2", "name": "Filter", "conditionExpr": "dac>100"}""")
     val sink = options.getParameter.getOrDefault("pipeline.sink",
-                                                 """{"id": "3", "name": "LoggerSink", "numRows": "20"}""")
+      """{"id": "3", "name": "LoggerSink", "numRows": "20"}""")
 
     val mapper = new ObjectMapper() with ScalaObjectMapper
     mapper.registerModule(DefaultScalaModule)
@@ -38,16 +38,16 @@ object App3 {
     val sinkModel = mapper.readValue[SinkModel](sink)
 
     val sourceClazz = Class.forName("com.chinasofti.ark.bdadp.component.CSVSource")
-        .asInstanceOf[Class[SourceComponent[_ <: Data[_]]]]
+      .asInstanceOf[Class[SourceComponent[_ <: Data[_]]]]
     val sourceTask = new SourceTask(sourceModel.id, sourceModel.name, options, sourceClazz)
 
     val transformClazz = Class.forName("com.chinasofti.ark.bdadp.component.Filter")
-        .asInstanceOf[Class[TransformableComponent[_ <: Data[_], _ <: Data[_]]]]
+      .asInstanceOf[Class[TransformableComponent[_ <: Data[_], _ <: Data[_]]]]
     val transformTask = new
-            TransformableTask(transformModel.id, transformModel.name, options, transformClazz)
+        TransformableTask(transformModel.id, transformModel.name, options, transformClazz)
 
     val sinkClazz = Class.forName("com.chinasofti.ark.bdadp.component.LoggerSink")
-        .asInstanceOf[Class[SinkComponent[_ <: Data[_]]]]
+      .asInstanceOf[Class[SinkComponent[_ <: Data[_]]]]
     val sinkTask = new SinkTask(sinkModel.id, sinkModel.name, options, sinkClazz)
 
     val channel1 = new MemoryChannel
@@ -61,16 +61,16 @@ object App3 {
     props.setProperty("numRows", sinkModel.numRows)
 
     sourceTask.addOChannel(channel1)
-    //    transformTask.addIChannel(channel1)
-    //    transformTask.addOChannel(channel2)
-    sinkTask.addIChannel(channel1)
+    transformTask.addIChannel(channel1)
+    transformTask.addOChannel(channel2)
+    sinkTask.addIChannel(channel2)
 
     sourceTask.configure(props)
     transformTask.configure(props)
     sinkTask.configure(props)
 
     sourceTask.run()
-    //    transformTask.run()
+    transformTask.run()
     sinkTask.run()
 
   }
