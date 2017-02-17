@@ -24,7 +24,7 @@ object TestJSON {
     options.setExecutionId("1")
 
     val source = options.getParameter.getOrDefault("pipeline.source",
-      """{"id": "1", "name": "JSONSource", "path": "D:\\aaa.json", "charset": "utf-8"}""")
+      """{"id": "1", "name": "JSONSource", "path": "D:\\2017sparkDev\\aaa.json"}""")
     val transform = options.getParameter.getOrDefault("pipeline.transform",
       """{"id": "2", "name": "Filter", "conditionExpr": "age > 20"}""")
     val sink = options.getParameter.getOrDefault("pipeline.sink",
@@ -56,7 +56,6 @@ object TestJSON {
     val props = new ComponentProps
 
     props.setProperty("path", sourceModel.path)
-    props.setProperty("charset", sourceModel.charset)
     props.setProperty("conditionExpr", transformModel.conditionExpr)
     props.setProperty("numRows", sinkModel.numRows)
 
@@ -75,7 +74,7 @@ object TestJSON {
 
   }
 
-  case class SourceModel(id: String, name: String, path: String, charset: String)
+  case class SourceModel(id: String, name: String, path: String)
 
   case class TransformModel(id: String, name: String, conditionExpr: String)
 

@@ -12,11 +12,5 @@
       <type>text</type>
       <nullable>false</nullable>
     </param>
-    <param>
-      <name>charset</name>
-      <description>charset</description>
-      <type>text</type>
-      <nullable>true</nullable>
-    </param>
   </params>
 </component>
