@@ -9,7 +9,7 @@
     <param>
       <name>withReplacement</name>
       <description>withReplacement</description>
-      <type>option</type>
+      <type>text</type>
       <nullable>false</nullable>
     </param>
     <param>
