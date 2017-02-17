@@ -15,19 +15,19 @@
     <param>
       <name>cols</name>
       <description>cols</description>
-      <type>String</type>
+      <type>text</type>
       <nullable>false</nullable>
     </param>
     <param>
       <name>valueType</name>
       <description>valueType</description>
-      <type>String</type>
+      <type>text</type>
       <nullable>false</nullable>
     </param>
     <param>
       <name>delimiter</name>
       <description>delimiter</description>
-      <type>String</type>
+      <type>text</type>
       <nullable>false</nullable>
     </param>
 
