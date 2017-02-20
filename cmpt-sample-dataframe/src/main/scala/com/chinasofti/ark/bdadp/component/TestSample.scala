@@ -20,9 +20,9 @@ object TestSample {
     val log = LoggerFactory.getLogger(this.getClass)
     val options = PipelineOptionsFactory.fromArgs(args).as(classOf[ScenarioOptions])
 
-    val input = options.getParameter.getOrDefault("pipeline.input",
+    val input = options.getSettings.getOrDefault("pipeline.input",
       """[{"name": "xiao", "age": 25},{"name": "xiao", "age": 25},{"name": "bai", "age": 30},{"name": "bai", "age": 30},{"name": "bai", "age": 30},{"name": "hh", "age": 15}]""")
-    val transform = options.getParameter.getOrDefault("pipeline.transform",
+    val transform = options.getSettings.getOrDefault("pipeline.transform",
       """[{"id": "1", "name": "sample","withReplacement":"true","fraction":"0.7","seed":"66"}]""")
 
 

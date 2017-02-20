@@ -20,9 +20,9 @@ object TestSelect {
     val log = LoggerFactory.getLogger(this.getClass)
     val options = PipelineOptionsFactory.fromArgs(args).as(classOf[ScenarioOptions])
 
-    val input = options.getParameter.getOrDefault("pipeline.input",
+    val input = options.getSettings.getOrDefault("pipeline.input",
       """[{"name": "bai", "age": -55,"work": 2,"sex":"male"},{"name": "xiao", "age": 25,"work": 2,"sex":"female"},{"name": "xiao", "age": 50,"work": 2,"sex":"male"}]""")
-    val transform = options.getParameter.getOrDefault("pipeline.transform",
+    val transform = options.getSettings.getOrDefault("pipeline.transform",
       """[{"id": "1", "name": "select","colExpr": "name,abs(age)"}]""")
 
     options.setDebug(true)

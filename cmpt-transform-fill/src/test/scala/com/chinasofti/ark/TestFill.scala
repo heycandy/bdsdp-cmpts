@@ -3,7 +3,7 @@ package com.chinasofti.ark
 import com.chinasofti.ark.bdadp.component.ComponentProps
 import com.chinasofti.ark.bdadp.component.api.channel.MemoryChannel
 import com.chinasofti.ark.bdadp.component.api.data.{Data, SparkData}
-import com.chinasofti.ark.bdadp.component.api.options.{SparkScenarioOptions, ScenarioOptions, PipelineOptionsFactory}
+import com.chinasofti.ark.bdadp.component.api.options.{PipelineOptionsFactory, ScenarioOptions, SparkScenarioOptions}
 import com.chinasofti.ark.bdadp.component.api.transforms.TransformableComponent
 import com.chinasofti.ark.bdadp.component.support.TransformableTask
 import com.fasterxml.jackson.databind.ObjectMapper
@@ -21,10 +21,10 @@ object TestFill {
     val log = LoggerFactory.getLogger(this.getClass)
     val options = PipelineOptionsFactory.fromArgs(args).as(classOf[ScenarioOptions])
 
-    val input = options.getParameter.getOrDefault("pipeline.input",
+    val input = options.getSettings.getOrDefault("pipeline.input",
       """[{"name": "aaa", "age": null, "money": null},{"name": "bbb", "age": 25, "money": null},{"name": "ccc", "age": 30, "money": null}]""")
 
-    val transform = options.getParameter.getOrDefault("pipeline.transform",
+    val transform = options.getSettings.getOrDefault("pipeline.transform",
       """[{"id": "1", "name": "fill","value":"100","cols":"age,money","valueType":"double","delimiter":","}]""")
 
     options.setDebug(true)

@@ -20,9 +20,9 @@ object App {
     //实例化一个 PipelineOptions
     val options = PipelineOptionsFactory.fromArgs(args).as(classOf[ScenarioOptions])
 
-    val input = options.getParameter.getOrDefault("pipeline.input",
+    val input = options.getSettings.getOrDefault("pipeline.input",
                                                   """[{"name": "xiao", "age": 25},{"name": "xiao", "age": 25},{"name": "bai", "age": 30},{"name": "bai", "age": 30},{"name": "bai", "age": 30},{"name": "hh", "age": 15}]""")
-    val transform = options.getParameter.getOrDefault("pipeline.transform",
+    val transform = options.getSettings.getOrDefault("pipeline.transform",
                                                       """[{"id": "1", "name": "distinct","withReplacement":"true","fraction":"0.7"}]""")
 
     options.setDebug(true)

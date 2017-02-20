@@ -20,10 +20,10 @@ object TestAlias {
     val log = LoggerFactory.getLogger(this.getClass)
     val options = PipelineOptionsFactory.fromArgs(args).as(classOf[ScenarioOptions])
 
-    val input = options.getParameter.getOrDefault("pipeline.input",
+    val input = options.getSettings.getOrDefault("pipeline.input",
                                                   """[{"name": "xiao", "age": 25},{"name": "xiao", "age": 25},{"name": "bai", "age": 30}]""")
 
-    val transform = options.getParameter.getOrDefault("pipeline.transform",
+    val transform = options.getSettings.getOrDefault("pipeline.transform",
                                                       """[{"id": "1", "name": "alias","existingName":"age","newName":"age2"}]""")
 
     options.setDebug(true)

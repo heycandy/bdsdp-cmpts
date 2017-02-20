@@ -32,7 +32,7 @@
     <module>cmpt-source-json</module>
     <module>cmpt-source-jdbc</module>
     <module>cmpt-transform-fill</module>
-    <module>cmpt-transform-replace</module>
+    <!--<module>cmpt-transform-replace</module>-->
     <module>cmpt-sink-jdbc</module>
     <module>cmpt-sink-csv</module>
     <module>cmpt-transform-groupBy</module>
@@ -68,16 +68,19 @@
         <groupId>org.scala-lang</groupId>
         <artifactId>scala-library</artifactId>
         <version>${scala.version}</version>
+        <scope>provided</scope>
       </dependency>
       <dependency>
         <groupId>org.scala-lang</groupId>
         <artifactId>scala-compiler</artifactId>
         <version>${scala.version}</version>
+        <scope>provided</scope>
       </dependency>
       <dependency>
         <groupId>org.scala-lang</groupId>
         <artifactId>scala-reflect</artifactId>
         <version>${scala.version}</version>
+        <scope>provided</scope>
       </dependency>
 
       <!-- hadoop -->
@@ -85,16 +88,7 @@
         <groupId>org.apache.hadoop</groupId>
         <artifactId>hadoop-common</artifactId>
         <version>${hadoop.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>org.apache.hadoop</groupId>
-        <artifactId>hadoop-hdfs</artifactId>
-        <version>${hadoop.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>org.apache.hadoop</groupId>
-        <artifactId>hadoop-client</artifactId>
-        <version>${hadoop.version}</version>
+        <scope>provided</scope>
       </dependency>
 
       <!-- spark -->
@@ -102,26 +96,31 @@
         <groupId>org.apache.spark</groupId>
         <artifactId>spark-core_${scala.binary.version}</artifactId>
         <version>${spark.version}</version>
+        <scope>provided</scope>
       </dependency>
       <dependency>
         <groupId>org.apache.spark</groupId>
         <artifactId>spark-sql_${scala.binary.version}</artifactId>
         <version>${spark.version}</version>
+        <scope>provided</scope>
       </dependency>
       <dependency>
         <groupId>org.apache.spark</groupId>
         <artifactId>spark-streaming_${scala.binary.version}</artifactId>
         <version>${spark.version}</version>
+        <scope>provided</scope>
       </dependency>
       <dependency>
         <groupId>org.apache.spark</groupId>
         <artifactId>spark-graphx_${scala.binary.version}</artifactId>
         <version>${spark.version}</version>
+        <scope>provided</scope>
       </dependency>
       <dependency>
         <groupId>org.apache.spark</groupId>
         <artifactId>spark-mllib_${scala.binary.version}</artifactId>
         <version>${spark.version}</version>
+        <scope>provided</scope>
       </dependency>
 
       <!-- external datasource -->
@@ -166,6 +165,7 @@
       <groupId>com.chinasofti.ark</groupId>
       <artifactId>bdadp-component</artifactId>
       <version>0.0.1-SNAPSHOT</version>
+      <scope>provided</scope>
     </dependency>
 
   </dependencies>
@@ -228,14 +228,14 @@
 
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
-          <artifactId>maven-assembly-plugin</artifactId>
-          <version>3.0.0</version>
+          <artifactId>maven-shade-plugin</artifactId>
+          <version>2.4.3</version>
           <executions>
             <execution>
-              <id>package</id>
+              <id>shade</id>
               <phase>package</phase>
               <goals>
-                <goal>single</goal>
+                <goal>shade</goal>
               </goals>
             </execution>
           </executions>
@@ -253,7 +253,7 @@
                 <target>
                   <copy
                       file="${project.build.directory}/${project.artifactId}-${project.version}.jar"
-                      tofile="../components/${project.artifactId}-${project.version}.jar"/>
+                      tofile="../components/${project.artifactId}/${project.artifactId}-${project.version}.jar"/>
                 </target>
 
               </configuration>
