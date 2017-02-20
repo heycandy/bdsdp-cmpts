@@ -5,4 +5,7 @@
   <componentClass>com.chinasofti.ark.bdadp.component.Intersect</componentClass>
   <componentIcon>icon-xl.png,icon-xs.png</componentIcon>
   <componentPid>component_pid_apply</componentPid>
+  <params>
+
+  </params>
 </component>
