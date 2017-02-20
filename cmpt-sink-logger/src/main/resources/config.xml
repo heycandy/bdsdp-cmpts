@@ -4,7 +4,7 @@
   <componentDescription>component_sink_show</componentDescription>
   <componentClass>com.chinasofti.ark.bdadp.component.LoggerSink</componentClass>
   <componentIcon>icon-xl.png,icon-xs.png</componentIcon>
-  <componentPid>component_pid_transfrom</componentPid>
+  <componentPid>component_pid_sink</componentPid>
   <params>
     <param>
       <name>numRows</name>
