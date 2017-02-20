@@ -4,14 +4,8 @@
   <componentDescription>component_transform_distinct</componentDescription>
   <componentClass>com.chinasofti.ark.bdadp.component.Distinct</componentClass>
   <componentIcon>icon-xl.png,icon-xs.png</componentIcon>
-  <componentPid>component_pid_transfrom</componentPid>
+  <componentPid>component_pid_apply</componentPid>
   <params>
-    <!-- <param>
-       <name>conditionExpr</name>
-       <description>conditionExpr</description>
-       <type>text</type>
-       <nullable>false</nullable>
-     </param>-->
 
   </params>
 </component>

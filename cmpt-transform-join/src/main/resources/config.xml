@@ -4,7 +4,7 @@
   <componentDescription>component_transform_join</componentDescription>
   <componentClass>com.chinasofti.ark.bdadp.component.Join</componentClass>
   <componentIcon>icon-xl.png,icon-xs.png</componentIcon>
-  <componentPid>component_pid_transfrom</componentPid>
+  <componentPid>component_pid_apply</componentPid>
   <params>
     <param>
       <name>conditionExpr</name>
