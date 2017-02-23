@@ -5,6 +5,7 @@ import java.util.Random
 import com.chinasofti.ark.bdadp.component.api.Configureable
 import com.chinasofti.ark.bdadp.component.api.data.{Builder, SparkData}
 import com.chinasofti.ark.bdadp.component.api.transforms.TransformableComponent
+import org.apache.spark.util.random.SamplingUtils
 import org.slf4j.Logger
 
 /**
@@ -18,6 +19,10 @@ class Sample(id: String, name: String, log: Logger)
   var seed: Long = 0
 
   override def apply(inputT: SparkData): SparkData = {
+//    val n = inputT.getRawData.sample(withReplacement, fraction, seed).collect().size
+//    if (10 != n)
+
+//    Builder.build(inputT.getRawData.sample(withReplacement, fraction, seed))
     Builder.build(inputT.getRawData.sample(withReplacement, fraction, seed))
   }
 

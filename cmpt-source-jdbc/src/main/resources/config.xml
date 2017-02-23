@@ -30,6 +30,29 @@
       <type>text</type>
       <nullable>true</nullable>
     </param>
-
+    <param>
+      <name>partitionColumn</name>
+      <description>partitionColumn</description>
+      <type>text</type>
+      <nullable>true</nullable>
+    </param>
+    <param>
+      <name>lowerBound</name>
+      <description>lowerBound</description>
+      <type>text</type>
+      <nullable>true</nullable>
+    </param>
+    <param>
+      <name>upperBound</name>
+      <description>upperBound</description>
+      <type>text</type>
+      <nullable>true</nullable>
+    </param>
+    <param>
+      <name>numPartitions</name>
+      <description>numPartitions</description>
+      <type>text</type>
+      <nullable>true</nullable>
+    </param>
   </params>
 </component>

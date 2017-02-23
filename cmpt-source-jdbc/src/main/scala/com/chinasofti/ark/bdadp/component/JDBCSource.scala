@@ -20,6 +20,10 @@ class JDBCSource(id: String, name: String, log: Logger)
      var table: String = null
      var userName: String = null
      var passWord: String = null
+     var partitionColumn: String = null    // 根据该字段分区，需要为整形，比如id等
+     var lowerBound: Long = 0   // 分区的下界
+     var upperBound: Long = 0    // 分区的上界
+     var numPartitions: Int = 0    // 分区的个数
      var properties = new Properties();
 
      override def call(): StringData = {
@@ -32,11 +36,16 @@ class JDBCSource(id: String, name: String, log: Logger)
        userName = componentProps.getString("userName")
        passWord = componentProps.getString("passWord")
 
+       partitionColumn = componentProps.getString("partitionColumn","*")
+       lowerBound = componentProps.getInt("lowerBound",1)
+       upperBound = componentProps.getInt("upperBound",10000000)
+       numPartitions = componentProps.getInt("numPartitions",8)
+
        properties.put("user", userName);
        properties.put("password", passWord);
      }
 
      override def spark(sparkScenarioOptions: SparkScenarioOptions): SparkData = {
-       Builder.build(sparkScenarioOptions.sqlContext().read.jdbc(conUrl,table,properties))
+       Builder.build(sparkScenarioOptions.sqlContext().read.jdbc(conUrl,table,partitionColumn,lowerBound,upperBound,numPartitions,properties))
      }
    }
