@@ -20,6 +20,7 @@ class ParquetSource(id: String, name: String, log: Logger)
 
   var path: String = null
   var charset: String = null
+  var mergeSchema: String = null
 
   override def call(): StringData = {
     Builder.build(
@@ -30,9 +31,10 @@ class ParquetSource(id: String, name: String, log: Logger)
   override def configure(componentProps: ComponentProps): Unit = {
     path = componentProps.getString("path")
     charset = componentProps.getString("charset", "UTF-8")
+    mergeSchema = componentProps.getString("mergeSchema", "true")
   }
 
   override def spark(sparkScenarioOptions: SparkScenarioOptions): SparkData = {
-    Builder.build(sparkScenarioOptions.sqlContext().read.parquet(path))
+    Builder.build(sparkScenarioOptions.sqlContext().read.option("mergeSchema",mergeSchema).parquet(path))
   }
 }

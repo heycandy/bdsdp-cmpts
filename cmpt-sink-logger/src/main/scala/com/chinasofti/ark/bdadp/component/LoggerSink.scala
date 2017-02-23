@@ -14,6 +14,7 @@ class LoggerSink(id: String, name: String, log: Logger)
             SparkSinkAdapter[SparkData] {
 
   var numRows: Int = 20
+  var numPartitions: Int = 0
 
   override def apply(inputT: StringData): Unit = {
     info(inputT.getRawData)
@@ -21,10 +22,11 @@ class LoggerSink(id: String, name: String, log: Logger)
 
   override def configure(componentProps: ComponentProps): Unit = {
     numRows = componentProps.getString("numRows", "20").toInt
+    numPartitions = componentProps.getString("numPartitions", "8").toInt
   }
 
   override def apply(inputT: SparkData): Unit = {
     ("" :: inputT.getRawData.toString() ::
-      Nil ++ inputT.getRawData.take(numRows)).foreach(row => info(row.toString()))
+      Nil ++ inputT.getRawData.repartition(numPartitions).take(numRows)).foreach(row => info(row.toString()))
   }
 }
