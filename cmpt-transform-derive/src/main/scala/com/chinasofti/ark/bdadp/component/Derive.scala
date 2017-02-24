@@ -18,7 +18,7 @@ class Derive (id: String, name: String, log: Logger)
 
   override def apply(inputT: SparkData): SparkData = {
     val df = inputT.getRawData
-    val expression : String = "( CASE WHEN " + conditionExpr + "  THEN " + "'"+ positiveResult +"'"+ " ELSE "+ "'" + negativeResult + "'"+ " END ) " + newColName
+    val expression : String = "( CASE WHEN " + conditionExpr + "  THEN " + positiveResult + " ELSE "+ "'" + negativeResult + "'"+ " END ) " + newColName
     Builder.build(df.selectExpr("*",expression))
 
   }
