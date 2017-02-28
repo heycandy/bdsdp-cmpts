@@ -11,23 +11,35 @@ import org.slf4j.Logger
 class Derive (id: String, name: String, log: Logger)
   extends TransformableComponent[SparkData, SparkData](id, name, log) with Configureable {
 
-  var conditionExpr: String = null
   var newColName : String = null
-  var positiveResult : String = null
-  var negativeResult : String = null
+  var conditionExprs: String = null
+  var values : String = null
+  var defaultValue : String = null
+  var delimiter: String = null
+  var map = Map[String, String]()
 
   override def apply(inputT: SparkData): SparkData = {
     val df = inputT.getRawData
-    val expression : String = "( CASE WHEN " + conditionExpr + "  THEN " + "'"+ positiveResult +"'"+ " ELSE "+ "'" + negativeResult + "'"+ " END ) " + newColName
+    val exprsArr = conditionExprs.split(delimiter)
+    val valArr = values.split(delimiter)
+
+    var expression  = "( "
+    for(i <- 0 to exprsArr.length){
+      expression += "CASE WHEN " + exprsArr(i) + "  THEN " +  valArr(i)
+    }
+
+    expression += " ELSE " + defaultValue + " END ) " + newColName
     Builder.build(df.selectExpr("*",expression))
 
   }
 
   override def configure(componentProps: ComponentProps): Unit = {
-    conditionExpr = componentProps.getString("conditionExpr")
     newColName = componentProps.getString("newColName")
-    positiveResult = componentProps.getString("positiveResult")
-    negativeResult = componentProps.getString("negativeResult")
+    conditionExprs = componentProps.getString("conditionExprs")
+    values = componentProps.getString("values")
+    defaultValue = componentProps.getString("defaultValue")
+    delimiter = componentProps.getString("defaultValue",",")
+
   }
 
 }
