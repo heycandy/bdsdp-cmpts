@@ -16,7 +16,6 @@ class Derive (id: String, name: String, log: Logger)
   var values : String = null
   var defaultValue : String = null
   var delimiter: String = null
-  var map = Map[String, String]()
 
   override def apply(inputT: SparkData): SparkData = {
     val df = inputT.getRawData
@@ -29,6 +28,7 @@ class Derive (id: String, name: String, log: Logger)
     }
 
     expression += " ELSE " + defaultValue + " END ) " + newColName
+    log.debug("expression ====== " + expression)
     Builder.build(df.selectExpr("*",expression))
 
   }
@@ -38,7 +38,7 @@ class Derive (id: String, name: String, log: Logger)
     conditionExprs = componentProps.getString("conditionExprs")
     values = componentProps.getString("values")
     defaultValue = componentProps.getString("defaultValue")
-    delimiter = componentProps.getString("defaultValue",",")
+    delimiter = componentProps.getString("delimiter",",")
 
   }
 

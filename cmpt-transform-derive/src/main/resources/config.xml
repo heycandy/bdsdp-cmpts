@@ -7,29 +7,35 @@
     <componentPid>component_pid_apply</componentPid>
     <params>
         <param>
-            <name>conditionExpr</name>
-            <description>conditionExpr</description>
-            <type>text</type>
-            <nullable>false</nullable>
-        </param>
-        <param>
             <name>newColName</name>
             <description>newColName</description>
             <type>text</type>
             <nullable>false</nullable>
         </param>
         <param>
-            <name>positiveResult</name>
-            <description>positiveResult</description>
-            <type>text</type>
-            <nullable>false</nullable>
-        </param>
-        <param>
-            <name>negativeResult</name>
-            <description>negativeResult</description>
+            <name>conditionExprs</name>
+            <description>conditionExprs</description>
             <type>text</type>
             <nullable>false</nullable>
         </param>
 
+        <param>
+            <name>values</name>
+            <description>values</description>
+            <type>text</type>
+            <nullable>false</nullable>
+        </param>
+        <param>
+            <name>defaultValue</name>
+            <description>defaultValue</description>
+            <type>text</type>
+            <nullable>false</nullable>
+        </param>
+        <param>
+            <name>delimiter</name>
+            <description>delimiter</description>
+            <type>text</type>
+            <nullable>false</nullable>
+        </param>
     </params>
 </component>
