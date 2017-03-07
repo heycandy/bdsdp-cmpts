@@ -12,11 +12,16 @@
       <type>text</type>
       <nullable>false</nullable>
     </param>
-    <param>
+     <param>
       <name>sortDirection</name>
       <description>sortDirection</description>
-      <type>text</type>
+      <type>options</type>
       <nullable>false</nullable>
+      <defaultOptions>
+        <option name="desc" desc="desc" value="desc"/>
+        <option name="asc" desc="asc" value="asc"/>
+      </defaultOptions>
+      <defaultValue>desc</defaultValue>
     </param>
 
   </params>
