@@ -2,6 +2,7 @@ package com.chinasofti.ark.bdadp.component;
 
 import com.chinasofti.ark.bdadp.component.api.Configureable;
 import com.chinasofti.ark.bdadp.component.api.RunnableComponent;
+import com.chinasofti.ark.bdadp.util.common.StringUtils;
 import com.chinasofti.ark.bdadp.util.io.FileUtil;
 import org.slf4j.Logger;
 
@@ -43,6 +44,7 @@ public class SqlExe extends RunnableComponent implements Configureable {
     sql = props.getString("jdbc_sql");
     inputStr = props.getString("inputStr");
     outputStr = props.getString("outputStr");
+    StringUtils.assertIsBlank(driver,url,user,pwd,sql,inputStr,outputStr);
     checkParams();
   }
 

@@ -4,6 +4,7 @@ package com.chinasofti.ark.bdadp.component
 import com.chinasofti.ark.bdadp.component.api.Configureable
 import com.chinasofti.ark.bdadp.component.api.data.{Builder, SparkData}
 import com.chinasofti.ark.bdadp.component.api.transforms.TransformableComponent
+import com.chinasofti.ark.bdadp.util.common.StringUtils
 import org.apache.spark.sql.{Column, DataFrame, GroupedData}
 import org.slf4j.Logger
 
@@ -43,5 +44,6 @@ class Aggregate (id: String, name: String, log: Logger)
     aggExpr = componentProps.getString("aggExpr")
     newName = componentProps.getString("newName")
     delimiter = componentProps.getString("delimiter",",")
+    StringUtils.assertIsBlank(aggExpr,newName);
   }
 }
