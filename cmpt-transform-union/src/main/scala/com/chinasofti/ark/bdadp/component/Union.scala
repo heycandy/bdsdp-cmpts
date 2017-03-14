@@ -5,6 +5,7 @@ import java.util
 import com.chinasofti.ark.bdadp.component.api.Configureable
 import com.chinasofti.ark.bdadp.component.api.data.{Builder, SparkData}
 import com.chinasofti.ark.bdadp.component.api.transforms.MultiTransComponent
+import com.chinasofti.ark.bdadp.util.common.StringUtils
 import org.slf4j.Logger
 
 import scala.collection.JavaConversions._
@@ -23,6 +24,7 @@ class Union(id: String, name: String, log: Logger)
 
   override def configure(componentProps: ComponentProps): Unit = {
     conditionExpr = componentProps.getString("conditionExpr")
+    StringUtils.assertIsBlank(conditionExpr)
   }
 }
 

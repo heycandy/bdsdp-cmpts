@@ -3,6 +3,7 @@ package com.chinasofti.ark.bdadp.component
 import com.chinasofti.ark.bdadp.component.api.Configureable
 import com.chinasofti.ark.bdadp.component.api.data.{Builder, SparkData}
 import com.chinasofti.ark.bdadp.component.api.transforms.TransformableComponent
+import com.chinasofti.ark.bdadp.util.common.StringUtils
 import org.slf4j.Logger
 
 /**
@@ -39,7 +40,7 @@ class Derive (id: String, name: String, log: Logger)
     values = componentProps.getString("values")
     defaultValue = componentProps.getString("defaultValue")
     delimiter = componentProps.getString("delimiter",",")
-
+    StringUtils.assertIsBlank(newColName,conditionExprs,values,defaultValue);
   }
 
 }

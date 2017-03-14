@@ -3,6 +3,7 @@ package com.chinasofti.ark.bdadp.component
 import com.chinasofti.ark.bdadp.component.api.Configureable
 import com.chinasofti.ark.bdadp.component.api.data.{Builder, SparkData}
 import com.chinasofti.ark.bdadp.component.api.transforms.TransformableComponent
+import com.chinasofti.ark.bdadp.util.common.StringUtils
 import org.apache.spark.sql.DataFrame
 import org.slf4j.Logger
 
@@ -36,5 +37,7 @@ class GroupBy (id: String, name: String, log: Logger)
   override def configure(componentProps: ComponentProps): Unit = {
     colNames = componentProps.getString("colNames");
     aggExpr = componentProps.getString("aggExpr");
+
+    StringUtils.assertIsBlank(colNames,aggExpr)
   }
 }

@@ -3,6 +3,7 @@ package com.chinasofti.ark.bdadp.component
 import com.chinasofti.ark.bdadp.component.api.Configureable
 import com.chinasofti.ark.bdadp.component.api.data.{ SparkData, StringData}
 import com.chinasofti.ark.bdadp.component.api.sink.{SparkSinkAdapter, SinkComponent}
+import com.chinasofti.ark.bdadp.util.common.StringUtils
 import org.slf4j.Logger
 
 /**
@@ -44,7 +45,9 @@ class CSVSink (id: String, name: String, log: Logger)
     comment = componentProps.getString("comment", "#")
     nullValue = componentProps.getString("nullValue")
     dateFormat = componentProps.getString("dateFormat")
-    numPartitions = componentProps.getString("numPartitions").toInt
+    numPartitions = componentProps.getInt("numPartitions",8)
+
+    StringUtils.assertIsBlank(path);
   }
 
   override def apply(inputT: SparkData): Unit = {

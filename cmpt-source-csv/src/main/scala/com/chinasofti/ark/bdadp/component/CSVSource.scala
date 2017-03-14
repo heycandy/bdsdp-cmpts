@@ -7,6 +7,7 @@ import com.chinasofti.ark.bdadp.component.api.Configureable
 import com.chinasofti.ark.bdadp.component.api.data.{Builder, SparkData, StringData}
 import com.chinasofti.ark.bdadp.component.api.options.SparkScenarioOptions
 import com.chinasofti.ark.bdadp.component.api.source.{SourceComponent, SparkSourceAdapter}
+import com.chinasofti.ark.bdadp.util.common.StringUtils
 import org.slf4j.Logger
 
 import scala.collection.JavaConversions._
@@ -50,6 +51,8 @@ class CSVSource(id: String, name: String, log: Logger)
     comment = componentProps.getString("comment", "#")
     nullValue = componentProps.getString("nullValue")
     dateFormat = componentProps.getString("dateFormat")
+
+    StringUtils.assertIsBlank(path);
   }
 
   override def spark(sparkScenarioOptions: SparkScenarioOptions): SparkData = {
