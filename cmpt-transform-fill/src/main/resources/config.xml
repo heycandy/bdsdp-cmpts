@@ -21,8 +21,13 @@
     <param>
       <name>valueType</name>
       <description>valueType</description>
-      <type>text</type>
-      <nullable>false</nullable>
+      <type>options</type>
+      <nullable>true</nullable>
+      <defaultOptions>
+        <option name="string" desc="STRING" value="string"/>
+        <option name="double" desc="DOUBLE" value="double"/>
+      </defaultOptions>
+      <defaultValue>string</defaultValue>
     </param>
     <param>
       <name>delimiter</name>
