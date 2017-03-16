@@ -9,7 +9,7 @@ import org.slf4j.Logger
 /**
  * Created by White on 2017/3/16.
  */
-class PieSink(id: String, name: String, log: Logger)
+class PieChartSink(id: String, name: String, log: Logger)
     extends SinkComponent[StringData](id, name, log) with Configureable with
             SparkSinkAdapter[SparkData] {
 

@@ -9,7 +9,7 @@
   </parent>
   <modelVersion>4.0.0</modelVersion>
 
-  <artifactId>cmpt-sink-pie</artifactId>
+  <artifactId>cmpt-sink-chart-pie</artifactId>
 
   <dependencies>
     <dependency>

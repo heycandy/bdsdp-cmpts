@@ -44,7 +44,7 @@
     <module>cmpt-source-jdbcOracle</module>
     <module>cmpt-sink-decisionTreeModel</module>
     <module>cmpt-transform-predictModel</module>
-    <module>cmpt-sink-pie</module>
+    <module>cmpt-sink-chart-pie</module>
 
   </modules>
 
