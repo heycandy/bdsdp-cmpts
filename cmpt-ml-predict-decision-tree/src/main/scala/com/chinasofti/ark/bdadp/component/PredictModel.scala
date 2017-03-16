@@ -1,24 +1,14 @@
 package com.chinasofti.ark.bdadp.component
 
-import java.util.Random
-
 import com.chinasofti.ark.bdadp.component.api.Configureable
 import com.chinasofti.ark.bdadp.component.api.data.{Builder, SparkData}
 import com.chinasofti.ark.bdadp.component.api.transforms.TransformableComponent
-import com.chinasofti.ark.bdadp.util.common.StringUtils
 import org.apache.spark.mllib.linalg.{Vector, Vectors}
-import org.apache.spark.mllib.regression.LabeledPoint
-import org.apache.spark.util.random.SamplingUtils
-import org.slf4j.Logger
-import org.apache.spark.mllib.tree.DecisionTree
 import org.apache.spark.mllib.tree.model.DecisionTreeModel
-import org.apache.spark.mllib.util.MLUtils
 import org.apache.spark.rdd.RDD
-import org.apache.spark.mllib.linalg.Vector
-
+import org.apache.spark.sql.Row
 import org.apache.spark.sql.types._
-import org.apache.spark.sql.{Row, SQLContext}
-import org.apache.spark.{SparkConf, SparkContext}
+import org.slf4j.Logger
 
 /**
  * Created by Administrator on 2017/1/12.

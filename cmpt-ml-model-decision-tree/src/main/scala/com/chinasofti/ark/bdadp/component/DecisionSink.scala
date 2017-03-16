@@ -3,15 +3,10 @@ package com.chinasofti.ark.bdadp.component
 import com.chinasofti.ark.bdadp.component.api.Configureable
 import com.chinasofti.ark.bdadp.component.api.data.{SparkData, StringData}
 import com.chinasofti.ark.bdadp.component.api.sink.{SinkComponent, SparkSinkAdapter}
-import org.apache.spark.ml.classification.LogisticRegression
-import org.apache.spark.mllib.linalg.{DenseVector, Vectors}
+import org.apache.spark.mllib.linalg.Vectors
 import org.apache.spark.mllib.regression.LabeledPoint
 import org.apache.spark.mllib.tree.DecisionTree
-import org.apache.spark.mllib.tree.model.DecisionTreeModel
-import org.apache.spark.mllib.util.MLUtils
 import org.slf4j.Logger
-
-import scala.collection.mutable
 
 
 /**
