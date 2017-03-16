@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component>
+  <componentName>component_sink_pie</componentName>
+  <componentDescription>component_sink_pie</componentDescription>
+  <componentClass>com.chinasofti.ark.bdadp.component.PieSink</componentClass>
+  <componentIcon>icon-xl.png,icon-xs.png</componentIcon>
+  <componentPid>component_pid_sink</componentPid>
+  <params>
+    <param>
+      <name>title</name>
+      <description>title</description>
+      <type>text</type>
+      <nullable>true</nullable>
+    </param>
+    <param>
+      <name>subtitle</name>
+      <description>subtitle</description>
+      <type>text</type>
+      <nullable>true</nullable>
+    </param>
+    <param>
+      <name>nameColumn</name>
+      <description>nameColumn</description>
+      <type>text</type>
+      <nullable>true</nullable>
+    </param>
+    <param>
+      <name>valueColumn</name>
+      <description>valueColumn</description>
+      <type>text</type>
+      <nullable>true</nullable>
+    </param>
+  </params>
+</component>
