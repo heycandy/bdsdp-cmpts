@@ -1,9 +1,10 @@
 package com.chinasofti.ark.bdadp.component
 
+import java.util
+
 import com.chinasofti.ark.bdadp.component.api.Configureable
 import com.chinasofti.ark.bdadp.component.api.data.{SparkData, StringData}
 import com.chinasofti.ark.bdadp.component.api.sink.{SinkComponent, SparkSinkAdapter}
-import com.google.common.collect.ImmutableMap
 import org.slf4j.Logger
 
 /**
@@ -11,7 +12,7 @@ import org.slf4j.Logger
  */
 class PieChartSink(id: String, name: String, log: Logger)
     extends SinkComponent[StringData](id, name, log) with Configureable with
-            SparkSinkAdapter[SparkData] {
+            SparkSinkAdapter[SparkData] with Serializable {
 
   var title: String = null
   var subtitle: String = null
@@ -40,20 +41,34 @@ class PieChartSink(id: String, name: String, log: Logger)
    * |  n3  |   3  |
    */
   override def apply(inputT: SparkData): Unit = {
-    val legendData = inputT.getRawData.select(nameColumn)
-        .map(_ (0).toString).collect()
-    val seriesData = inputT.getRawData.select(nameColumn, valueColumn)
-        .map(f => ImmutableMap.of("name", f(0).toString, "value", f(1).toString.toDouble))
-        .collect()
+    val chartData = inputT.getRawData.select(nameColumn, valueColumn)
+    val legendData = chartData.map(_ (0).toString).collect()
+    val seriesData = chartData
+//        .map(f => ImmutableMap.of("name", f(0).toString, "value", f(1).toString.toDouble))
+        .map(f => {
+          val map = new util.HashMap[String, Object]()
 
-    val entrySet = ImmutableMap.builder[String, Object]()
-        .put("title", title)
-        .put("subtitle", subtitle)
-        .put("legendData", legendData)
-        .put("seriesData", seriesData)
-        .build()
+          map.put("name", f(0).toString)
+          map.put("value", java.lang.Double.valueOf(f(1).toString))
 
-    chart("pie.vm", entrySet)
+          map
+        }).collect()
+
+    //    val map = ImmutableMap.builder[String, Object]()
+    //        .put("title", title)
+    //        .put("subtitle", subtitle)
+    //        .put("legendData", legendData)
+    //        .put("seriesData", seriesData)
+    //        .build()
+
+    val map = new util.HashMap[String, Object]()
+
+    map.put("title", title)
+    map.put("subtitle", subtitle)
+    map.put("legendData", legendData)
+    map.put("seriesData", seriesData)
+
+    chart("pie.vm", map)
 
   }
 }
