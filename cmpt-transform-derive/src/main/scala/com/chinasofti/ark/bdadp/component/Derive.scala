@@ -24,7 +24,7 @@ class Derive (id: String, name: String, log: Logger)
     val valArr = values.split(delimiter)
 
     var expression  = "( "
-    for(i <- 0 to exprsArr.length){
+    for(i <- 0 to exprsArr.length -1){
       expression += "CASE WHEN " + exprsArr(i) + "  THEN " +  valArr(i)
     }
 
