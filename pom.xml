@@ -61,9 +61,9 @@
     <java.version>1.8</java.version>
     <hadoop.version>2.7.2</hadoop.version>
     <scala.binary.version>2.10</scala.binary.version>
-    <scala.version>2.10.6</scala.version>
+    <scala.version>2.10.4</scala.version>
     <spark.version>1.5.1</spark.version>
-    <jackson.version>2.7.4</jackson.version>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
 
   <dependencyManagement>
