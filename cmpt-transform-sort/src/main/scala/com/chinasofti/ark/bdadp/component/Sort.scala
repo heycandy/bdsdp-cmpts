@@ -33,6 +33,6 @@ class Sort(id: String, name: String, log: Logger)
     colName = componentProps.getString("colName");
     sortDirection = componentProps.getString("sortDirection");
 
-    StringUtils.assertIsBlank(colName,sortDirection)
+    StringUtils.assertIsBlank(colName);
   }
 }

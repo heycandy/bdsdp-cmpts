@@ -16,7 +16,7 @@
     <module>cmpt-shell-executor</module>
     <module>cmpt-url-decoder</module>
     <module>cmpt-sample-scala</module>
-    <module>cmpt-sample-dataframe</module>
+    <!--<module>cmpt-sample-dataframe</module>-->
     <module>cmpt-hdfs-upload</module>
     <module>cmpt-transform-filter</module>
     <module>cmpt-transform-sort</module>
