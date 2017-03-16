@@ -3,6 +3,7 @@ package com.chinasofti.ark.bdadp.component
 import com.chinasofti.ark.bdadp.component.api.Configureable
 import com.chinasofti.ark.bdadp.component.api.data.{Builder, SparkData}
 import com.chinasofti.ark.bdadp.component.api.transforms.TransformableComponent
+import com.chinasofti.ark.bdadp.util.common.StringUtils
 import org.slf4j.Logger
 
 /**
@@ -21,5 +22,6 @@ class Alias(id: String, name: String, log: Logger)
   override def configure(componentProps: ComponentProps): Unit = {
     existingName = componentProps.getString("existingName")
     newName = componentProps.getString("newName")
+    StringUtils.assertIsBlank(existingName,newName);
   }
 }

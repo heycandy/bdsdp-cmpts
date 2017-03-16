@@ -25,3 +25,6 @@ out/
 #runtime files
 components
 execution
+
+#others
+*/dependency-reduced-pom.xml

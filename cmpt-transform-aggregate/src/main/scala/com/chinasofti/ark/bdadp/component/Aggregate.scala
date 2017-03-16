@@ -4,6 +4,7 @@ package com.chinasofti.ark.bdadp.component
 import com.chinasofti.ark.bdadp.component.api.Configureable
 import com.chinasofti.ark.bdadp.component.api.data.{Builder, SparkData}
 import com.chinasofti.ark.bdadp.component.api.transforms.TransformableComponent
+import com.chinasofti.ark.bdadp.util.common.StringUtils
 import org.apache.spark.sql.{Column, DataFrame, GroupedData}
 import org.slf4j.Logger
 
@@ -17,24 +18,32 @@ class Aggregate (id: String, name: String, log: Logger)
 
 
   var aggExpr: String = null
-  var key:String = null
-  var value:String = null
-  var strs = Array[String]()
-  var treasureMap = Map[String, String]()
+  var newName: String = null
+  var delimiter: String = null
+  var strsAgg = Array[String]()
+  var strsNew = Array[String]()
+  var tmpStr: String = null
+  var resultAgg: String = null
+  var i:Int = 0
 
   override def apply(inputT: SparkData): SparkData = {
-    strs = aggExpr.split(",")
-    for(a <- strs){
-      key = a.substring(a.indexOf("(")+1,a.indexOf(")"))
-      value = a.substring(0,a.indexOf("("))
-      treasureMap += (key -> value)
-    }
+    strsAgg = aggExpr.split(delimiter)
+    strsNew = newName.split(delimiter)
 
-    val df: DataFrame = inputT.getRawData.agg(treasureMap.head,(treasureMap.toSeq.tail): _*)
+    for(a <- strsAgg){
+      tmpStr = tmpStr + a + " " + "as" + " " + strsNew(i) + ","
+      i+=1
+    }
+    resultAgg = tmpStr.substring(4,tmpStr.length-1)
+    info("resultAgg is: "+resultAgg)
+    val df: DataFrame = inputT.getRawData.selectExpr(resultAgg.split(","): _*)
     Builder.build(df)
   }
 
   override def configure(componentProps: ComponentProps): Unit = {
-    aggExpr = componentProps.getString("aggExpr");
+    aggExpr = componentProps.getString("aggExpr")
+    newName = componentProps.getString("newName")
+    delimiter = componentProps.getString("delimiter",",")
+    StringUtils.assertIsBlank(aggExpr,newName);
   }
 }

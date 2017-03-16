@@ -7,6 +7,7 @@ import com.chinasofti.ark.bdadp.component.api.Configureable
 import com.chinasofti.ark.bdadp.component.api.data.{Builder, SparkData, StringData}
 import com.chinasofti.ark.bdadp.component.api.options.SparkScenarioOptions
 import com.chinasofti.ark.bdadp.component.api.source.{SourceComponent, SparkSourceAdapter}
+import com.chinasofti.ark.bdadp.util.common.StringUtils
 import org.slf4j.Logger
 
 import scala.collection.JavaConversions._
@@ -32,6 +33,7 @@ class ParquetSource(id: String, name: String, log: Logger)
     path = componentProps.getString("path")
     charset = componentProps.getString("charset", "UTF-8")
     mergeSchema = componentProps.getString("mergeSchema", "true")
+    StringUtils.assertIsBlank(path);
   }
 
   override def spark(sparkScenarioOptions: SparkScenarioOptions): SparkData = {
