@@ -36,7 +36,7 @@ class Fill(id: String, name: String, log: Logger)
     valueType = componentProps.getString("valueType")
     value = componentProps.getString("value")
 
-    StringUtils.assertIsBlank(delimiter, componentProps.getString("cols"), valueType, value)
+    StringUtils.assertIsBlank(colsStr, delimiter, valueType, value)
     cols = colsStr.split(delimiter)
 
   }

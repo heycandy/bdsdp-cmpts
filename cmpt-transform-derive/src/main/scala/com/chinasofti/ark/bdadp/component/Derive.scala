@@ -23,9 +23,9 @@ class Derive (id: String, name: String, log: Logger)
     val exprsArr = conditionExprs.split(delimiter)
     val valArr = values.split(delimiter)
 
-    var expression  = "( "
+    var expression  = "( CASE"
     for(i <- 0 to exprsArr.length -1){
-      expression += "CASE WHEN " + exprsArr(i) + "  THEN " +  valArr(i)
+      expression += " WHEN " + exprsArr(i) + "  THEN " +  valArr(i)
     }
 
     expression += " ELSE " + defaultValue + " END ) " + newColName
