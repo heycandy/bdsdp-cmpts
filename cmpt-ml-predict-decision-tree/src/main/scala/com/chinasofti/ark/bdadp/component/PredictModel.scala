@@ -22,7 +22,7 @@ class PredictModel(id: String, name: String, log: Logger)
     val sameModel = DecisionTreeModel.load(sc,path)
     val data: RDD[Vector] = inputT.getRawData.mapPartitions(
       iterator => iterator.map(row => {
-        val values = row.toSeq.tail.map(_.toString).map(_.toDouble).toArray
+        val values = row.toSeq.map(_.toString).map(_.toDouble).toArray
         Vectors.dense(values)
       }))
     val rddPredict: RDD[Double] = sameModel.predict(data)
