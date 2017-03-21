@@ -45,6 +45,7 @@
     <module>cmpt-ml-model-decision-tree</module>
     <module>cmpt-ml-predict-decision-tree</module>
     <module>cmpt-sink-chart-pie</module>
+      <module>cmpt-sink-chart-bar</module>
 
   </modules>
 
