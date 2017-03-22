@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component>
+  <componentName>cmpt_transform_drop</componentName>
+  <componentDescription>cmpt_transform_drop</componentDescription>
+  <componentClass>com.chinasofti.ark.bdadp.component.Drop</componentClass>
+  <componentIcon>icon-xl.png,icon-xs.png</componentIcon>
+  <componentPid>component_pid_apply</componentPid>
+  <params>
+    <param>
+      <name>colName</name>
+      <description>colName</description>
+      <type>text</type>
+      <nullable>false</nullable>
+    </param>
+  </params>
+</component>
