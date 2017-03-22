@@ -10,8 +10,8 @@ import org.apache.spark.util.random.SamplingUtils
 import org.slf4j.Logger
 
 /**
- * Created by Administrator on 2017/1/12.
- */
+  * Created by Administrator on 2017/1/12.
+  */
 class Sample(id: String, name: String, log: Logger)
   extends TransformableComponent[SparkData, SparkData](id, name, log) with Configureable {
 
@@ -32,16 +32,15 @@ class Sample(id: String, name: String, log: Logger)
     val fractionStr = componentProps.getString("fraction")
     val seedStr = componentProps.getString("seed")
 
-    StringUtils.assertIsBlank(withReplacementStr, fractionStr, seedStr);
+    StringUtils.assertIsBlank(withReplacementStr, fractionStr);
     withReplacement = withReplacementStr.toBoolean;
     fraction = fractionStr.toDouble;
-    seed = seedStr.toLong;
 
-    if (null != seed && seed != 0) {
-      seed = componentProps.getString("seed").toLong
-    };
-    else {
+    if (seedStr == null || seedStr.equals("")) {
       seed = new Random().nextLong()
-    };
+    }
+    else {
+      seed = componentProps.getString("seed").toLong
+    }
   }
 }
