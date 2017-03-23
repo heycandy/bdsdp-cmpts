@@ -25,4 +25,20 @@ class Select (id: String, name: String, log: Logger)
     colExpr = componentProps.getString("colExpr");
     StringUtils.assertIsBlank(colExpr)
   }
+
+
+  def call(inputT: SparkData, cmptProps: ComponentProps): SparkData = {
+    configure(cmptProps)
+    apply(inputT)
+  }
+
+  def call(inputT: SparkData, colExpr: String): SparkData = {
+
+    val cmptProps = new ComponentProps()
+    cmptProps.setProperty("colExpr", colExpr)
+
+    configure(cmptProps)
+    apply(inputT)
+  }
+
 }

@@ -15,4 +15,6 @@ class Distinct(id: String, name: String, log: Logger)
 
   override def configure(componentProps: ComponentProps): Unit = {
   }
+
+
 }

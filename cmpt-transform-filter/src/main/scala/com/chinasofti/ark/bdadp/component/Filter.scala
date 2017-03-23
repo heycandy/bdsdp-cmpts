@@ -20,4 +20,19 @@ class Filter(id: String, name: String, log: Logger)
   override def configure(componentProps: ComponentProps): Unit = {
     conditionExpr = componentProps.getString("conditionExpr")
   }
+
+
+  def call(inputT: SparkData, cmptProps: ComponentProps): SparkData = {
+    configure(cmptProps)
+    apply(inputT)
+  }
+
+  def call(inputT: SparkData, conditionExpr: String): SparkData = {
+
+    val cmptProps = new ComponentProps()
+    cmptProps.setProperty("conditionExpr", conditionExpr)
+
+    configure(cmptProps)
+    apply(inputT)
+  }
 }

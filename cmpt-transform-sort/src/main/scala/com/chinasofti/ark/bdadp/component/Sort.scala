@@ -11,7 +11,7 @@ import org.slf4j.Logger;
  * Created by Administrator on 2017.1.11.
  */
 class Sort(id: String, name: String, log: Logger)
-    extends TransformableComponent[SparkData, SparkData](id, name, log) with Configureable {
+  extends TransformableComponent[SparkData, SparkData](id, name, log) with Configureable {
 
   var colName: String = null;
   var sortDirection: String = null;
@@ -23,7 +23,6 @@ class Sort(id: String, name: String, log: Logger)
       buildDataFrame = df.sort(df.col(colName).desc)
     }
     else {
-      // 默认升序排列
       buildDataFrame = df.sort(df.col(colName).asc)
     }
     Builder.build(buildDataFrame)
@@ -34,5 +33,18 @@ class Sort(id: String, name: String, log: Logger)
     sortDirection = componentProps.getString("sortDirection");
 
     StringUtils.assertIsBlank(colName);
+  }
+
+  def call(inputT: SparkData, cmptProps: ComponentProps): SparkData = {
+    configure(cmptProps)
+    apply(inputT)
+  }
+
+  def call(inputT: SparkData, colName: String, sortDirection: String): SparkData = {
+    val cmptProps = new ComponentProps()
+    cmptProps.setProperty("colName", colName)
+    cmptProps.setProperty("sortDirection", sortDirection)
+    configure(cmptProps)
+    apply(inputT)
   }
 }
