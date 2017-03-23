@@ -32,6 +32,7 @@
     <module>cmpt-source-json</module>
     <module>cmpt-source-jdbc</module>
     <module>cmpt-transform-fill</module>
+    <module>cmpt-transform-drop</module>
     <!--<module>cmpt-transform-replace</module>-->
     <module>cmpt-sink-jdbc</module>
     <module>cmpt-sink-csv</module>
@@ -45,6 +46,7 @@
     <module>cmpt-ml-model-decision-tree</module>
     <module>cmpt-ml-predict-decision-tree</module>
     <module>cmpt-sink-chart-pie</module>
+      <module>cmpt-sink-chart-bar</module>
 
   </modules>
 

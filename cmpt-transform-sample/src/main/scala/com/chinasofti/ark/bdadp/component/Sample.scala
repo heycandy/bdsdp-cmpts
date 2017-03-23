@@ -6,42 +6,49 @@ import com.chinasofti.ark.bdadp.component.api.Configureable
 import com.chinasofti.ark.bdadp.component.api.data.{Builder, SparkData}
 import com.chinasofti.ark.bdadp.component.api.transforms.TransformableComponent
 import com.chinasofti.ark.bdadp.util.common.StringUtils
-import org.apache.spark.util.random.SamplingUtils
 import org.slf4j.Logger
 
 /**
- * Created by Administrator on 2017/1/12.
- */
+  * Created by Administrator on 2017/1/12.
+  */
 class Sample(id: String, name: String, log: Logger)
   extends TransformableComponent[SparkData, SparkData](id, name, log) with Configureable {
 
+  var samplingType: String = null
   var withReplacement: Boolean = true
-  var fraction: Double = 0.00
+  var fractionOrNum: String = null
   var seed: Long = 0
 
   override def apply(inputT: SparkData): SparkData = {
-    //    val n = inputT.getRawData.sample(withReplacement, fraction, seed).collect().size
-    //    if (10 != n)
-
-    //    Builder.build(inputT.getRawData.sample(withReplacement, fraction, seed))
-    Builder.build(inputT.getRawData.sample(withReplacement, fraction, seed))
+    val sc = inputT.getRawData.sqlContext.sparkContext
+    val df = inputT.getRawData
+    //compute with the fraction or line num.
+    if("fraction".equalsIgnoreCase(samplingType)){
+      Builder.build(df.sample(withReplacement, fractionOrNum.toDouble,seed))
+    }else
+    {
+      val schema = df.schema
+      val sampleArray = df.rdd.takeSample(withReplacement,fractionOrNum.toInt,seed)
+      //Parallel array and build rdd
+      val sampleRDD = sc.parallelize(sampleArray)
+      val dfResult = inputT.getRawData.toDF().sqlContext.createDataFrame(sampleRDD, schema)
+      Builder.build(dfResult)
+    }
   }
 
   override def configure(componentProps: ComponentProps): Unit = {
+    samplingType = componentProps.getString("samplingType")
+    fractionOrNum = componentProps.getString("fractionOrNum")
     val withReplacementStr = componentProps.getString("withReplacement")
-    val fractionStr = componentProps.getString("fraction")
     val seedStr = componentProps.getString("seed")
 
-    StringUtils.assertIsBlank(withReplacementStr, fractionStr, seedStr);
-    withReplacement = withReplacementStr.toBoolean;
-    fraction = fractionStr.toDouble;
-    seed = seedStr.toLong;
-
-    if (null != seed && seed != 0) {
-      seed = componentProps.getString("seed").toLong
-    };
-    else {
+    StringUtils.assertIsBlank(withReplacementStr, fractionOrNum)
+    withReplacement = withReplacementStr.toBoolean
+    if (seedStr == null || seedStr.equals("")) {
       seed = new Random().nextLong()
-    };
+    }
+    else {
+      seed = componentProps.getString("seed").toLong
+    }
   }
 }

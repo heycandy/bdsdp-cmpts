@@ -3,10 +3,15 @@ package com.chinasofti.ark.bdadp.component
 import com.chinasofti.ark.bdadp.component.api.Configureable
 import com.chinasofti.ark.bdadp.component.api.data.{SparkData, StringData}
 import com.chinasofti.ark.bdadp.component.api.sink.{SinkComponent, SparkSinkAdapter}
-import org.apache.spark.mllib.linalg.Vectors
+import org.apache.spark.ml.classification.LogisticRegression
+import org.apache.spark.mllib.linalg.{DenseVector, Vectors}
 import org.apache.spark.mllib.regression.LabeledPoint
 import org.apache.spark.mllib.tree.DecisionTree
+import org.apache.spark.mllib.tree.model.DecisionTreeModel
+import org.apache.spark.mllib.util.MLUtils
 import org.slf4j.Logger
+
+import scala.collection.mutable
 
 
 /**
@@ -16,17 +21,21 @@ class DecisionSink (id: String, name: String, log: Logger)
   extends SinkComponent[StringData](id, name, log) with Configureable with
     SparkSinkAdapter[SparkData] with Serializable {
 
-  //  val categoricalFeaturesInfo = Map[Int, Int]() // Empty categoricalFeaturesInfo indicates all features are continuous.
-  //  val impurity = "variance"                     //回归，所以impurity的定义为variance
-  //  val maxDepth = 5                              //树的最大层次
-  //  val maxBins = 100                             //最大的划分数
   var path: String = null
+  var numClasses: Int = 0
+  var impurity: String = null
+  var maxDepth: Int = 0
+  var maxBins: Int = 0
   override def apply(inputT: StringData): Unit = {
     //    info(inputT.getRawData)
   }
 
   override def configure(componentProps: ComponentProps): Unit = {
     path = componentProps.getString("path")
+    numClasses = componentProps.getString("numClasses","2").toInt
+    impurity = componentProps.getString("impurity","gini")
+    maxDepth = componentProps.getString("maxDepth","5").toInt
+    maxBins = componentProps.getString("maxBins","32").toInt
   }
 
   override def apply(inputT: SparkData): Unit = {
@@ -39,18 +48,13 @@ class DecisionSink (id: String, name: String, log: Logger)
       new LabeledPoint(label, features)
     }))
 
-//    // Split the data into training and test sets (30% held out for testing)
-//    val splits = data.randomSplit(Array(0.7,0.3))
-//    val (trainingData, testData) = (splits(0), splits(1))
+    //    Split the data into training and test sets (30% held out for testing)
+    //    val splits = data.randomSplit(Array(0.7,0.3))
+    //    val (trainingData, testData) = (splits(0), splits(1))
 
     // Train a DecisionTree model.
     //  Empty categoricalFeaturesInfo indicates all features are continuous.
-    val numClasses = 2
     val categoricalFeaturesInfo = Map[Int, Int]()
-    val impurity = "gini"
-    val maxDepth = 5
-    val maxBins = 32
-
     val model = DecisionTree.trainClassifier(data, numClasses, categoricalFeaturesInfo,
       impurity, maxDepth, maxBins)
 
