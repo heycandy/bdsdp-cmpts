@@ -8,7 +8,6 @@ import com.chinasofti.ark.bdadp.util.common.StringUtils
 import org.apache.spark.sql.{Column, DataFrame, GroupedData}
 import org.slf4j.Logger
 
-import com.chinasofti.ark.bdadp.component.S
 
 /**
   * Created by Administrator on 2017/1/16.
