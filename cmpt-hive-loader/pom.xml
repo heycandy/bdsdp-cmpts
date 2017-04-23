@@ -10,6 +10,7 @@
   <modelVersion>4.0.0</modelVersion>
 
   <artifactId>cmpt-hive-loader</artifactId>
+
   <dependencies>
     <dependency>
       <groupId>org.apache.hadoop</groupId>

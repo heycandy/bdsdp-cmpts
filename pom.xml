@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xmlns="http://maven.apache.org/POM/4.0.0"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  xmlns="http://maven.apache.org/POM/4.0.0"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <packaging>pom</packaging>
   <modules>
@@ -46,7 +46,10 @@
     <module>cmpt-ml-model-decision-tree</module>
     <module>cmpt-ml-predict-decision-tree</module>
     <module>cmpt-sink-chart-pie</module>
-      <module>cmpt-sink-chart-bar</module>
+    <module>cmpt-sink-chart-bar</module>
+    <module>cmpt-source-as400</module>
+    <module>cmpt-sink-oracle</module>
+
 
   </modules>
 
@@ -64,7 +67,7 @@
     <hadoop.version>2.7.2</hadoop.version>
     <scala.binary.version>2.10</scala.binary.version>
     <scala.version>2.10.4</scala.version>
-    <spark.version>1.5.1</spark.version>
+    <spark.version>1.6.3</spark.version>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
 
@@ -182,7 +185,7 @@
       <plugins>
         <plugin>
           <artifactId>maven-compiler-plugin</artifactId>
-          <version>3.6.0</version>
+          <version>3.3</version>
           <configuration>
             <source>1.8</source>
             <target>1.8</target>
@@ -259,8 +262,8 @@
               <configuration>
                 <target>
                   <copy
-                      file="${project.build.directory}/${project.artifactId}-${project.version}.jar"
-                      tofile="../components/${project.artifactId}/${project.artifactId}-${project.version}.jar"/>
+                    file="${project.build.directory}/${project.artifactId}-${project.version}.jar"
+                    tofile="../components/${project.artifactId}/${project.artifactId}-${project.version}.jar"/>
                 </target>
 
               </configuration>
