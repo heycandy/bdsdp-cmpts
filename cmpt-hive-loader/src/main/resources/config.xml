@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component>
+    <componentName>component_hive_loader</componentName>
+    <componentDescription>component_hive_loader</componentDescription>
+    <componentClass>com.chinasofti.ark.bdadp.component.sample.LoadToHiveRunnableComponent
+    </componentClass>
+    <componentIcon>icon-xl.png,icon-xs.png</componentIcon>
+    <!-- 60px * 60px, 20px * 20px -->
+    <componentPid>component_pid_data_import</componentPid>
+    <params>
+        <param>
+            <name>file_source</name>
+            <description>file_source</description>
+            <type>options</type>
+            <nullable>false</nullable>
+            <defaultOptions>
+                <option name="local" desc="local" value="0"/>
+                <option name="hdfs" desc="hdfs" value="1"/>
+            </defaultOptions>
+            <defaultValue>0</defaultValue>
+        </param>
+        <param>
+            <name>file_path</name>
+            <description>file_path</description>
+            <type>text</type>
+            <nullable>false</nullable>
+        </param>
+        <param>
+            <name>file_name</name>
+            <description>file_name</description>
+            <type>text</type>
+            <nullable>false</nullable>
+        </param>
+        <param>
+            <name>table_name</name>
+            <description>table_name</description>
+            <type>text</type>
+            <nullable>false</nullable>
+        </param>
+        <param>
+            <name>overwriter</name>
+            <description>overwriter</description>
+            <type>options</type>
+            <nullable>false</nullable>
+            <defaultOptions>
+                <option name="yes" desc="yes" value="0"/>
+                <option name="no" desc="no" value="1"/>
+            </defaultOptions>
+            <defaultValue>0</defaultValue>
+        </param>
+        <param>
+            <name>table_partition</name>
+            <description>table_partition</description>
+            <type>text</type>
+            <nullable>false</nullable>
+        </param>
+        <param>
+            <name>hive_conf</name>
+            <description>hive_conf</description>
+            <type>text</type>
+            <nullable>false</nullable>
+        </param>
+
+    </params>
+</component>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component>
+    <componentName>component_transform_sort</componentName>
+    <componentDescription>component_transform_sort</componentDescription>
+    <componentClass>com.chinasofti.ark.bdadp.component.Sort</componentClass>
+    <componentIcon>icon-xl.png,icon-xs.png</componentIcon>
+    <componentPid>component_pid_apply</componentPid>
+    <params>
+        <param>
+            <name>colName</name>
+            <description>colName</description>
+            <type>text</type>
+            <nullable>false</nullable>
+        </param>
+        <param>
+            <name>sortDirection</name>
+            <description>sortDirection</description>
+            <type>options</type>
+            <nullable>false</nullable>
+            <defaultOptions>
+                <option name="desc" desc="desc" value="desc"/>
+                <option name="asc" desc="asc" value="asc"/>
+            </defaultOptions>
+            <defaultValue>desc</defaultValue>
+        </param>
+
+    </params>
+</component>

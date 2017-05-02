@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component>
+    <componentName>component_transform_derive</componentName>
+    <componentDescription>component_transform_derive</componentDescription>
+    <componentClass>com.chinasofti.ark.bdadp.component.Derive</componentClass>
+    <componentIcon>icon-xl.png,icon-xs.png</componentIcon>
+    <componentPid>component_pid_apply</componentPid>
+    <params>
+        <param>
+            <name>newColName</name>
+            <description>newColName</description>
+            <type>text</type>
+            <nullable>false</nullable>
+        </param>
+        <param>
+            <name>conditionExprs</name>
+            <description>conditionExprs</description>
+            <type>text</type>
+            <nullable>false</nullable>
+        </param>
+
+        <param>
+            <name>values</name>
+            <description>values</description>
+            <type>text</type>
+            <nullable>false</nullable>
+        </param>
+        <param>
+            <name>defaultValue</name>
+            <description>defaultValue</description>
+            <type>text</type>
+            <nullable>false</nullable>
+        </param>
+        <param>
+            <name>delimiter</name>
+            <description>delimiter</description>
+            <type>text</type>
+            <nullable>false</nullable>
+        </param>
+    </params>
+</component>

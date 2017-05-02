@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component>
+    <componentName>component_hql_executor</componentName>
+    <componentDescription>component_hql_executor</componentDescription>
+    <componentClass>com.chinasofti.ark.bdadp.component.sample.HqlRunnableComponent</componentClass>
+    <componentIcon>icon-xl.png,icon-xs.png</componentIcon>
+    <!-- 60px * 60px, 20px * 20px -->
+    <componentPid>component_pid_common</componentPid>
+    <params>
+        <param>
+            <name>hql_type</name>
+            <description>hql_type</description>
+            <type>options</type>
+            <nullable>false</nullable>
+            <defaultOptions>
+                <option name="hql" desc="hql" value="0"/>
+                <option name="file_path" desc="file_path" value="1"/>
+            </defaultOptions>
+            <defaultValue>0</defaultValue>
+        </param>
+        <param>
+            <name>hql</name>
+            <description>hql</description>
+            <type>textarea</type>
+            <nullable>false</nullable>
+        </param>
+        <param>
+            <name>hive_conf</name>
+            <description>hive_conf</description>
+            <type>text</type>
+            <nullable>false</nullable>
+        </param>
+
+    </params>
+</component>

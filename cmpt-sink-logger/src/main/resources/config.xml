@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component>
+    <componentName>component_sink_show</componentName>
+    <componentDescription>component_sink_show</componentDescription>
+    <componentClass>com.chinasofti.ark.bdadp.component.LoggerSink</componentClass>
+    <componentIcon>icon-xl.png,icon-xs.png</componentIcon>
+    <componentPid>component_pid_sink</componentPid>
+    <params>
+        <param>
+            <name>numRows</name>
+            <description>numRows</description>
+            <type>text</type>
+            <nullable>true</nullable>
+        </param>
+        <param>
+            <name>numPartitions</name>
+            <description>numPartitions</description>
+            <type>text</type>
+            <nullable>true</nullable>
+        </param>
+    </params>
+</component>

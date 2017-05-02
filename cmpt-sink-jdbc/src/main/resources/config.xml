@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component>
+    <componentName>component_sink_jdbc</componentName>
+    <componentDescription>component_sink_jdbc</componentDescription>
+    <componentClass>com.chinasofti.ark.bdadp.component.JDBCSink</componentClass>
+    <componentIcon>icon-xl.png,icon-xs.png</componentIcon>
+    <componentPid>component_pid_sink</componentPid>
+    <params>
+        <param>
+            <name>conUrl</name>
+            <description>conUrl</description>
+            <type>text</type>
+            <nullable>false</nullable>
+        </param>
+        <param>
+            <name>table</name>
+            <description>table</description>
+            <type>text</type>
+            <nullable>true</nullable>
+        </param>
+        <param>
+            <name>userName</name>
+            <description>userName</description>
+            <type>text</type>
+            <nullable>true</nullable>
+        </param>
+        <param>
+            <name>passWord</name>
+            <description>passWord</description>
+            <type>text</type>
+            <nullable>true</nullable>
+        </param>
+        <param>
+            <name>numPartitions</name>
+            <description>numPartitions</description>
+            <type>text</type>
+            <nullable>true</nullable>
+        </param>
+        <param>
+            <name>mode</name>
+            <description>mode</description>
+            <type>options</type>
+            <nullable>true</nullable>
+            <defaultOptions>
+                <option name="error" desc="error" value="error"/>
+                <option name="append" desc="append" value="append"/>
+                <option name="overwrite" desc="overwrite" value="overwrite"/>
+                <option name="ignore" desc="ignore" value="ignore"/>
+            </defaultOptions>
+            <defaultValue>error</defaultValue>
+        </param>
+    </params>
+</component>

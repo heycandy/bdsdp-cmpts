@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component>
+    <componentName>cmpt_source_jdbc_as400</componentName>
+    <componentDescription>cmpt_source_jdbc_as400</componentDescription>
+    <componentClass>com.chinasofti.ark.bdadp.component.AS400JDBCSource</componentClass>
+    <componentIcon>icon-xl.png,icon-xs.png</componentIcon>
+    <componentPid>component_pid_source</componentPid>
+    <params>
+        <param>
+            <name>systemName</name>
+            <description>System Name</description>
+            <type>text</type>
+            <nullable>false</nullable>
+        </param>
+        <param>
+            <name>defaultSchema</name>
+            <description>Default Schema</description>
+            <type>Default Scheam</type>
+            <nullable>true</nullable>
+        </param>
+        <param>
+            <name>databaseName</name>
+            <description>Database Name</description>
+            <type>text</type>
+            <nullable>true</nullable>
+        </param>
+        <param>
+            <name>user</name>
+            <description>User Name</description>
+            <type>text</type>
+            <nullable>false</nullable>
+        </param>
+        <param>
+            <name>password</name>
+            <description>Password</description>
+            <type>password</type>
+            <nullable>false</nullable>
+        </param>
+        <param>
+            <name>dbtable</name>
+            <description>Table</description>
+            <type>text</type>
+            <nullable>false</nullable>
+        </param>
+    </params>
+</component>

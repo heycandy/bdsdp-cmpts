@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component>
+    <componentName>component_transform_select</componentName>
+    <componentDescription>component_transform_select</componentDescription>
+    <componentClass>com.chinasofti.ark.bdadp.component.Select</componentClass>
+    <componentIcon>icon-xl.png,icon-xs.png</componentIcon>
+    <componentPid>component_pid_apply</componentPid>
+    <params>
+        <param>
+            <name>colExpr</name>
+            <description>colExpr</description>
+            <type>text</type>
+            <nullable>false</nullable>
+        </param>
+
+    </params>
+</component>

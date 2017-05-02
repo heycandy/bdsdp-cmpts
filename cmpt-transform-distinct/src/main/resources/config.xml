@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component>
+    <componentName>component_transform_distinct</componentName>
+    <componentDescription>component_transform_distinct</componentDescription>
+    <componentClass>com.chinasofti.ark.bdadp.component.Distinct</componentClass>
+    <componentIcon>icon-xl.png,icon-xs.png</componentIcon>
+    <componentPid>component_pid_apply</componentPid>
+    <params>
+
+    </params>
+</component>
