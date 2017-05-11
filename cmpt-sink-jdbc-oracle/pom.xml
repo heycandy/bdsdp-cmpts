@@ -8,7 +8,7 @@
     <relativePath>../../bdsdp-cmpts/pom.xml</relativePath>
   </parent>
   <modelVersion>4.0.0</modelVersion>
-  <artifactId>cmpt-sink-oracle</artifactId>
+  <artifactId>cmpt-sink-jdbc-oracle</artifactId>
 
   <repositories>
     <repository>

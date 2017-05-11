@@ -27,7 +27,7 @@
     <param>
       <name>passWord</name>
       <description>passWord</description>
-      <type>text</type>
+      <type>password</type>
       <nullable>true</nullable>
     </param>
     <param>

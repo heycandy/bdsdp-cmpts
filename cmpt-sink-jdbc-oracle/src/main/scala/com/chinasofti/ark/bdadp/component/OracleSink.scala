@@ -2,12 +2,14 @@ package com.chinasofti.ark.bdadp.component
 
 //import java.sql.DriverManager
 
+import java.sql.Connection
 import java.util.Properties
 
 import com.chinasofti.ark.bdadp.component.api.Configureable
 import com.chinasofti.ark.bdadp.component.api.data.{SparkData, StringData}
 import com.chinasofti.ark.bdadp.component.api.sink.{SinkComponent, SparkSinkAdapter}
 import com.chinasofti.ark.bdadp.util.common.StringUtils
+import org.apache.spark.sql.execution.datasources.jdbc.JdbcUtils
 
 //import oracle.jdbc.OracleDriver
 
@@ -17,7 +19,7 @@ import org.slf4j.Logger
  * Created by water on 2017.4.23
  */
 class OracleSink(id: String, name: String, log: Logger)
-  extends SinkComponent[StringData](id, name, log) with Configureable with
+  extends SinkComponent[SparkData](id, name, log) with Configureable with
   SparkSinkAdapter[SparkData] {
 
   var conUrl: String = null
@@ -27,13 +29,12 @@ class OracleSink(id: String, name: String, log: Logger)
   var numPartitions: Int = 0
   var mode: String = null
   var driver = ""
+  var truncate: String = null
   var properties = new Properties();
 
-  override def apply(inputT: StringData): Unit = {
-  }
+
 
   override def configure(componentProps: ComponentProps): Unit = {
-    //    DriverManager.registerDriver(new OracleDriver())
 
     conUrl = componentProps.getString("conUrl")
     table = componentProps.getString("table")
@@ -41,14 +42,10 @@ class OracleSink(id: String, name: String, log: Logger)
     passWord = componentProps.getString("passWord")
     numPartitions = componentProps.getInt("numPartitions", 8)
     mode = componentProps.getString("mode", "append")
-    this.driver = "oracle.jdbc.Oracle10gDriver"
+    truncate = componentProps.getString("truncate")
+    this.driver = "oracle.jdbc.OracleDriver"
 
     StringUtils.assertIsBlank(conUrl, table, userName, passWord);
-
-    //    默认为SaveMode.ErrorIfExists模式，该模式下，如果数据库中已经存在该表，则会直接报异常，导致数据不能存入数据库.另外三种模式如下：
-    //    SaveMode.Append 如果表已经存在，则追加在该表中；若该表不存在，则会先创建表，再插入数据；
-    //    SaveMode.Overwrite 重写模式，其实质是先将已有的表及其数据全都删除，再重新创建该表，最后插入新的数据；
-    //    SaveMode.Ignore 若表不存在，则创建表，并存入数据；在表存在的情况下，直接跳过数据的存储，不会报错。
 
     properties.put("user", userName);
     properties.put("password", passWord);
@@ -57,7 +54,24 @@ class OracleSink(id: String, name: String, log: Logger)
   }
 
   override def apply(inputT: SparkData): Unit = {
-    inputT.getRawData.repartition(numPartitions).write.option("driver", driver).mode(mode).jdbc(conUrl, table, properties)
+    if (truncate.equals("true")) {
+      val conn = JdbcUtils.createConnectionFactory(conUrl, properties)()
+      truncateTable(conn, table)
+    }
 
+    inputT.getRawData.repartition(numPartitions).write.option("driver", driver).option("truncate", truncate).mode(mode).jdbc(conUrl, table, properties)
+
+  }
+
+  /**
+   * Truncate a table from the JDBC database.
+   */
+  def truncateTable(conn: Connection, table: String): Unit = {
+    val statement = conn.createStatement
+    try {
+      statement.executeUpdate(s"TRUNCATE TABLE $table")
+    } finally {
+      statement.close()
+    }
   }
 }

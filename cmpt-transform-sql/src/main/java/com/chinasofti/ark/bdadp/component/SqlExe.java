@@ -3,15 +3,10 @@ package com.chinasofti.ark.bdadp.component;
 import com.chinasofti.ark.bdadp.component.api.Configureable;
 import com.chinasofti.ark.bdadp.component.api.RunnableComponent;
 import com.chinasofti.ark.bdadp.util.common.StringUtils;
-import com.chinasofti.ark.bdadp.util.io.FileUtil;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import org.slf4j.Logger;
-
-
-import java.io.*;
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -22,6 +17,7 @@ import java.sql.DriverManager;
 public class SqlExe extends RunnableComponent implements Configureable {
 
   private final static String DEST_CHARSET = "UTF-8";
+  private final static String DATE_FORMAT = "yyyy-MM-dd";
   private String driver;
   private String url;
   private String user;
@@ -44,7 +40,7 @@ public class SqlExe extends RunnableComponent implements Configureable {
     sql = props.getString("jdbc_sql");
     inputStr = props.getString("inputStr");
     outputStr = props.getString("outputStr");
-    StringUtils.assertIsBlank(driver,url,user,pwd,sql,inputStr,outputStr);
+    StringUtils.assertIsBlank(driver, url, user, pwd, sql, inputStr, outputStr);
     checkParams();
   }
 
@@ -54,47 +50,53 @@ public class SqlExe extends RunnableComponent implements Configureable {
     if (con == null) {
       throw new RuntimeException(getName() + " can not work since it can not retrieve connection.");
     }
-//    ResultSet rs = null;
     try {
 //      String sql = "{CALL pro_num_user(?,?)}"; //调用存储过程
       String regexp = "\'";
       int countIn = inputStr.split(",").length;
       int countSum = sql.split(",").length;
       String[] list_In = inputStr.split(",");
-      CallableStatement cstm = con.prepareCall(sql); //实例化对象cstm
-      for(int i=1;i<=countIn;i++){
-        if(list_In[i-1].indexOf("'")>-1){
-          //有单引号
-          String str_Int = list_In[i-1].replaceAll(regexp,"");
-          cstm.setString(i, str_Int); //存储过程输入string参数
-          info("input string is： "+str_Int);
-        }else{
-          cstm.setInt(i,Integer.parseInt(list_In[i-1])); //存储过程输入int参数
-          info("input int is： "+Integer.parseInt(list_In[i-1]));
+      CallableStatement cstm = con.prepareCall(sql);
+      for (int i = 1; i <= countIn; i++) {
+        if (list_In[i - 1].indexOf("'") > -1) {//有单引号
+          String strInput = list_In[i - 1].replaceAll(regexp, "");
+          if (strInput.contains("-")) {
+            SimpleDateFormat sdf = new SimpleDateFormat(DATE_FORMAT);
+            java.sql.Date sqlDate = new java.sql.Date(sdf.parse(strInput).getTime());
+            cstm.setDate(i, sqlDate);
+            info("input date is： " + sqlDate);
+          } else {
+            cstm.setString(i, strInput);
+            info("input string is： " + strInput);
+          }
+        } else {
+          cstm.setInt(i, Integer.parseInt(list_In[i - 1]));
+          info("input int is： " + Integer.parseInt(list_In[i - 1]));
         }
+
       }
-      //cstm.setInt(2, 2); // 存储过程输入参数
+
       String[] list_Out = outputStr.split(",");
       int index_type = 0;
-      int index_get = 0 ;
-      for(int j=countIn+1;j<=countSum;j++){
-        if(list_Out[index_type].equals("string")){
+      int index_get = 0;
+      for (int j = countIn + 1; j <= countSum; j++) {
+        if (list_Out[index_type].equals("string")) {
           cstm.registerOutParameter(j, Types.VARCHAR); // 设置返回值string类型
           index_type++;
-          info("output type is： "+Types.VARCHAR);
-        }else{
+          info("output type is： " + Types.VARCHAR);
+        } else {
           cstm.registerOutParameter(j, Types.INTEGER); // 设置返回值int类型
           index_type++;
-          info("output type is： "+Types.INTEGER);
+          info("output type is： " + Types.INTEGER);
         }
       }
       cstm.execute(); // 执行存储过程
-      for(int k=countIn+1;k<=countSum;k++){
-        if(list_Out[index_get].equals("string")){
-          info("output is： "+cstm.getString(k));
+      for (int k = countIn + 1; k <= countSum; k++) {
+        if (list_Out[index_get].equals("string")) {
+          info("output is： " + cstm.getString(k));
           index_get++;
-        }else{
-          info("output is： "+cstm.getInt(k));
+        } else {
+          info("output is： " + cstm.getInt(k));
           index_get++;
         }
       }
@@ -102,6 +104,8 @@ public class SqlExe extends RunnableComponent implements Configureable {
       con.close();
     } catch (SQLException e) {
       throw new RuntimeException(getName() + " execute sql failed, sql is: ");
+    } catch (ParseException e) {
+      e.printStackTrace();
     }
   }
 
@@ -112,9 +116,6 @@ public class SqlExe extends RunnableComponent implements Configureable {
     if (url == null || "".equals(url.trim())) {
       throw new RuntimeException("Jdbc url is required.");
     }
-//    if (sql == null || "".equals(sql.trim())) {
-//      throw new RuntimeException("Jdbc sql is required.");
-//    }
   }
 
   private Connection getConnection(String driver, String url, String user, String pwd) {

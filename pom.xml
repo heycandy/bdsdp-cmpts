@@ -48,7 +48,8 @@
     <module>cmpt-sink-chart-pie</module>
     <module>cmpt-sink-chart-bar</module>
     <module>cmpt-source-as400</module>
-    <module>cmpt-sink-oracle</module>
+    <module>cmpt-sink-jdbc-oracle</module>
+    <module>cmpt-tools-mail</module>
 
 
   </modules>
