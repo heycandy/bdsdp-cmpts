@@ -48,7 +48,7 @@
         <!--<module>cmpt-sink-chart-pie</module>-->
         <!--<module>cmpt-sink-chart-bar</module>-->
         <!--<module>cmpt-source-jdbc-as400</module>-->
-        <!--<module>cmpt-sink-assert</module>-->
+      <module>cmpt-sink-assert</module>
         <module>cmpt-transform-graph-cycle</module>
         <module>cmpt-sink-chart-cycle</module>
 
