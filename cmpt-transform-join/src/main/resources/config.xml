@@ -1,17 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <component>
-    <componentName>component_transform_join</componentName>
-    <componentDescription>component_transform_join</componentDescription>
-    <componentClass>com.chinasofti.ark.bdadp.component.Join</componentClass>
-    <componentIcon>icon-xl.png,icon-xs.png</componentIcon>
-    <componentPid>component_pid_apply</componentPid>
-    <params>
-        <param>
-            <name>conditionExpr</name>
-            <description>conditionExpr</description>
-            <type>text</type>
-            <nullable>false</nullable>
-        </param>
+  <componentName>component_transform_join</componentName>
+  <componentDescription>component_transform_join</componentDescription>
+  <componentClass>com.chinasofti.ark.bdadp.component.Join</componentClass>
+  <componentIcon>icon-xl.png,icon-xs.png</componentIcon>
+  <componentPid>component_pid_apply</componentPid>
+  <params>
+    <param>
+      <name>joinExprs</name>
+      <description>joinExprs</description>
+      <type>text</type>
+      <nullable>false</nullable>
+    </param>
+    <param>
+      <name>joinType</name>
+      <description>joinType</description>
+      <type>options</type>
+      <nullable>false</nullable>
+      <defaultOptions>
+        <option name="inner" desc="Inner" value="inner"/>
+        <option name="outer" desc="Outer" value="outer"/>
+        <option name="left_outer" desc="Left Outer" value="left_outer"/>
+        <option name="right_outer" desc="Right Outer" value="right_outer"/>
+        <option name="leftsemi" desc="Left Semi" value="leftsemi"/>
+      </defaultOptions>
+      <defaultValue>inner</defaultValue>
+    </param>
 
-    </params>
+  </params>
 </component>
