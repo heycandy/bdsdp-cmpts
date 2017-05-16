@@ -43,6 +43,11 @@ class Assert(id: String, name: String, log: Logger)
 
     } while (assertFlag && assertTime())
 
+
+    if (!assertFlag && assertKey.startsWith("$")) {
+      assertValue = inputT.getRawData.first().getAs(assertKey.tail)
+    }
+
     System.setProperty("scenario.assert.flag", assertFlag.toString)
     System.setProperty(assertKey, assertValue)
 
