@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <component>
-<<<<<<< HEAD
   <componentName>cmpt-transform-sql</componentName>
   <componentDescription>cmpt-transform-sql</componentDescription>
   <componentClass>com.chinasofti.ark.bdadp.component.SqlExe</componentClass>
@@ -57,56 +56,5 @@
       <nullable>false</nullable>
     </param>
   </params>
-=======
-    <componentName>cmpt-transform-sql</componentName>
-    <componentDescription>cmpt-transform-sql</componentDescription>
-    <componentClass>com.chinasofti.ark.bdadp.component.SqlExe</componentClass>
-    <componentIcon>icon-xl.png,icon-xs.png</componentIcon>
-    <!-- 60px * 60px, 20px * 20px -->
-    <componentPid>component_pid_data_extract</componentPid>
-    <params>
-        <param>
-            <name>jdbc_driver</name>
-            <description>jdbc_driver</description>
-            <type>text</type>
-            <nullable>false</nullable>
-        </param>
-        <param>
-            <name>jdbc_url</name>
-            <description>jdbc_url</description>
-            <type>text</type>
-            <nullable>false</nullable>
-        </param>
-        <param>
-            <name>jdbc_user</name>
-            <description>username</description>
-            <type>text</type>
-            <nullable>false</nullable>
-        </param>
-        <param>
-            <name>jdbc_pwd</name>
-            <description>password</description>
-            <type>password</type>
-            <nullable>false</nullable>
-        </param>
-        <param>
-            <name>jdbc_sql</name>
-            <description>SQL</description>
-            <type>text</type>
-            <nullable>false</nullable>
-        </param>
-        <param>
-            <name>inputStr</name>
-            <description>inputStr</description>
-            <type>text</type>
-            <nullable>false</nullable>
-        </param>
-        <param>
-            <name>outputStr</name>
-            <description>outputStr</description>
-            <type>text</type>
-            <nullable>false</nullable>
-        </param>
-    </params>
->>>>>>> c5c6e652a6967989a1d0e5a8aa802015dea6fab4
+
 </component>
