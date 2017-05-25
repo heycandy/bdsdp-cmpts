@@ -50,6 +50,7 @@
     <module>cmpt-source-as400</module>
     <module>cmpt-sink-jdbc-oracle</module>
     <module>cmpt-tools-mail</module>
+    <module>cmpt-sink-assert</module>
 
 
   </modules>

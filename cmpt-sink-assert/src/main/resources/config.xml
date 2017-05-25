@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component>
+  <componentName>component_sink_assert</componentName>
+  <componentDescription>component_sink_assert</componentDescription>
+  <componentClass>com.chinasofti.ark.bdadp.component.Assert</componentClass>
+  <componentIcon>icon-xl.png,icon-xs.png</componentIcon>
+  <componentPid>component_pid_sink</componentPid>
+  <params>
+    <param>
+      <name>conditionExpr</name>
+      <description>conditionExpr</description>
+      <type>text</type>
+      <nullable>false</nullable>
+    </param>
+    <param>
+      <name>deadline</name>
+      <description>deadline</description>
+      <type>text</type>
+      <nullable>false</nullable>
+    </param>
+    <param>
+      <name>period</name>
+      <description>period</description>
+      <type>number</type>
+      <nullable>false</nullable>
+    </param>
+    <param>
+      <name>assertKey</name>
+      <description>assertKey</description>
+      <type>text</type>
+      <nullable>false</nullable>
+    </param>
+    <param>
+      <name>assertValue</name>
+      <description>assertValue</description>
+      <type>textarea</type>
+      <nullable>false</nullable>
+    </param>
+
+  </params>
+</component>

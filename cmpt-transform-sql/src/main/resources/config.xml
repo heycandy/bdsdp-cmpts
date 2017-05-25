@@ -5,7 +5,7 @@
   <componentClass>com.chinasofti.ark.bdadp.component.SqlExe</componentClass>
   <componentIcon>icon-xl.png,icon-xs.png</componentIcon>
   <!-- 60px * 60px, 20px * 20px -->
-  <componentPid>component_pid_data_extract</componentPid>
+  <componentPid>component_pid_apply</componentPid>
   <params>
     <param>
       <name>jdbc_driver</name>
@@ -46,6 +46,12 @@
     <param>
       <name>outputStr</name>
       <description>outputStr</description>
+      <type>text</type>
+      <nullable>false</nullable>
+    </param>
+    <param>
+      <name>resultCode</name>
+      <description>resultCode</description>
       <type>text</type>
       <nullable>false</nullable>
     </param>
