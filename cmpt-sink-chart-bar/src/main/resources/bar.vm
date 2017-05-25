@@ -1,1 +1,5 @@
+<<<<<<< HEAD
 {title:{text:$title,subtext:$subtitle,x:'center'},color:['#3398DB'],tooltip:{trigger:'axis',axisPointer:{type:'shadow'}},grid:{left:'3%',right:'4%',bottom:'3%',containLabel:true},xAxis:[{type:'category',data:$legendData,axisTick:{alignWithLabel:true}}],yAxis:[{type:'value'}],series:[{name:'value',type:'bar',barWidth:'60%',data:$seriesData}]}
+=======
+{title:{text:$title,subtext:$subtitle,x:'center'},color:['#3398DB'],tooltip:{trigger:'axis',axisPointer:{type:'shadow'}},grid:{left:'3%',right:'4%',bottom:'3%',containLabel:true},xAxis:[{type:'category',data:$legendData,axisTick:{alignWithLabel:true}}],yAxis:[{type:'value'}],series:[{name:'name',type:'bar',barWidth:'60%',data:$seriesData}]}
+>>>>>>> c5c6e652a6967989a1d0e5a8aa802015dea6fab4

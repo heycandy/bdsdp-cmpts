@@ -51,7 +51,8 @@
     <module>cmpt-sink-jdbc-oracle</module>
     <module>cmpt-tools-mail</module>
     <module>cmpt-sink-assert</module>
-
+    <module>cmpt-sink-chart-cycle</module>
+    <module>cmpt-transform-graph-cycle</module>
 
   </modules>
 
@@ -286,5 +287,6 @@
       <url>http://maven.aliyun.com/nexus/content/groups/public/</url>
     </repository>
   </repositories>
+
 
 </project>

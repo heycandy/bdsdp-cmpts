@@ -3,6 +3,7 @@ package com.chinasofti.ark.bdadp.component
 import com.chinasofti.ark.bdadp.component.api.Configureable
 import com.chinasofti.ark.bdadp.component.api.data.{SparkData, StringData}
 import com.chinasofti.ark.bdadp.component.api.sink.{SinkComponent, SparkSinkAdapter}
+<<<<<<< HEAD
 import org.apache.spark.ml.classification.LogisticRegression
 import org.apache.spark.mllib.linalg.{DenseVector, Vectors}
 import org.apache.spark.mllib.regression.LabeledPoint
@@ -13,11 +14,19 @@ import org.slf4j.Logger
 
 import scala.collection.mutable
 
+=======
+import org.slf4j.Logger
+
+>>>>>>> c5c6e652a6967989a1d0e5a8aa802015dea6fab4
 
 /**
   * Created by Administrator on 2017.2.16.
   */
+<<<<<<< HEAD
 class DecisionSink (id: String, name: String, log: Logger)
+=======
+class DecisionSink(id: String, name: String, log: Logger)
+>>>>>>> c5c6e652a6967989a1d0e5a8aa802015dea6fab4
   extends SinkComponent[StringData](id, name, log) with Configureable with
     SparkSinkAdapter[SparkData] with Serializable {
 
@@ -26,16 +35,27 @@ class DecisionSink (id: String, name: String, log: Logger)
   var impurity: String = null
   var maxDepth: Int = 0
   var maxBins: Int = 0
+<<<<<<< HEAD
+=======
+
+>>>>>>> c5c6e652a6967989a1d0e5a8aa802015dea6fab4
   override def apply(inputT: StringData): Unit = {
     //    info(inputT.getRawData)
   }
 
   override def configure(componentProps: ComponentProps): Unit = {
     path = componentProps.getString("path")
+<<<<<<< HEAD
     numClasses = componentProps.getString("numClasses","2").toInt
     impurity = componentProps.getString("impurity","gini")
     maxDepth = componentProps.getString("maxDepth","5").toInt
     maxBins = componentProps.getString("maxBins","32").toInt
+=======
+    numClasses = componentProps.getString("numClasses", "2").toInt
+    impurity = componentProps.getString("impurity", "gini")
+    maxDepth = componentProps.getString("maxDepth", "5").toInt
+    maxBins = componentProps.getString("maxBins", "32").toInt
+>>>>>>> c5c6e652a6967989a1d0e5a8aa802015dea6fab4
   }
 
   override def apply(inputT: SparkData): Unit = {
@@ -60,6 +80,10 @@ class DecisionSink (id: String, name: String, log: Logger)
 
     val sc = inputT.getRawData.sqlContext.sparkContext
 
+<<<<<<< HEAD
     model.save(sc,path)
+=======
+    model.save(sc, path)
+>>>>>>> c5c6e652a6967989a1d0e5a8aa802015dea6fab4
   }
 }
