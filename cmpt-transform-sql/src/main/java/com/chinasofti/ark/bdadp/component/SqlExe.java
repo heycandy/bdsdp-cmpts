@@ -1,25 +1,28 @@
 package com.chinasofti.ark.bdadp.component;
 
 import com.chinasofti.ark.bdadp.component.api.Configureable;
+import com.chinasofti.ark.bdadp.component.api.Optional;
 import com.chinasofti.ark.bdadp.component.api.RunnableComponent;
+import com.chinasofti.ark.bdadp.component.api.options.ScenarioOptions;
 import com.chinasofti.ark.bdadp.util.common.StringUtils;
-import java.math.BigDecimal;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import org.slf4j.Logger;
-import java.sql.*;
 
+import org.slf4j.Logger;
+
+import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.DriverManager;
-
+import java.sql.SQLException;
+import java.sql.Types;
+import java.text.SimpleDateFormat;
 
 /**
  * Created by wumin on 2016/9/23.
  */
-public class SqlExe extends RunnableComponent implements Configureable {
+public class SqlExe extends RunnableComponent implements Configureable, Optional {
 
   private final static String DEST_CHARSET = "UTF-8";
   private final static String DATE_FORMAT = "yyyy-MM-dd";
+  private final static String DATE_FORMAT_SHORT = "yyyyMMdd";
   private String driver;
   private String url;
   private String user;
@@ -29,6 +32,7 @@ public class SqlExe extends RunnableComponent implements Configureable {
   private String outputStr;
   private String resultCode;
 
+  private String inputDate;
 
   public SqlExe(String id, String name, Logger log) {
     super(id, name, log);
@@ -44,40 +48,62 @@ public class SqlExe extends RunnableComponent implements Configureable {
     inputStr = props.getString("inputStr");
     outputStr = props.getString("outputStr");
     resultCode = props.getString("resultCode","0").trim();
+
     StringUtils.assertIsBlank(driver, url, user, pwd, sql, inputStr, outputStr);
-    checkParams();
+
+    if (StringUtils.isNulOrEmpty(driver)) {
+      throw new RuntimeException("Jdbc driver is required.");
+    }
+
+    if (StringUtils.isNulOrEmpty(url)) {
+      throw new RuntimeException("Jdbc url is required.");
+    }
   }
 
-  //      String sql = "{CALL pro_num_user(?,?)}"; //调用存储过程
+  @Override
+  public void options(ScenarioOptions scenarioOptions) {
+    inputDate = scenarioOptions.getSettings().get("scenario.assert.date");
+    info("input date: " + inputDate);
+  }
+
+  //  {CALL pro_num_user(?,?)}
   @Override
   public void run() {
-    Connection con = getConnection(driver, url, user, pwd);
+    Connection con = null;
+    CallableStatement cstm = null;
+
     try {
       String regexp = "\'";
       int countIn = inputStr.split(",").length;
       int countSum = sql.split(",").length;
       String[] list_In = inputStr.split(",");
-      CallableStatement cstm = con.prepareCall(sql);
-      for (int i = 1; i <= countIn; i++) {
 
-        if (i == 1) {
-          SimpleDateFormat sdf = new SimpleDateFormat(DATE_FORMAT);
-          String inputDate = System.getProperty("scenario.assert.date");
+      con = getConnection(driver, url, user, pwd);
+      cstm = con.prepareCall(sql);
+
+      for (int i = 1; i <= countIn; i++) {
+        if (i == 1) { // 场景没有时间入参的，取list_In第二个值为时间入参
+          java.sql.Date sqlDate;
+
           if (org.apache.commons.lang.StringUtils.isBlank(inputDate)) {
+            SimpleDateFormat sdf = new SimpleDateFormat(DATE_FORMAT);
             inputDate = list_In[i - 1].replaceAll(regexp, "");
+            sqlDate = new java.sql.Date(sdf.parse(inputDate).getTime());
+
+          } else {  // 场景包含时间入参的，取inputDate作为时间入参
+            SimpleDateFormat sdf = new SimpleDateFormat(DATE_FORMAT_SHORT);
+            sqlDate = new java.sql.Date(sdf.parse(inputDate).getTime());
           }
-          java.sql.Date sqlDate = new java.sql.Date(sdf.parse(inputDate).getTime());
+
           info("input date is： " + sqlDate);
           cstm.setDate(1, sqlDate);
-        } else {
-
-          if (list_In[i - 1].indexOf("'") > -1) {//有单引号
+        } else {  // 有单引号为字符串入参
+          if (list_In[i - 1].contains("'")) {
             String strInput = list_In[i - 1].replaceAll(regexp, "");
 
             cstm.setString(i, strInput);
             info("input string is： " + strInput);
-
-          } else {
+          } else {  // 没有单引号为数值类型入参
             cstm.setInt(i, Integer.parseInt(list_In[i - 1]));
             info("input int is： " + Integer.parseInt(list_In[i - 1]));
           }
@@ -89,53 +115,59 @@ public class SqlExe extends RunnableComponent implements Configureable {
       int index_get = 0;
       String resultMessage = null;
       String runCode = null;
-      for (int j = countIn + 1; j <= countSum; j++) {
+
+      for (int j = countIn + 1; j <= countSum && index_type < list_Out.length; j++) {
         if (list_Out[index_type].equals("string")) {
           cstm.registerOutParameter(j, Types.VARCHAR); // 设置返回值string类型
-          index_type++;
-//          info("output type is： " + Types.VARCHAR);
         } else {
           cstm.registerOutParameter(j, Types.INTEGER); // 设置返回值int类型
-          index_type++;
-//          info("output type is： " + Types.INTEGER);
         }
+
+        index_type++;
       }
+
       cstm.execute(); // 执行存储过程
-      for (int k = countIn + 1; k <= countSum; k++) {
+
+      //  存储过程节点执行后的返回值目前定义的有两个，第一个是Code，第二个是Msg
+      for (int k = countIn + 1; k <= countSum && index_get < list_Out.length; k++) {
         if (list_Out[index_get].equals("string")) {
-
-          if(isNum(cstm.getString(k))){
-
-            runCode = cstm.getString(k);
+          String str = cstm.getString(k);
+          if (org.apache.commons.lang.StringUtils.isNumeric(str)) { //  Number类型的是Code
+            runCode = str;
             info("output code is： " + runCode);
-          }else{
-            resultMessage = cstm.getString(k);
+          } else {  //  字符串类型的是Msg
+            resultMessage = str;
             info("output msg is： " + resultMessage);
           }
-          index_get++;
-        } else {
-          info("output code is： " + cstm.getInt(k));
-          index_get++;
+        } else {  // 数值类型的忽略
+          info("output int is： " + cstm.getInt(k));
+        }
+
+        index_get++;
+      }
+
+      if (!resultCode.equals(runCode)) {
+        throw new SQLException(String.format("Code: %s, Msg: %s", runCode, resultMessage));
+      }
+
+    } catch (Exception e) {
+      throw new RuntimeException(e.getMessage(), e);
+    } finally {
+      if (cstm != null) {
+        try {
+          cstm.close();
+        } catch (SQLException e) {
+          e.printStackTrace();
         }
       }
-      if (!resultCode.equals(runCode)) {
-        throw new RuntimeException(" execute sql failed, message is: " + resultMessage);
-      }
-      cstm.close();
-      con.close();
-    } catch (SQLException e) {
-      throw new RuntimeException(getName() + " execute sql failed, sql is: ");
-    } catch (ParseException e) {
-      e.printStackTrace();
-    }
-  }
 
-  private void checkParams() {
-    if (driver == null || "".equals(driver.trim())) {
-      throw new RuntimeException("Jdbc driver is required.");
-    }
-    if (url == null || "".equals(url.trim())) {
-      throw new RuntimeException("Jdbc url is required.");
+      if (con != null) {
+        try {
+          con.close();
+        } catch (SQLException e) {
+          e.printStackTrace();
+        }
+      }
     }
   }
 
@@ -155,13 +187,4 @@ public class SqlExe extends RunnableComponent implements Configureable {
     }
   }
 
-  private  boolean isNum(String str) {
-
-    try {
-      new BigDecimal(str);
-      return true;
-    } catch (Exception e) {
-      return false;
-    }
-  }
 }

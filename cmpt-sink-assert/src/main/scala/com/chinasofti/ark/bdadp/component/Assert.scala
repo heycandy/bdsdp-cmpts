@@ -1,30 +1,19 @@
 package com.chinasofti.ark.bdadp.component
 
-<<<<<<< HEAD
-import java.text.SimpleDateFormat
-import java.util.{Date, Calendar}
-=======
 import java.util.Calendar
->>>>>>> c5c6e652a6967989a1d0e5a8aa802015dea6fab4
 
-import com.chinasofti.ark.bdadp.component.api.Configureable
 import com.chinasofti.ark.bdadp.component.api.data.SparkData
+import com.chinasofti.ark.bdadp.component.api.options.ScenarioOptions
 import com.chinasofti.ark.bdadp.component.api.sink.SinkComponent
+import com.chinasofti.ark.bdadp.component.api.{Configureable, Optional}
 import org.apache.commons.lang.StringUtils
 import org.slf4j.Logger
 
 /**
-<<<<<<< HEAD
  * Created by White on 2017/5/10.
  */
 class Assert(id: String, name: String, log: Logger)
-  extends SinkComponent[SparkData](id, name, log) with Configureable {
-=======
-  * Created by White on 2017/5/10.
-  */
-class Assert(id: String, name: String, log: Logger)
-    extends SinkComponent[SparkData](id, name, log) with Configureable {
->>>>>>> c5c6e652a6967989a1d0e5a8aa802015dea6fab4
+    extends SinkComponent[SparkData](id, name, log) with Configureable with Optional {
 
   var conditionExpr: String = _
   var deadline: String = _
@@ -34,6 +23,8 @@ class Assert(id: String, name: String, log: Logger)
 
   var assertFlag: Boolean = false
 
+  var options: ScenarioOptions = _
+
   override def apply(inputT: SparkData): Unit = {
 
     val Array(hour, minute, second) = deadline.split(":")
@@ -41,13 +32,8 @@ class Assert(id: String, name: String, log: Logger)
       val calendar = Calendar.getInstance()
 
       calendar.get(Calendar.HOUR_OF_DAY) <= hour.toInt &&
-<<<<<<< HEAD
-        calendar.get(Calendar.MINUTE) <= minute.toInt &&
-        calendar.get(Calendar.SECOND) <= second.toInt
-=======
       calendar.get(Calendar.MINUTE) <= minute.toInt &&
       calendar.get(Calendar.SECOND) <= second.toInt
->>>>>>> c5c6e652a6967989a1d0e5a8aa802015dea6fab4
     }
 
     do {
@@ -61,17 +47,16 @@ class Assert(id: String, name: String, log: Logger)
     } while (assertFlag && assertTime())
 
 
-    if (!assertFlag && assertKey.startsWith("$")) {
-<<<<<<< HEAD
-      //      assertValue = inputT.getRawData.col(assertKey.tail).toString()
-      assertValue = getNowDate()
-=======
-      assertValue = inputT.getRawData.first().getAs(assertKey.tail)
->>>>>>> c5c6e652a6967989a1d0e5a8aa802015dea6fab4
+    if (!assertFlag) {
+      if (assertValue.startsWith("$")) {
+        options.getSettings.put(assertKey, inputT.getRawData.first().getAs(assertValue.tail))
+      } else {
+        options.getSettings.put(assertKey, assertValue)
+      }
+
     }
 
-    System.setProperty("scenario.assert.flag", assertFlag.toString)
-    System.setProperty(assertKey, assertValue)
+    options.getSettings.put("scenario.assert.flag", String.valueOf(assertFlag))
 
   }
 
@@ -88,7 +73,6 @@ class Assert(id: String, name: String, log: Logger)
     }
 
     splits.foreach(str =>
-<<<<<<< HEAD
       if (!StringUtils.isNumeric(str)) {
         throw new IllegalArgumentException(
           "Incorrect format for 'deadline', For example: 20:00:00.")
@@ -96,19 +80,7 @@ class Assert(id: String, name: String, log: Logger)
 
   }
 
-  def getNowDate(): String = {
-    val now: Date = new Date()
-    val dateFormat: SimpleDateFormat = new SimpleDateFormat("yyyy-MM-dd")
-    val today = dateFormat.format(now)
-    today
+  override def options(scenarioOptions: ScenarioOptions): Unit = {
+    options = scenarioOptions
   }
-
-=======
-                     if (!StringUtils.isNumeric(str)) {
-                       throw new IllegalArgumentException(
-                         "Incorrect format for 'deadline', For example: 20:00:00.")
-                     })
-
-  }
->>>>>>> c5c6e652a6967989a1d0e5a8aa802015dea6fab4
 }
