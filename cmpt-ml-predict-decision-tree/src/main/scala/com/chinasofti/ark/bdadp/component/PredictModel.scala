@@ -3,6 +3,11 @@ package com.chinasofti.ark.bdadp.component
 import com.chinasofti.ark.bdadp.component.api.Configureable
 import com.chinasofti.ark.bdadp.component.api.data.{Builder, SparkData}
 import com.chinasofti.ark.bdadp.component.api.transforms.TransformableComponent
+import org.apache.spark.mllib.linalg.{Vector, Vectors}
+import org.apache.spark.mllib.tree.model.DecisionTreeModel
+import org.apache.spark.rdd.RDD
+import org.apache.spark.sql.Row
+import org.apache.spark.sql.types.{DoubleType, StructField, StructType}
 import org.slf4j.Logger
 
 /**

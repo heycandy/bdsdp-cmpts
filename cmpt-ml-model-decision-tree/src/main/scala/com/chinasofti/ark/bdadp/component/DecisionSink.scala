@@ -3,6 +3,9 @@ package com.chinasofti.ark.bdadp.component
 import com.chinasofti.ark.bdadp.component.api.Configureable
 import com.chinasofti.ark.bdadp.component.api.data.{SparkData, StringData}
 import com.chinasofti.ark.bdadp.component.api.sink.{SinkComponent, SparkSinkAdapter}
+import org.apache.spark.mllib.linalg.Vectors
+import org.apache.spark.mllib.regression.LabeledPoint
+import org.apache.spark.mllib.tree.DecisionTree
 import org.slf4j.Logger
 
 
@@ -41,18 +44,27 @@ class DecisionSink(id: String, name: String, log: Logger)
       new LabeledPoint(label, features)
     }))
 
-    //    Split the data into training and test sets (30% held out for testing)
-    //    val splits = data.randomSplit(Array(0.7,0.3))
-    //    val (trainingData, testData) = (splits(0), splits(1))
+    // Split the data into training and test sets (30% held out for testing)
+    val splits = data.randomSplit(Array(0.7, 0.3))
+    val (trainingData, testData) = (splits(0), splits(1))
 
     // Train a DecisionTree model.
     //  Empty categoricalFeaturesInfo indicates all features are continuous.
     val categoricalFeaturesInfo = Map[Int, Int]()
-    val model = DecisionTree.trainClassifier(data, numClasses, categoricalFeaturesInfo,
-      impurity, maxDepth, maxBins)
+    val model = DecisionTree.trainClassifier(trainingData, numClasses, categoricalFeaturesInfo,
+                                             impurity, maxDepth, maxBins)
 
+    // Evaluate model on test instances and compute test error
+    val labelAndPreds = testData.map { point =>
+      val prediction = model.predict(point.features)
+      (point.label, prediction)
+                                     }
+    val testAccuracy = labelAndPreds.filter(r => r._1 == r._2).count.toDouble / testData.count()
+    info("Test Accuracy = " + testAccuracy)
+    //    info("Learned classification tree model:\n" + model.toDebugString)
+
+    // Save and load model
     val sc = inputT.getRawData.sqlContext.sparkContext
-
     model.save(sc, path)
   }
 }
