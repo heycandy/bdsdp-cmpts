@@ -8,18 +8,13 @@ import org.apache.spark.sql.DataFrame
 import org.slf4j.Logger;
 
 /**
-  * Created by Administrator on 2017.1.11.
-  */
+ * Created by Administrator on 2017.1.11.
+ */
 class Sort(id: String, name: String, log: Logger)
   extends TransformableComponent[SparkData, SparkData](id, name, log) with Configureable {
 
   var colName: String = null;
   var sortDirection: String = null;
-
-  def call(inputT: SparkData, cmptProps: ComponentProps): SparkData = {
-    configure(cmptProps)
-    apply(inputT)
-  }
 
   override def apply(inputT: SparkData): SparkData = {
     val df = inputT.getRawData
@@ -38,6 +33,11 @@ class Sort(id: String, name: String, log: Logger)
     sortDirection = componentProps.getString("sortDirection");
 
     StringUtils.assertIsBlank(colName);
+  }
+
+  def call(inputT: SparkData, cmptProps: ComponentProps): SparkData = {
+    configure(cmptProps)
+    apply(inputT)
   }
 
   def call(inputT: SparkData, colName: String, sortDirection: String): SparkData = {

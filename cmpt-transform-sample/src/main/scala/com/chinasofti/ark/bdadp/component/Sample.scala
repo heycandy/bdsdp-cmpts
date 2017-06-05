@@ -23,11 +23,12 @@ class Sample(id: String, name: String, log: Logger)
     val sc = inputT.getRawData.sqlContext.sparkContext
     val df = inputT.getRawData
     //compute with the fraction or line num.
-    if ("fraction".equalsIgnoreCase(samplingType)) {
-      Builder.build(df.sample(withReplacement, fractionOrNum.toDouble, seed))
-    } else {
+    if("fraction".equalsIgnoreCase(samplingType)){
+      Builder.build(df.sample(withReplacement, fractionOrNum.toDouble,seed))
+    }else
+    {
       val schema = df.schema
-      val sampleArray = df.rdd.takeSample(withReplacement, fractionOrNum.toInt, seed)
+      val sampleArray = df.rdd.takeSample(withReplacement,fractionOrNum.toInt,seed)
       //Parallel array and build rdd
       val sampleRDD = sc.parallelize(sampleArray)
       val dfResult = inputT.getRawData.toDF().sqlContext.createDataFrame(sampleRDD, schema)

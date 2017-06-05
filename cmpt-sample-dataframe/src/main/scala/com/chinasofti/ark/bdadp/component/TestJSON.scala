@@ -12,8 +12,13 @@ import com.fasterxml.jackson.module.scala.DefaultScalaModule
 import com.fasterxml.jackson.module.scala.experimental.ScalaObjectMapper
 
 /**
+<<<<<<< HEAD
+ * Created by White on 2017/1/3.
+ */
+=======
   * Created by White on 2017/1/3.
   */
+>>>>>>> c5c6e652a6967989a1d0e5a8aa802015dea6fab4
 object TestJSON {
 
   def main(args: Array[String]) {

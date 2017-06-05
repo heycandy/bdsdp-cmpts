@@ -1,5 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <component>
+<<<<<<< HEAD
+  <componentName>cmpt_transform_predictModel</componentName>
+  <componentDescription>cmpt_transform_predictModel</componentDescription>
+  <componentClass>com.chinasofti.ark.bdadp.component.PredictModel</componentClass>
+  <componentIcon>icon-xl.png,icon-xs.png</componentIcon>
+  <componentPid>component_pid_apply</componentPid>
+  <params>
+    <param>
+      <name>path</name>
+      <description>path</description>
+      <type>text</type>
+      <nullable>false</nullable>
+    </param>
+  </params>
+=======
     <componentName>cmpt_transform_predictModel</componentName>
     <componentDescription>cmpt_transform_predictModel</componentDescription>
     <componentClass>com.chinasofti.ark.bdadp.component.PredictModel</componentClass>
@@ -13,4 +28,5 @@
             <nullable>false</nullable>
         </param>
     </params>
+>>>>>>> c5c6e652a6967989a1d0e5a8aa802015dea6fab4
 </component>

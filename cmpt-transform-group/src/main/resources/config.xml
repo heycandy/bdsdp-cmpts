@@ -1,23 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <component>
-    <componentName>component_transform_groupBy</componentName>
-    <componentDescription>component_transform_groupBy</componentDescription>
-    <componentClass>com.chinasofti.ark.bdadp.component.GroupBy</componentClass>
-    <componentIcon>icon-xl.png,icon-xs.png</componentIcon>
-    <componentPid>component_pid_apply</componentPid>
-    <params>
-        <param>
-            <name>colNames</name>
-            <description>colNames</description>
-            <type>text</type>
-            <nullable>false</nullable>
-        </param>
+  <componentName>component_transform_groupBy</componentName>
+  <componentDescription>component_transform_groupBy</componentDescription>
+  <componentClass>com.chinasofti.ark.bdadp.component.GroupBy</componentClass>
+  <componentIcon>icon-xl.png,icon-xs.png</componentIcon>
+  <componentPid>component_pid_apply</componentPid>
+  <params>
+    <param>
+      <name>colNames</name>
+      <description>colNames</description>
+      <type>text</type>
+      <nullable>false</nullable>
+    </param>
 
-        <param>
-            <name>aggExpr</name>
-            <description>aggExpr</description>
-            <type>text</type>
-            <nullable>false</nullable>
-        </param>
-    </params>
+    <param>
+      <name>aggExpr</name>
+      <description>aggExpr</description>
+      <type>text</type>
+      <nullable>false</nullable>
+    </param>
+  </params>
 </component>

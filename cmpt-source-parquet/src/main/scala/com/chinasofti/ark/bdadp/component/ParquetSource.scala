@@ -37,6 +37,6 @@ class ParquetSource(id: String, name: String, log: Logger)
   }
 
   override def spark(sparkScenarioOptions: SparkScenarioOptions): SparkData = {
-    Builder.build(sparkScenarioOptions.sqlContext().read.option("mergeSchema", mergeSchema).parquet(path))
+    Builder.build(sparkScenarioOptions.sqlContext().read.option("mergeSchema",mergeSchema).parquet(path))
   }
 }

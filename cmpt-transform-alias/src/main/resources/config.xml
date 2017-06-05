@@ -1,23 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <component>
-    <componentName>component_transform_alias</componentName>
-    <componentDescription>component_transform_alias</componentDescription>
-    <componentClass>com.chinasofti.ark.bdadp.component.Alias</componentClass>
-    <componentIcon>icon-xl.png,icon-xs.png</componentIcon>
-    <componentPid>component_pid_apply</componentPid>
-    <params>
-        <param>
-            <name>existingName</name>
-            <description>existingName</description>
-            <type>text</type>
-            <nullable>false</nullable>
-        </param>
-        <param>
-            <name>newName</name>
-            <description>newName</description>
-            <type>text</type>
-            <nullable>false</nullable>
-        </param>
+  <componentName>component_transform_alias</componentName>
+  <componentDescription>component_transform_alias</componentDescription>
+  <componentClass>com.chinasofti.ark.bdadp.component.Alias</componentClass>
+  <componentIcon>icon-xl.png,icon-xs.png</componentIcon>
+  <componentPid>component_pid_apply</componentPid>
+  <params>
+    <param>
+      <name>existingName</name>
+      <description>existingName</description>
+      <type>text</type>
+      <nullable>false</nullable>
+    </param>
+    <param>
+      <name>newName</name>
+      <description>newName</description>
+      <type>text</type>
+      <nullable>false</nullable>
+    </param>
 
-    </params>
+  </params>
 </component>

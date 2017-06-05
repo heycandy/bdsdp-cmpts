@@ -12,8 +12,13 @@ import com.fasterxml.jackson.module.scala.experimental.ScalaObjectMapper
 import org.slf4j.LoggerFactory
 
 /**
+<<<<<<< HEAD
+ * Created by White on 2017/1/3.
+ */
+=======
   * Created by White on 2017/1/3.
   */
+>>>>>>> c5c6e652a6967989a1d0e5a8aa802015dea6fab4
 object App2 {
 
   def main(args: Array[String]) {
@@ -22,11 +27,19 @@ object App2 {
     val options = PipelineOptionsFactory.fromArgs(args).as(classOf[ScenarioOptions])
 
     val input = options.getSettings.getOrDefault("pipeline.input",
+<<<<<<< HEAD
+                                                  """[{"name": "liu", "age": 18},{"name": "xiao", "age": 25},{"name": "bai", "age": 30}]""")
+    val input2 = options.getSettings.getOrDefault("pipeline.input2",
+                                                   """[{"name": "liu", "money": 18},{"name": "xiao", "money": 25},{"name": "bai", "money": 30}]""")
+    val transform = options.getSettings.getOrDefault("pipeline.transform",
+                                                      """[{"id": "1", "name": "join", "conditionExpr": "name"}]""")
+=======
       """[{"name": "liu", "age": 18},{"name": "xiao", "age": 25},{"name": "bai", "age": 30}]""")
     val input2 = options.getSettings.getOrDefault("pipeline.input2",
       """[{"name": "liu", "money": 18},{"name": "xiao", "money": 25},{"name": "bai", "money": 30}]""")
     val transform = options.getSettings.getOrDefault("pipeline.transform",
       """[{"id": "1", "name": "join", "conditionExpr": "name"}]""")
+>>>>>>> c5c6e652a6967989a1d0e5a8aa802015dea6fab4
 
     options.setDebug(true)
     options.setScenarioId("1")
@@ -49,7 +62,11 @@ object App2 {
 
     val pipeline = mapper.readValue[Seq[TransformModel]](transform).map(f => {
       val className = Array("com.chinasofti.ark.bdadp.component",
+<<<<<<< HEAD
+                            f.name.charAt(0).toUpper + f.name.substring(1)).mkString(".")
+=======
         f.name.charAt(0).toUpper + f.name.substring(1)).mkString(".")
+>>>>>>> c5c6e652a6967989a1d0e5a8aa802015dea6fab4
       val clazz = Class.forName(className)
 
       val constructor = clazz.getConstructors()(0)

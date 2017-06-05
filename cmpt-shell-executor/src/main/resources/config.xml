@@ -1,30 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <component>
-    <componentName>component_shell_executor</componentName>
-    <componentDescription>component_shell_executor</componentDescription>
-    <componentClass>com.chinasofti.ark.bdadp.component.sample.ShellComponent</componentClass>
-    <componentIcon>icon-xl.png,icon-xs.png</componentIcon>
-    <!-- 60px * 60px, 20px * 20px -->
-    <componentPid>component_pid_common</componentPid>
-    <params>
-        <param>
-            <name>component_shell_path</name>
-            <description>shell_path</description>
-            <type>text</type>
-            <nullable>false</nullable>
-        </param>
-        <param>
-            <name>component_shell_filename</name>
-            <description>shell_filename</description>
-            <type>text</type>
-            <nullable>false</nullable>
-        </param>
-        <param>
-            <name>component_shell_var</name>
-            <description>shell_var</description>
-            <type>text</type>
-            <nullable>false</nullable>
-        </param>
+  <componentName>component_shell_executor</componentName>
+  <componentDescription>component_shell_executor</componentDescription>
+  <componentClass>com.chinasofti.ark.bdadp.component.sample.ShellComponent</componentClass>
+  <componentIcon>icon-xl.png,icon-xs.png</componentIcon>
+  <!-- 60px * 60px, 20px * 20px -->
+  <componentPid>component_pid_common</componentPid>
+  <params>
+    <param>
+      <name>component_shell_path</name>
+      <description>shell_path</description>
+      <type>text</type>
+      <nullable>false</nullable>
+    </param>
+    <param>
+      <name>component_shell_filename</name>
+      <description>shell_filename</description>
+      <type>text</type>
+      <nullable>false</nullable>
+    </param>
+    <param>
+      <name>component_shell_var</name>
+      <description>shell_var</description>
+      <type>text</type>
+      <nullable>false</nullable>
+    </param>
 
-    </params>
+  </params>
 </component>

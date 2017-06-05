@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component>
+  <componentName>cmpt_tools_mail</componentName>
+  <componentDescription>cmpt_tools_mail</componentDescription>
+  <componentClass>com.chinasofti.ark.bdadp.component.Mail</componentClass>
+  <componentIcon>icon-xl.png,icon-xs.png</componentIcon>
+  <componentPid>component_pid_common</componentPid>
+  <params>
+    <param>
+      <name>host</name>
+      <description>host</description>
+      <type>text</type>
+      <nullable>false</nullable>
+    </param>
+    <param>
+      <name>port</name>
+      <description>Port</description>
+      <type>text</type>
+      <nullable>true</nullable>
+    </param>
+    <param>
+      <name>userName</name>
+      <description>userName</description>
+      <type>text</type>
+      <nullable>false</nullable>
+    </param>
+    <param>
+      <name>password</name>
+      <description>password</description>
+      <type>password</type>
+      <nullable>false</nullable>
+    </param>
+    <param>
+      <name>receiver</name>
+      <description>receiver</description>
+      <type>text</type>
+      <nullable>false</nullable>
+    </param>
+  </params>
+</component>

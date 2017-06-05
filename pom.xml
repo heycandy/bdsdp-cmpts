@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xmlns="http://maven.apache.org/POM/4.0.0"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  xmlns="http://maven.apache.org/POM/4.0.0"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <packaging>pom</packaging>
   <modules>
@@ -45,12 +45,14 @@
     <module>cmpt-source-jdbc-oracle</module>
     <module>cmpt-ml-model-decision-tree</module>
     <module>cmpt-ml-predict-decision-tree</module>
-    <!--<module>cmpt-sink-chart-pie</module>-->
-    <!--<module>cmpt-sink-chart-bar</module>-->
-    <!--<module>cmpt-source-jdbc-as400</module>-->
+    <module>cmpt-sink-chart-pie</module>
+    <module>cmpt-sink-chart-bar</module>
+    <module>cmpt-source-as400</module>
+    <module>cmpt-sink-jdbc-oracle</module>
+    <module>cmpt-tools-mail</module>
     <module>cmpt-sink-assert</module>
-    <module>cmpt-transform-graph-cycle</module>
     <module>cmpt-sink-chart-cycle</module>
+    <module>cmpt-transform-graph-cycle</module>
 
   </modules>
 
@@ -186,7 +188,7 @@
       <plugins>
         <plugin>
           <artifactId>maven-compiler-plugin</artifactId>
-          <version>3.6.0</version>
+          <version>3.3</version>
           <configuration>
             <source>1.8</source>
             <target>1.8</target>
@@ -263,8 +265,8 @@
               <configuration>
                 <target>
                   <copy
-                      file="${project.build.directory}/${project.artifactId}-${project.version}.jar"
-                      tofile="../components/${project.artifactId}/${project.artifactId}-${project.version}.jar"/>
+                    file="${project.build.directory}/${project.artifactId}-${project.version}.jar"
+                    tofile="../components/${project.artifactId}/${project.artifactId}-${project.version}.jar"/>
                 </target>
 
               </configuration>
@@ -285,5 +287,6 @@
       <url>http://maven.aliyun.com/nexus/content/groups/public/</url>
     </repository>
   </repositories>
+
 
 </project>

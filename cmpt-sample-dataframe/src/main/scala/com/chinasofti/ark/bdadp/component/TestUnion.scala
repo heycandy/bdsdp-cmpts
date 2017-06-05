@@ -69,5 +69,8 @@ object TestUnion {
   }
 
   case class TransformModel(id: String, name: String, conditionExpr: String)
+<<<<<<< HEAD
+=======
 
+>>>>>>> c5c6e652a6967989a1d0e5a8aa802015dea6fab4
 }

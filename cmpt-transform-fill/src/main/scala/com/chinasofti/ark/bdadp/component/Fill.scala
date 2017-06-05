@@ -8,8 +8,8 @@ import org.apache.spark.sql.DataFrame
 import org.slf4j.Logger
 
 /**
-  * Created by Administrator on 2017.2.9.
-  */
+ * Created by Administrator on 2017.2.9.
+ */
 class Fill(id: String, name: String, log: Logger)
   extends TransformableComponent[SparkData, SparkData](id, name, log) with Configureable {
 

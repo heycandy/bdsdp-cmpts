@@ -8,11 +8,11 @@ import com.chinasofti.ark.bdadp.component.api.sink.{SinkComponent, SparkSinkAdap
 import org.slf4j.Logger
 
 /**
-  * Created by White on 2017/3/16.
-  */
+ * Created by White on 2017/3/16.
+ */
 class PieChartSink(id: String, name: String, log: Logger)
-  extends SinkComponent[StringData](id, name, log) with Configureable with
-    SparkSinkAdapter[SparkData] with Serializable {
+    extends SinkComponent[StringData](id, name, log) with Configureable with
+            SparkSinkAdapter[SparkData] with Serializable {
 
   var title: String = null
   var subtitle: String = null
@@ -31,28 +31,28 @@ class PieChartSink(id: String, name: String, log: Logger)
   }
 
   /**
-    *
-    * @param inputT
-    *
-    * | name | value |
-    * ----------------
-    * |  n1  |   1  |
-    * |  n2  |   2  |
-    * |  n3  |   3  |
-    */
+   *
+   * @param inputT
+   *
+   * | name | value |
+   * ----------------
+   * |  n1  |   1  |
+   * |  n2  |   2  |
+   * |  n3  |   3  |
+   */
   override def apply(inputT: SparkData): Unit = {
     val chartData = inputT.getRawData.select(nameColumn, valueColumn)
     val legendData = chartData.map(_ (0).toString).collect()
     val seriesData = chartData
-      //        .map(f => ImmutableMap.of("name", f(0).toString, "value", f(1).toString.toDouble))
-      .map(f => {
-      val map = new util.HashMap[String, Object]()
+//        .map(f => ImmutableMap.of("name", f(0).toString, "value", f(1).toString.toDouble))
+        .map(f => {
+          val map = new util.HashMap[String, Object]()
 
-      map.put("name", f(0).toString)
-      map.put("value", java.lang.Double.valueOf(f(1).toString))
+          map.put("name", f(0).toString)
+          map.put("value", java.lang.Double.valueOf(f(1).toString))
 
-      map
-    }).collect()
+          map
+        }).collect()
 
     //    val map = ImmutableMap.builder[String, Object]()
     //        .put("title", title)

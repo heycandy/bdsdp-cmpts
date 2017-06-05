@@ -1,17 +1,17 @@
 package com.chinasofti.ark.bdadp.component
 
 import com.chinasofti.ark.bdadp.component.api.Configureable
-import com.chinasofti.ark.bdadp.component.api.data.{SparkData, StringData}
-import com.chinasofti.ark.bdadp.component.api.sink.{SinkComponent, SparkSinkAdapter}
+import com.chinasofti.ark.bdadp.component.api.data.{ SparkData, StringData}
+import com.chinasofti.ark.bdadp.component.api.sink.{SparkSinkAdapter, SinkComponent}
 import com.chinasofti.ark.bdadp.util.common.StringUtils
 import org.slf4j.Logger
 
 /**
-  * Created by Administrator on 2017.2.16.
-  */
-class CSVSink(id: String, name: String, log: Logger)
+ * Created by Administrator on 2017.2.16.
+ */
+class CSVSink (id: String, name: String, log: Logger)
   extends SinkComponent[StringData](id, name, log) with Configureable with
-    SparkSinkAdapter[SparkData] {
+  SparkSinkAdapter[SparkData] {
 
   var path: String = null
   var header: String = null
@@ -45,7 +45,7 @@ class CSVSink(id: String, name: String, log: Logger)
     comment = componentProps.getString("comment", "#")
     nullValue = componentProps.getString("nullValue")
     dateFormat = componentProps.getString("dateFormat")
-    numPartitions = componentProps.getInt("numPartitions", 8)
+    numPartitions = componentProps.getInt("numPartitions",8)
 
     StringUtils.assertIsBlank(path);
   }

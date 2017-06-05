@@ -6,12 +6,12 @@ import com.chinasofti.ark.bdadp.component.api.sink.{SinkComponent, SparkSinkAdap
 import org.slf4j.Logger
 
 /**
-  * Hello world!
-  *
-  */
+ * Hello world!
+ *
+ */
 class LoggerSink(id: String, name: String, log: Logger)
-  extends SinkComponent[StringData](id, name, log) with Configureable with
-    SparkSinkAdapter[SparkData] {
+    extends SinkComponent[StringData](id, name, log) with Configureable with
+            SparkSinkAdapter[SparkData] {
 
   var numRows: Int = 20
   var numPartitions: Int = 0

@@ -8,8 +8,8 @@ import com.fasterxml.jackson.module.scala.DefaultScalaModule
 import com.fasterxml.jackson.module.scala.experimental.ScalaObjectMapper
 
 /**
-  * Created by Administrator on 2017.1.13.
-  */
+ * Created by Administrator on 2017.1.13.
+ */
 object TestSort {
 
   def main(args: Array[String]) {
@@ -17,9 +17,9 @@ object TestSort {
     val options = PipelineOptionsFactory.fromArgs(args).as(classOf[ScenarioOptions])
 
     val input = options.getParameter.getOrDefault("pipeline.input",
-      """[{"name": "aaa", "age": 34},{"name": "ccc", "age": 25},{"name": "bbb", "age": 30}]""")
+                                                  """[{"name": "aaa", "age": 34},{"name": "ccc", "age": 25},{"name": "bbb", "age": 30}]""")
     val transform = options.getParameter.getOrDefault("pipeline.transform",
-      """[{"id": "1", "name": "sort", "colName": "age" ,"sortExprs": "desc"}]""")
+                                                      """[{"id": "1", "name": "sort", "colName": "age" ,"sortExprs": "desc"}]""")
 
     options.setDebug(true)
 
@@ -36,7 +36,7 @@ object TestSort {
 
     val pipeline = mapper.readValue[Seq[TransformModel]](transform).map(f => {
       val className = Array("com.chinasofti.ark.bdadp.component",
-        f.name.charAt(0).toUpper + f.name.substring(1)).mkString(".")
+                            f.name.charAt(0).toUpper + f.name.substring(1)).mkString(".")
       val clazz = Class.forName(className)
 
       val task = new TransformableTask(f.id, f.name, f.id, f.id, clazz)
@@ -57,12 +57,12 @@ object TestSort {
     val that = pipeline.tail
 
     pipeline.zip(that).foreach {
-      case (out, in) =>
-        val channel = new MemoryChannel
+                                 case (out, in) =>
+                                   val channel = new MemoryChannel
 
-        out.addOChannel(channel)
-        in.addIChannel(channel)
-    }
+                                   out.addOChannel(channel)
+                                   in.addIChannel(channel)
+                               }
 
     pipeline.foreach(_.run())
 

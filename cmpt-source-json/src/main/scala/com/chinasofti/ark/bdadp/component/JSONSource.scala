@@ -8,16 +8,16 @@ import com.chinasofti.ark.bdadp.component.api.data.{Builder, SparkData, StringDa
 import com.chinasofti.ark.bdadp.component.api.options.SparkScenarioOptions
 import com.chinasofti.ark.bdadp.component.api.source.{SourceComponent, SparkSourceAdapter}
 import com.chinasofti.ark.bdadp.util.common.StringUtils
+import org.apache.spark.sql.DataFrame
 import org.slf4j.Logger
 
 import scala.collection.JavaConversions._
-
 /**
-  * Created by Administrator on 2017.2.8.
-  */
+ * Created by Administrator on 2017.2.8.
+ */
 class JSONSource(id: String, name: String, log: Logger)
   extends SourceComponent[StringData](id, name, log) with Configureable with
-    SparkSourceAdapter[SparkData] {
+  SparkSourceAdapter[SparkData] {
 
   var path: String = null
   var charset: String = null

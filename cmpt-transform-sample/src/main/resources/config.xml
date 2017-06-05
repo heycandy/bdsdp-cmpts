@@ -1,44 +1,44 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <component>
-    <componentName>component_transform_sample</componentName>
-    <componentDescription>component_transform_sample</componentDescription>
-    <componentClass>com.chinasofti.ark.bdadp.component.Sample</componentClass>
-    <componentIcon>icon-xl.png,icon-xs.png</componentIcon>
-    <componentPid>component_pid_apply</componentPid>
-    <params>
-        <param>
-            <name>withReplacement</name>
-            <description>withReplacement</description>
-            <type>options</type>
-            <nullable>false</nullable>
-            <defaultOptions>
-                <option name="true" desc="true" value="true"/>
-                <option name="false" desc="false" value="false"/>
-            </defaultOptions>
-            <defaultValue>true</defaultValue>
-        </param>
-        <param>
-            <name>samplingType</name>
-            <description>samplingType</description>
-            <type>options</type>
-            <nullable>false</nullable>
-            <defaultOptions>
-                <option name="FRACTION" desc="FRACTION" value="FRACTION"/>
-                <option name="LINE" desc="LINE" value="LINE"/>
-            </defaultOptions>
-            <defaultValue>LINE</defaultValue>
-        </param>
-        <param>
-            <name>fractionOrNum</name>
-            <description>fractionOrNum</description>
-            <type>text</type>
-            <nullable>true</nullable>
-        </param>
-        <param>
-            <name>seed</name>
-            <description>seed</description>
-            <type>text</type>
-            <nullable>true</nullable>
-        </param>
-    </params>
+  <componentName>component_transform_sample</componentName>
+  <componentDescription>component_transform_sample</componentDescription>
+  <componentClass>com.chinasofti.ark.bdadp.component.Sample</componentClass>
+  <componentIcon>icon-xl.png,icon-xs.png</componentIcon>
+  <componentPid>component_pid_apply</componentPid>
+  <params>
+    <param>
+      <name>withReplacement</name>
+      <description>withReplacement</description>
+      <type>options</type>
+      <nullable>false</nullable>
+      <defaultOptions>
+        <option name="true" desc="true" value="true"/>
+        <option name="false" desc="false" value="false"/>
+      </defaultOptions>
+      <defaultValue>true</defaultValue>
+    </param>
+    <param>
+      <name>samplingType</name>
+      <description>samplingType</description>
+      <type>options</type>
+      <nullable>false</nullable>
+      <defaultOptions>
+        <option name="FRACTION" desc="FRACTION" value="FRACTION"/>
+        <option name="LINE" desc="LINE" value="LINE"/>
+      </defaultOptions>
+      <defaultValue>LINE</defaultValue>
+    </param>
+    <param>
+      <name>fractionOrNum</name>
+      <description>fractionOrNum</description>
+      <type>text</type>
+      <nullable>true</nullable>
+    </param>
+    <param>
+      <name>seed</name>
+      <description>seed</description>
+      <type>text</type>
+      <nullable>true</nullable>
+    </param>
+  </params>
 </component>

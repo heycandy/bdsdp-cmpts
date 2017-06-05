@@ -13,11 +13,11 @@ import org.slf4j.Logger
 import scala.collection.JavaConversions._
 
 /**
-  * Created by White on 2017/1/17.
-  */
+ * Created by White on 2017/1/17.
+ */
 class CSVSource(id: String, name: String, log: Logger)
-  extends SourceComponent[StringData](id, name, log) with Configureable with
-    SparkSourceAdapter[SparkData] {
+    extends SourceComponent[StringData](id, name, log) with Configureable with
+            SparkSourceAdapter[SparkData] {
 
   var path: String = null
   var header: String = null
@@ -35,7 +35,7 @@ class CSVSource(id: String, name: String, log: Logger)
   override def call(): StringData = {
     Builder.build(
       ("" +: Files.readAllLines(Paths.get(path.replace("file:///", "")), Charset.forName(charset)))
-        .mkString("\n"))
+          .mkString("\n"))
   }
 
   override def configure(componentProps: ComponentProps): Unit = {
@@ -57,19 +57,19 @@ class CSVSource(id: String, name: String, log: Logger)
 
   override def spark(sparkScenarioOptions: SparkScenarioOptions): SparkData = {
     Builder.build(sparkScenarioOptions.sqlContext().read
-      .format("com.databricks.spark.csv")
-      .option("path", path)
-      .option("header", header)
-      .option("delimiter", delimiter)
-      .option("quote", quote)
-      .option("escape", escape)
-      .option("parserLib", parserLib)
-      .option("mode", mode)
-      .option("charset", charset)
-      .option("inferSchema", inferSchema)
-      .option("comment", comment)
-      .option("nullValue", nullValue)
-      .option("dateFormat", dateFormat)
-      .load())
+                      .format("com.databricks.spark.csv")
+                      .option("path", path)
+                      .option("header", header)
+                      .option("delimiter", delimiter)
+                      .option("quote", quote)
+                      .option("escape", escape)
+                      .option("parserLib", parserLib)
+                      .option("mode", mode)
+                      .option("charset", charset)
+                      .option("inferSchema", inferSchema)
+                      .option("comment", comment)
+                      .option("nullValue", nullValue)
+                      .option("dateFormat", dateFormat)
+                      .load())
   }
 }

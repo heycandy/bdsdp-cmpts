@@ -14,8 +14,13 @@ import com.fasterxml.jackson.module.scala.DefaultScalaModule
 import com.fasterxml.jackson.module.scala.experimental.ScalaObjectMapper
 
 /**
+<<<<<<< HEAD
+ * Created by Administrator on 2017.2.10.
+ */
+=======
   * Created by Administrator on 2017.2.10.
   */
+>>>>>>> c5c6e652a6967989a1d0e5a8aa802015dea6fab4
 object TestJDBC {
 
   def main(args: Array[String]) {
@@ -26,22 +31,37 @@ object TestJDBC {
     options.setExecutionId("1")
     val now = new Date()
     val conditionExpr = "NAME = 'newName'"
+<<<<<<< HEAD
+    testSelect(options,conditionExpr)
+    val end = new Date()
+
+    println(end.getTime-now.getTime)
+=======
     testSelect(options, conditionExpr)
     val end = new Date()
 
     println(end.getTime - now.getTime)
+>>>>>>> c5c6e652a6967989a1d0e5a8aa802015dea6fab4
 
   }
 
 
+<<<<<<< HEAD
+  def testSelect(options: ScenarioOptions,conditionExpr: String):Unit = {
+=======
   def testSelect(options: ScenarioOptions, conditionExpr: String): Unit = {
+>>>>>>> c5c6e652a6967989a1d0e5a8aa802015dea6fab4
 
     val source = options.getSettings.getOrDefault("pipeline.source",
       """{"id": "1", "name": "JDBCSource", "conUrl": "jdbc:mysql://localhost:3306/testjdbc?useUnicode=true&characterEncoding=UTF-8&autoReconnect=true", "table": "example", "userName": "root", "passWord": "mysql"}""")
     val source2 = options.getSettings.getOrDefault("pipeline.source",
       """{"id": "1", "name": "JDBCSource", "conUrl": "jdbc:mysql://localhost:3306/testjdbc2?useUnicode=true&characterEncoding=UTF-8&autoReconnect=true", "table": "example", "userName": "root", "passWord": "mysql"}""")
     //    val source3 = options.getSettings.getOrDefault("pipeline.source",
+<<<<<<< HEAD
+//      """{"id": "1", "name": "JDBCSource", "conUrl": "jdbc:mysql://localhost:3306/testjdbc3?useUnicode=true&characterEncoding=UTF-8&autoReconnect=true", "table": "example", "userName": "root", "passWord": "mysql"}""")
+=======
     //      """{"id": "1", "name": "JDBCSource", "conUrl": "jdbc:mysql://localhost:3306/testjdbc3?useUnicode=true&characterEncoding=UTF-8&autoReconnect=true", "table": "example", "userName": "root", "passWord": "mysql"}""")
+>>>>>>> c5c6e652a6967989a1d0e5a8aa802015dea6fab4
     val transform = options.getSettings.getOrDefault("pipeline.transform",
       """{"id": "2", "name": "Filter", "conditionExpr": "example_id = 11111"}""")
     val sink = options.getSettings.getOrDefault("pipeline.sink",
@@ -52,7 +72,11 @@ object TestJDBC {
 
     val sourceModel = mapper.readValue[SourceModel](source)
     val sourceModel2 = mapper.readValue[SourceModel](source2)
+<<<<<<< HEAD
+//    val sourceModel3 = mapper.readValue[SourceModel](source3)
+=======
     //    val sourceModel3 = mapper.readValue[SourceModel](source3)
+>>>>>>> c5c6e652a6967989a1d0e5a8aa802015dea6fab4
     val transformModel = mapper.readValue[TransformModel](transform)
     val sinkModel = mapper.readValue[SinkModel](sink)
 
@@ -60,7 +84,11 @@ object TestJDBC {
       .asInstanceOf[Class[SourceComponent[_ <: Data[_]]]]
     val sourceTask = new SourceTask(sourceModel.id, sourceModel.name, options, sourceClazz)
     val sourceTask2 = new SourceTask(sourceModel2.id, sourceModel2.name, options, sourceClazz)
+<<<<<<< HEAD
+//    val sourceTask3 = new SourceTask(sourceModel3.id, sourceModel3.name, options, sourceClazz)
+=======
     //    val sourceTask3 = new SourceTask(sourceModel3.id, sourceModel3.name, options, sourceClazz)
+>>>>>>> c5c6e652a6967989a1d0e5a8aa802015dea6fab4
 
     val transformClazz = Class.forName("com.chinasofti.ark.bdadp.component.Filter")
       .asInstanceOf[Class[TransformableComponent[_ <: Data[_], _ <: Data[_]]]]
@@ -86,7 +114,11 @@ object TestJDBC {
 
     sourceTask.addOChannel(channel1)
     sourceTask2.addOChannel(channel1)
+<<<<<<< HEAD
+//    sourceTask3.addOChannel(channel1)
+=======
     //    sourceTask3.addOChannel(channel1)
+>>>>>>> c5c6e652a6967989a1d0e5a8aa802015dea6fab4
 
     transformTask.addIChannel(channel1)
     transformTask.addOChannel(channel2)
@@ -94,13 +126,21 @@ object TestJDBC {
 
     sourceTask.configure(props)
     sourceTask2.configure(props)
+<<<<<<< HEAD
+//    sourceTask3.configure(props)
+=======
     //    sourceTask3.configure(props)
+>>>>>>> c5c6e652a6967989a1d0e5a8aa802015dea6fab4
     transformTask.configure(props)
     sinkTask.configure(props)
 
     sourceTask.run()
     sourceTask2.run()
+<<<<<<< HEAD
+//    sourceTask3.run()
+=======
     //    sourceTask3.run()
+>>>>>>> c5c6e652a6967989a1d0e5a8aa802015dea6fab4
     transformTask.run()
     sinkTask.run()
   }

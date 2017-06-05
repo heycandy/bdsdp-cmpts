@@ -10,8 +10,13 @@ import com.fasterxml.jackson.module.scala.DefaultScalaModule
 import com.fasterxml.jackson.module.scala.experimental.ScalaObjectMapper
 
 /**
+<<<<<<< HEAD
+ * Created by White on 2017/1/3.
+ */
+=======
   * Created by White on 2017/1/3.
   */
+>>>>>>> c5c6e652a6967989a1d0e5a8aa802015dea6fab4
 
 object App {
 
@@ -21,9 +26,15 @@ object App {
     val options = PipelineOptionsFactory.fromArgs(args).as(classOf[ScenarioOptions])
 
     val input = options.getSettings.getOrDefault("pipeline.input",
+<<<<<<< HEAD
+                                                  """[{"name": "xiao", "age": 25},{"name": "xiao", "age": 25},{"name": "bai", "age": 30},{"name": "bai", "age": 30},{"name": "bai", "age": 30},{"name": "hh", "age": 15}]""")
+    val transform = options.getSettings.getOrDefault("pipeline.transform",
+                                                      """[{"id": "1", "name": "distinct","withReplacement":"true","fraction":"0.7"}]""")
+=======
       """[{"name": "xiao", "age": 25},{"name": "xiao", "age": 25},{"name": "bai", "age": 30},{"name": "bai", "age": 30},{"name": "bai", "age": 30},{"name": "hh", "age": 15}]""")
     val transform = options.getSettings.getOrDefault("pipeline.transform",
       """[{"id": "1", "name": "distinct","withReplacement":"true","fraction":"0.7"}]""")
+>>>>>>> c5c6e652a6967989a1d0e5a8aa802015dea6fab4
 
     options.setDebug(true)
     options.setScenarioId("1")
@@ -47,9 +58,15 @@ object App {
 
     val pipeline = mapper.readValue[Seq[TransformModel]](transform).map(f => {
       val className = Array("com.chinasofti.ark.bdadp.component",
+<<<<<<< HEAD
+                            f.name.head.toUpper + f.name.tail).mkString(".")
+      val clazz = Class.forName(className)
+          .asInstanceOf[Class[TransformableComponent[_ <: Data[_], _ <: Data[_]]]]
+=======
         f.name.head.toUpper + f.name.tail).mkString(".")
       val clazz = Class.forName(className)
         .asInstanceOf[Class[TransformableComponent[_ <: Data[_], _ <: Data[_]]]]
+>>>>>>> c5c6e652a6967989a1d0e5a8aa802015dea6fab4
 
       val task = new TransformableTask(f.id, f.name, options, clazz)
       val props = new ComponentProps()
@@ -71,12 +88,21 @@ object App {
     val that = pipeline.tail
 
     pipeline.zip(that).foreach {
+<<<<<<< HEAD
+                                 case (out, in) =>
+                                   val channel = new MemoryChannel
+
+                                   out.addOChannel(channel)
+                                   in.addIChannel(channel)
+                               }
+=======
       case (out, in) =>
         val channel = new MemoryChannel
 
         out.addOChannel(channel)
         in.addIChannel(channel)
     }
+>>>>>>> c5c6e652a6967989a1d0e5a8aa802015dea6fab4
 
     pipeline.foreach(_.run())
 

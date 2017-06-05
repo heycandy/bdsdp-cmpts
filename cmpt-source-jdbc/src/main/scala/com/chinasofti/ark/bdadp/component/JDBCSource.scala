@@ -11,11 +11,11 @@ import org.slf4j.Logger
 
 
 /**
-  * Created by Administrator on 2017.2.8.
-  */
+ * Created by Administrator on 2017.2.8.
+ */
 class JDBCSource(id: String, name: String, log: Logger)
   extends SourceComponent[StringData](id, name, log) with Configureable with
-    SparkSourceAdapter[SparkData] {
+  SparkSourceAdapter[SparkData] {
 
   var conUrl: String = null
   var table: String = null
@@ -42,7 +42,7 @@ class JDBCSource(id: String, name: String, log: Logger)
     passWord = componentProps.getString("passWord")
     partitionColumn = componentProps.getString("partitionColumn")
 
-    StringUtils.assertIsBlank(conUrl, table, userName, passWord, partitionColumn);
+    StringUtils.assertIsBlank(conUrl, table, userName, passWord,partitionColumn);
     lowerBound = componentProps.getInt("lowerBound", 1)
     upperBound = componentProps.getInt("upperBound", 10000000)
     numPartitions = componentProps.getInt("numPartitions", 8)

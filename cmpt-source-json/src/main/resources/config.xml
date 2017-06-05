@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <component>
-    <componentName>component_source_json</componentName>
-    <componentDescription>component_source_json</componentDescription>
-    <componentClass>com.chinasofti.ark.bdadp.component.JSONSource</componentClass>
-    <componentIcon>icon-xl.png,icon-xs.png</componentIcon>
-    <componentPid>component_pid_source</componentPid>
-    <params>
-        <param>
-            <name>path</name>
-            <description>path</description>
-            <type>text</type>
-            <nullable>false</nullable>
-        </param>
-    </params>
+  <componentName>component_source_json</componentName>
+  <componentDescription>component_source_json</componentDescription>
+  <componentClass>com.chinasofti.ark.bdadp.component.JSONSource</componentClass>
+  <componentIcon>icon-xl.png,icon-xs.png</componentIcon>
+  <componentPid>component_pid_source</componentPid>
+  <params>
+    <param>
+      <name>path</name>
+      <description>path</description>
+      <type>text</type>
+      <nullable>false</nullable>
+    </param>
+  </params>
 </component>

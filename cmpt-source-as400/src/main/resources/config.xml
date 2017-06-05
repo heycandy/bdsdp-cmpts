@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component>
+  <componentName>component_source_as400</componentName>
+  <componentDescription>component_source_as400</componentDescription>
+  <componentClass>com.chinasofti.ark.bdadp.component.AS400Source</componentClass>
+  <componentIcon>icon-xl.png,icon-xs.png</componentIcon>
+  <componentPid>component_pid_source</componentPid>
+  <params>
+    <param>
+      <name>hostName</name>
+      <description>Host</description>
+      <type>text</type>
+      <nullable>false</nullable>
+    </param>
+    <param>
+      <name>port</name>
+      <description>Port</description>
+      <type>text</type>
+      <nullable>true</nullable>
+    </param>
+    <param>
+      <name>dbName</name>
+      <description>Database Name</description>
+      <type>text</type>
+      <nullable>false</nullable>
+    </param>
+    <param>
+      <name>library</name>
+      <description>Library</description>
+      <type>text</type>
+      <nullable>false</nullable>
+    </param>
+    <param>
+      <name>file</name>
+      <description>File</description>
+      <type>text</type>
+      <nullable>false</nullable>
+    </param>
+    <param>
+      <name>userName</name>
+      <description>User Name</description>
+      <type>text</type>
+      <nullable>false</nullable>
+    </param>
+    <param>
+      <name>passWord</name>
+      <description>Password</description>
+      <type>password</type>
+      <nullable>false</nullable>
+    </param>
+    <param>
+      <name>records</name>
+      <description>Record Number</description>
+      <type>text</type>
+      <nullable>true</nullable>
+    </param>
+    <param>
+      <name>sql</name>
+      <description>SQL Syntax</description>
+      <type>textarea</type>
+      <nullable>true</nullable>
+    </param>
+  </params>
+</component>

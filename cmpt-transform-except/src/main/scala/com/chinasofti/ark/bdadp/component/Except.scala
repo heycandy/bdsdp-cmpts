@@ -10,11 +10,11 @@ import org.slf4j.Logger
 import scala.collection.JavaConversions._
 
 /**
-  * Created by Hu on 2017/1/12.
-  */
+ * Created by Hu on 2017/1/12.
+ */
 class Except(id: String, name: String, log: Logger)
-  extends MultiTransComponent[util.Collection[SparkData], SparkData](id, name, log) with
-    Configureable {
+    extends MultiTransComponent[util.Collection[SparkData], SparkData](id, name, log) with
+            Configureable {
 
   override def apply(inputT: util.Collection[SparkData]): SparkData = {
     Builder.build(inputT.map(_.getRawData).reduce((f, s) => f.except(s)))

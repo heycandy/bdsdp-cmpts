@@ -1,68 +1,68 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <component>
-    <componentName>component_transform_filter</componentName>
-    <componentDescription>component_transform_filter</componentDescription>
-    <componentClass>com.chinasofti.ark.bdadp.component.Filter</componentClass>
-    <componentIcon>icon-xl.png,icon-xs.png</componentIcon>
-    <componentPid>component_pid_apply</componentPid>
-    <params>
-        <param>
-            <name>conditionExpr</name>
-            <description>conditionExpr</description>
-            <type>expr</type>
-            <nullable>false</nullable>
-            <defaultOptions>
-                <option name="approxCountDistinct" desc="func.desc.approxCountDistinct" cate="func.cate.aggr">
-                    <args>
-                        <arg name="columnName" dataType="String"/>
-                        <arg name="rsd" dataType="Double"/>
-                    </args>
-                </option>
-                <option name="array_contains" desc="func.desc.array_contains" cate="func.cate.collection">
-                    <args>
-                        <arg name="columnName" dataType="String"/>
-                        <arg name="value" dataType="Any"/>
-                    </args>
-                </option>
-                <option name="add_months" desc="func.desc.add_months" cate="func.cate.date.time">
-                    <args>
-                        <arg name="startDate" dataType="Column"/>
-                        <arg name="numMonths" dataType="Int"/>
-                    </args>
-                </option>
-                <option name="acos" desc="func.desc.acos" cate="func.cate.math">
-                    <args>
-                        <arg name="columnName" dataType="String"/>
-                    </args>
-                </option>
-                <option name="acos" desc="func.desc.crc32" cate="func.cate.misc">
-                    <args>
-                        <arg name="column" dataType="Column"/>
-                    </args>
-                </option>
-                <option name="abs" desc="func.desc.abs" cate="func.cate.non-aggr">
-                    <args>
-                        <arg name="column" dataType="Column"/>
-                    </args>
-                </option>
-                <option name="asc" desc="func.desc.asc" cate="func.cate.sorting">
-                    <args>
-                        <arg name="columnName" dataType="String"/>
-                    </args>
-                </option>
-                <option name="ascii" desc="func.desc.ascii" cate="func.cate.string">
-                    <args>
-                        <arg name="column" dataType="Column"/>
-                    </args>
-                </option>
-                <option name="callUDF" desc="func.desc.callUDF" cate="func.cate.udf">
-                    <args>
-                        <arg name="udfName" dataType="String"/>
-                        <arg name="cols" dataType="Column*"/>
-                    </args>
-                </option>
-            </defaultOptions>
-        </param>
+  <componentName>component_transform_filter</componentName>
+  <componentDescription>component_transform_filter</componentDescription>
+  <componentClass>com.chinasofti.ark.bdadp.component.Filter</componentClass>
+  <componentIcon>icon-xl.png,icon-xs.png</componentIcon>
+  <componentPid>component_pid_apply</componentPid>
+  <params>
+    <param>
+      <name>conditionExpr</name>
+      <description>conditionExpr</description>
+      <type>expr</type>
+      <nullable>false</nullable>
+      <defaultOptions>
+        <option name="approxCountDistinct" desc="func.desc.approxCountDistinct" cate="func.cate.aggr">
+          <args>
+            <arg name="columnName" dataType="String"/>
+            <arg name="rsd" dataType="Double"/>
+          </args>
+        </option>
+        <option name="array_contains" desc="func.desc.array_contains" cate="func.cate.collection">
+          <args>
+            <arg name="columnName" dataType="String"/>
+            <arg name="value" dataType="Any"/>
+          </args>
+        </option>
+        <option name="add_months" desc="func.desc.add_months" cate="func.cate.date.time">
+          <args>
+            <arg name="startDate" dataType="Column"/>
+            <arg name="numMonths" dataType="Int"/>
+          </args>
+        </option>
+        <option name="acos" desc="func.desc.acos" cate="func.cate.math">
+          <args>
+            <arg name="columnName" dataType="String"/>
+          </args>
+        </option>
+        <option name="acos" desc="func.desc.crc32" cate="func.cate.misc">
+          <args>
+            <arg name="column" dataType="Column"/>
+          </args>
+        </option>
+        <option name="abs" desc="func.desc.abs" cate="func.cate.non-aggr">
+          <args>
+            <arg name="column" dataType="Column"/>
+          </args>
+        </option>
+        <option name="asc" desc="func.desc.asc" cate="func.cate.sorting">
+          <args>
+            <arg name="columnName" dataType="String"/>
+          </args>
+        </option>
+        <option name="ascii" desc="func.desc.ascii" cate="func.cate.string">
+          <args>
+            <arg name="column" dataType="Column"/>
+          </args>
+        </option>
+        <option name="callUDF" desc="func.desc.callUDF" cate="func.cate.udf">
+          <args>
+            <arg name="udfName" dataType="String"/>
+            <arg name="cols" dataType="Column*"/>
+          </args>
+        </option>
+      </defaultOptions>
+    </param>
 
-    </params>
+  </params>
 </component>

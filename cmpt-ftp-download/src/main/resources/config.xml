@@ -1,87 +1,87 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <component>
-    <componentName>component_ftp_download</componentName>
-    <componentDescription>component_ftp_download</componentDescription>
-    <componentClass>com.chinasofti.ark.bdadp.component.sample.FtpComponent</componentClass>
-    <componentIcon>icon-xl.png,icon-xs.png</componentIcon>
-    <!-- 60px * 60px, 20px * 20px -->
-    <componentPid>component_pid_data_extract</componentPid>
-    <params>
-        <param>
-            <name>host_name</name>
-            <description>host_name</description>
-            <type>text</type>
-            <nullable>false</nullable>
-        </param>
-        <param>
-            <name>port</name>
-            <description>port</description>
-            <type>number</type>
-            <nullable>false</nullable>
-        </param>
-        <param>
-            <name>protocol_type</name>
-            <description>protocol_type</description>
-            <type>options</type>
-            <nullable>false</nullable>
-            <defaultOptions>
-                <option name="FtpDownload" desc="FTP" value="0"/>
-                <option name="SFtpDownload" desc="SFTP" value="1"/>
-            </defaultOptions>
-            <defaultValue>0</defaultValue>
-        </param>
-        <param>
-            <name>username</name>
-            <description>username</description>
-            <type>text</type>
-            <nullable>false</nullable>
-        </param>
-        <param>
-            <name>password</name>
-            <description>password</description>
-            <type>password</type>
-            <nullable>false</nullable>
-        </param>
-        <param>
-            <name>upload_path</name>
-            <description>upload_path</description>
-            <type>text</type>
-            <nullable>false</nullable>
-        </param>
-        <param>
-            <name>file_name</name>
-            <description>file_name</description>
-            <type>text</type>
-            <nullable>false</nullable>
-        </param>
-        <param>
-            <name>read_done</name>
-            <description>read_done</description>
-            <type>options</type>
-            <nullable>false</nullable>
-            <defaultOptions>
-                <option name="none" desc="none" value="0"/>
-                <option name="remove" desc="remove" value="1"/>
-            </defaultOptions>
-            <defaultValue>1</defaultValue>
-        </param>
-        <param>
-            <name>dest_source</name>
-            <description>dest_source</description>
-            <type>options</type>
-            <nullable>false</nullable>
-            <defaultOptions>
-                <option name="local" desc="local" value="0"/>
-                <option name="hdfs" desc="hdfs" value="1"/>
-            </defaultOptions>
-            <defaultValue>0</defaultValue>
-        </param>
-        <param>
-            <name>dest_path</name>
-            <description>dest_path</description>
-            <type>text</type>
-            <nullable>false</nullable>
-        </param>
+  <componentName>component_ftp_download</componentName>
+  <componentDescription>component_ftp_download</componentDescription>
+  <componentClass>com.chinasofti.ark.bdadp.component.sample.FtpComponent</componentClass>
+  <componentIcon>icon-xl.png,icon-xs.png</componentIcon>
+  <!-- 60px * 60px, 20px * 20px -->
+  <componentPid>component_pid_data_extract</componentPid>
+  <params>
+    <param>
+      <name>host_name</name>
+      <description>host_name</description>
+      <type>text</type>
+      <nullable>false</nullable>
+    </param>
+    <param>
+      <name>port</name>
+      <description>port</description>
+      <type>number</type>
+      <nullable>false</nullable>
+    </param>
+    <param>
+      <name>protocol_type</name>
+      <description>protocol_type</description>
+      <type>options</type>
+      <nullable>false</nullable>
+      <defaultOptions>
+        <option name="FtpDownload" desc="FTP" value="0"/>
+        <option name="SFtpDownload" desc="SFTP" value="1"/>
+      </defaultOptions>
+      <defaultValue>0</defaultValue>
+    </param>
+    <param>
+      <name>username</name>
+      <description>username</description>
+      <type>text</type>
+      <nullable>false</nullable>
+    </param>
+    <param>
+      <name>password</name>
+      <description>password</description>
+      <type>password</type>
+      <nullable>false</nullable>
+    </param>
+    <param>
+      <name>upload_path</name>
+      <description>upload_path</description>
+      <type>text</type>
+      <nullable>false</nullable>
+    </param>
+    <param>
+      <name>file_name</name>
+      <description>file_name</description>
+      <type>text</type>
+      <nullable>false</nullable>
+    </param>
+    <param>
+      <name>read_done</name>
+      <description>read_done</description>
+      <type>options</type>
+      <nullable>false</nullable>
+      <defaultOptions>
+        <option name="none" desc="none" value="0"/>
+        <option name="remove" desc="remove" value="1"/>
+      </defaultOptions>
+      <defaultValue>1</defaultValue>
+    </param>
+    <param>
+      <name>dest_source</name>
+      <description>dest_source</description>
+      <type>options</type>
+      <nullable>false</nullable>
+      <defaultOptions>
+        <option name="local" desc="local" value="0"/>
+        <option name="hdfs" desc="hdfs" value="1"/>
+      </defaultOptions>
+      <defaultValue>0</defaultValue>
+    </param>
+    <param>
+      <name>dest_path</name>
+      <description>dest_path</description>
+      <type>text</type>
+      <nullable>false</nullable>
+    </param>
 
-    </params>
+  </params>
 </component>
