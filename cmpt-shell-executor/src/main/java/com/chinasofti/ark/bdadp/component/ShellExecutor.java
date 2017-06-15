@@ -1,4 +1,4 @@
-package com.chinasofti.ark.bdadp.component.sample;
+package com.chinasofti.ark.bdadp.component;
 
 import com.chinasofti.ark.bdadp.component.ComponentProps;
 import com.chinasofti.ark.bdadp.component.api.Configureable;
@@ -13,7 +13,7 @@ import java.io.InputStreamReader;
 /**
  * Created by tangcb on 2016/9/21.
  */
-public class ShellComponent extends RunnableComponent implements Configureable {
+public class ShellExecutor extends RunnableComponent implements Configureable {
 
   /**
    * shell文件所在路径
@@ -28,7 +28,7 @@ public class ShellComponent extends RunnableComponent implements Configureable {
    **/
   private String shellScriptParam;
 
-  public ShellComponent(String id, String name, Logger log) {
+  public ShellExecutor(String id, String name, Logger log) {
     super(id, name, log);
   }
 

@@ -7,8 +7,8 @@
   <componentPid>component_pid_apply</componentPid>
   <params>
     <param>
-      <name>colName</name>
-      <description>colName</description>
+      <name>colsName</name>
+      <description>colsName</description>
       <type>text</type>
       <nullable>false</nullable>
     </param>
