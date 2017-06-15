@@ -1,9 +1,8 @@
 /**
  * Copyright (c) 2016 chinaSofti.com. All Rights Reserved.
  */
-package com.chinasofti.ark.bdadp.component.sample;
+package com.chinasofti.ark.bdadp.component;
 
-import com.chinasofti.ark.bdadp.component.ComponentProps;
 import com.chinasofti.ark.bdadp.component.api.Configureable;
 import com.chinasofti.ark.bdadp.component.api.RunnableComponent;
 import com.chinasofti.ark.bdadp.util.hdfs.common.ConfigurationClient;
@@ -33,7 +32,7 @@ import java.util.regex.Pattern;
  * @author wgzhang
  * @create 2016-09-21 20:00
  */
-public class ContentConversionRunnableComponent extends RunnableComponent
+public class ContentConversion extends RunnableComponent
     implements Configureable {
 
   String contentSource = "";
@@ -49,7 +48,7 @@ public class ContentConversionRunnableComponent extends RunnableComponent
   String defaultCharSet = "UTF-8";
   String destName = "";
 
-  public ContentConversionRunnableComponent(String id, String name, Logger log) {
+  public ContentConversion(String id, String name, Logger log) {
     super(id, name, log);
   }
 

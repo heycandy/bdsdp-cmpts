@@ -1,6 +1,5 @@
-package com.chinasofti.ark.bdadp.component.sample;
+package com.chinasofti.ark.bdadp.component;
 
-import com.chinasofti.ark.bdadp.component.ComponentProps;
 import com.chinasofti.ark.bdadp.component.api.Configureable;
 import com.chinasofti.ark.bdadp.component.api.RunnableComponent;
 import com.chinasofti.ark.bdadp.util.hdfs.common.ConfigurationClient;
@@ -18,7 +17,7 @@ import java.util.regex.Pattern;
 /**
  * Created by Administrator on 2016/9/21.
  */
-public class DataMonitorRunnableComponent extends RunnableComponent implements Configureable {
+public class DataMonitor extends RunnableComponent implements Configureable {
 
   String monitorSource = "";
   String monitorFilePath = "";
@@ -28,7 +27,7 @@ public class DataMonitorRunnableComponent extends RunnableComponent implements C
 
   String canSkip;
 
-  public DataMonitorRunnableComponent(String id, String name, Logger log) {
+  public DataMonitor(String id, String name, Logger log) {
     super(id, name, log);
   }
 
@@ -69,7 +68,7 @@ public class DataMonitorRunnableComponent extends RunnableComponent implements C
   @Override
   public void run() {
     try {
-      debug("DataMonitorRunnableComponent ：run");
+      debug("DataMonitor ：run");
 
       if ("0".equals(monitorSource)) {
         findLocalFiles();

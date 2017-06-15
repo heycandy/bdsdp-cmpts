@@ -2,7 +2,7 @@
 <component>
   <componentName>component_file_monitor</componentName>
   <componentDescription>component_file_monitor</componentDescription>
-  <componentClass>com.chinasofti.ark.bdadp.component.sample.DataMonitorRunnableComponent
+  <componentClass>com.chinasofti.ark.bdadp.component.DataMonitor
   </componentClass>
   <componentIcon>icon-xl.png,icon-xs.png</componentIcon>
   <!-- 60px * 60px, 20px * 20px -->

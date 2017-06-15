@@ -1,9 +1,8 @@
 /**
  * Copyright (c) 2016 chinaSofti.com. All Rights Reserved.
  */
-package com.chinasofti.ark.bdadp.component.sample;
+package com.chinasofti.ark.bdadp.component;
 
-import com.chinasofti.ark.bdadp.component.ComponentProps;
 import com.chinasofti.ark.bdadp.component.api.Configureable;
 import com.chinasofti.ark.bdadp.component.api.RunnableComponent;
 import com.chinasofti.ark.bdadp.expression.support.ArkConversionUtil;
@@ -25,7 +24,7 @@ import java.util.Map;
  * @author wgzhang
  * @create 2016-09-12 17:00
  */
-public class HqlRunnableComponent extends RunnableComponent implements Configureable {
+public class HiveSQL extends RunnableComponent implements Configureable {
 
   String hqlHql = "";
   String fileName = "";
@@ -40,7 +39,7 @@ public class HqlRunnableComponent extends RunnableComponent implements Configure
   Map<String, String> mapParam = new HashMap<String, String>();
   Connection connection = null;
 
-  public HqlRunnableComponent(String id, String name, Logger log) {
+  public HiveSQL(String id, String name, Logger log) {
     super(id, name, log);
   }
 
@@ -78,7 +77,7 @@ public class HqlRunnableComponent extends RunnableComponent implements Configure
         throw new RuntimeException("Link to the server failed!");
       }
     } catch (Exception e) {
-      throw new RuntimeException("HqlRunnableComponent exception: ", e);
+      throw new RuntimeException("HiveSQL exception: ", e);
     }
 
     try {
@@ -151,7 +150,7 @@ public class HqlRunnableComponent extends RunnableComponent implements Configure
       }
 
     } catch (Exception e) {
-      throw new RuntimeException("HqlRunnableComponent exception: ", e);
+      throw new RuntimeException("HiveSQL exception: ", e);
     } finally {
       // 关闭JDBC连接
       HiveJdbcUtil.closeConnection(connection);

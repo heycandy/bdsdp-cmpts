@@ -1,4 +1,4 @@
-package com.chinasofti.ark.bdadp.component.sample;
+package com.chinasofti.ark.bdadp.component;
 
 import com.chinasofti.ark.bdadp.component.ComponentProps;
 import com.chinasofti.ark.bdadp.component.api.Configureable;
@@ -39,7 +39,7 @@ import java.util.Vector;
 /**
  * Created by Administrator on 2016/9/6.
  */
-public class FtpComponent extends RunnableComponent implements Configureable {
+public class FtpDownload extends RunnableComponent implements Configureable {
 
   public static int BUFFER_SIZE = 2048;
   //标志位判断是否有可执行源文件
@@ -61,7 +61,7 @@ public class FtpComponent extends RunnableComponent implements Configureable {
   private Session sshSession;
   private Channel channel;
 
-  public FtpComponent(String id, String name, Logger log) {
+  public FtpDownload(String id, String name, Logger log) {
     super(id, name, log);
   }
 

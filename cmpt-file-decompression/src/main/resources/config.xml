@@ -2,7 +2,7 @@
 <component>
   <componentName>component_file_decompression</componentName>
   <componentDescription>component_file_decompression</componentDescription>
-  <componentClass>com.chinasofti.ark.bdadp.component.sample.FileDecompressionRunnableComponent
+  <componentClass>com.chinasofti.ark.bdadp.component.FileDecompression
   </componentClass>
   <componentIcon>icon-xl.png,icon-xs.png</componentIcon>
   <!-- 60px * 60px, 20px * 20px -->

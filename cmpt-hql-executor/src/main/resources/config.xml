@@ -2,7 +2,7 @@
 <component>
   <componentName>component_hql_executor</componentName>
   <componentDescription>component_hql_executor</componentDescription>
-  <componentClass>com.chinasofti.ark.bdadp.component.sample.HqlRunnableComponent</componentClass>
+  <componentClass>com.chinasofti.ark.bdadp.component.HiveSQL</componentClass>
   <componentIcon>icon-xl.png,icon-xs.png</componentIcon>
   <!-- 60px * 60px, 20px * 20px -->
   <componentPid>component_pid_common</componentPid>

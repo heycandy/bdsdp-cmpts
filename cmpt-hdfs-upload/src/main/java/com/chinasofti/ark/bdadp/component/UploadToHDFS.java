@@ -1,4 +1,4 @@
-package com.chinasofti.ark.bdadp.component.sample;
+package com.chinasofti.ark.bdadp.component;
 
 import com.chinasofti.ark.bdadp.component.ComponentProps;
 import com.chinasofti.ark.bdadp.component.api.Configureable;
@@ -22,7 +22,7 @@ import java.io.OutputStream;
 /**
  * Created by Administrator on 2016/11/17.
  */
-public class UploadToHDFSComponent extends RunnableComponent implements Configureable {
+public class UploadToHDFS extends RunnableComponent implements Configureable {
 
   public static int BUFFER_SIZE = 2048;
   String resource = "";
@@ -31,7 +31,7 @@ public class UploadToHDFSComponent extends RunnableComponent implements Configur
   String destSource = "";
   String destPath = "";
 
-  public UploadToHDFSComponent(String id, String name, Logger log) {
+  public UploadToHDFS(String id, String name, Logger log) {
     super(id, name, log);
   }
 

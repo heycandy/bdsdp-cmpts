@@ -1,4 +1,4 @@
-package com.chinasofti.ark.bdadp.component.sample;
+package com.chinasofti.ark.bdadp.component;
 
 import com.chinasofti.ark.bdadp.component.ComponentProps;
 import com.chinasofti.ark.bdadp.component.api.Configureable;
@@ -22,7 +22,7 @@ import java.util.List;
 /**
  * Created by wumin on 2016/9/23.
  */
-public class JdbcExportComponent extends RunnableComponent implements Configureable {
+public class JdbcExport extends RunnableComponent implements Configureable {
 
   private final static String DEST_CHARSET = "UTF-8";
   private String driver;
@@ -36,7 +36,7 @@ public class JdbcExportComponent extends RunnableComponent implements Configurea
   private String separator;
   private String dbCharset;
 
-  public JdbcExportComponent(String id, String name, Logger log) {
+  public JdbcExport(String id, String name, Logger log) {
     super(id, name, log);
   }
 

@@ -1,7 +1,7 @@
 /**
  * Copyright (c) 2016 chinaSofti.com. All Rights Reserved.
  */
-package com.chinasofti.ark.bdadp.component.sample;
+package com.chinasofti.ark.bdadp.component;
 
 import com.chinasofti.ark.bdadp.component.ComponentProps;
 import com.chinasofti.ark.bdadp.component.api.Configureable;
@@ -27,7 +27,7 @@ import java.util.Map;
  * @create 2016-09-13 9:36
  */
 
-public class LoadToHiveRunnableComponent extends RunnableComponent implements Configureable {
+public class LoadToHive extends RunnableComponent implements Configureable {
 
   //上传到web服务器/opt/upload文件夹下文件
   private static final String OUT_WEB_PATH = "/opt/uploadToHdfs/";
@@ -52,7 +52,7 @@ public class LoadToHiveRunnableComponent extends RunnableComponent implements Co
   Map<String, String> mapParam = new HashMap<String, String>();
   String overwriter = null;
 
-  public LoadToHiveRunnableComponent(String id, String name, Logger log) {
+  public LoadToHive(String id, String name, Logger log) {
     super(id, name, log);
   }
 
@@ -93,7 +93,7 @@ public class LoadToHiveRunnableComponent extends RunnableComponent implements Co
 
   @Override
   public void run() {
-    debug("LoadToHiveRunnableComponent");
+    debug("LoadToHive");
 
     File dest;
     try {
@@ -166,7 +166,7 @@ public class LoadToHiveRunnableComponent extends RunnableComponent implements Co
       }
 
     } catch (Exception e) {
-      throw new RuntimeException("LoadToHiveRunnableComponent exception: ", e);
+      throw new RuntimeException("LoadToHive exception: ", e);
     } finally {
       // 关闭JDBC连接
       HiveJdbcUtil.closeConnection(connection);
@@ -198,7 +198,7 @@ public class LoadToHiveRunnableComponent extends RunnableComponent implements Co
       debug("Link to hive");
       HiveJdbcUtil.execHql(connection, "default", hiveQL, 1000);
     } catch (Exception e) {
-      throw new RuntimeException("LoadToHiveRunnableComponent exception: ", e);
+      throw new RuntimeException("LoadToHive exception: ", e);
     }
 
   }

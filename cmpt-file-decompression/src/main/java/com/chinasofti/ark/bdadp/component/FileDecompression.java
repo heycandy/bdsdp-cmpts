@@ -1,9 +1,8 @@
 /**
  * Copyright (c) 2016 chinaSofti.com. All Rights Reserved.
  */
-package com.chinasofti.ark.bdadp.component.sample;
+package com.chinasofti.ark.bdadp.component;
 
-import com.chinasofti.ark.bdadp.component.ComponentProps;
 import com.chinasofti.ark.bdadp.component.api.Configureable;
 import com.chinasofti.ark.bdadp.component.api.RunnableComponent;
 import com.chinasofti.ark.bdadp.util.hdfs.common.ConfigurationClient;
@@ -34,7 +33,7 @@ import java.util.List;
 /**
  * 文件解压控件
  */
-public class FileDecompressionRunnableComponent extends RunnableComponent implements Configureable {
+public class FileDecompression extends RunnableComponent implements Configureable {
 
   public static int BUFFER_SIZE = 2048;
   String resource = "";
@@ -45,7 +44,7 @@ public class FileDecompressionRunnableComponent extends RunnableComponent implem
   String destPath = "";
   String destSource = "";
 
-  public FileDecompressionRunnableComponent(String id, String name, Logger log) {
+  public FileDecompression(String id, String name, Logger log) {
     super(id, name, log);
   }
 

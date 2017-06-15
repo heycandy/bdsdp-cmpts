@@ -1,6 +1,5 @@
-package com.chinasofti.ark.bdadp.component.sample;
+package com.chinasofti.ark.bdadp.component;
 
-import com.chinasofti.ark.bdadp.component.ComponentProps;
 import com.chinasofti.ark.bdadp.component.api.Configureable;
 import com.chinasofti.ark.bdadp.component.api.RunnableComponent;
 import com.chinasofti.ark.bdadp.util.hdfs.common.ConfigurationClient;
@@ -26,7 +25,7 @@ import java.io.OutputStreamWriter;
 /**
  * 编码转换 Created by TongTong on 2016/9/8.
  */
-public class TransCodingRunnableComponent extends RunnableComponent implements Configureable {
+public class TransCoding extends RunnableComponent implements Configureable {
 
   String fileSource = "";
   String filePath = "";
@@ -38,7 +37,7 @@ public class TransCodingRunnableComponent extends RunnableComponent implements C
   String destEncode = "UTF-8";
 
 
-  public TransCodingRunnableComponent(String id, String name, Logger log) {
+  public TransCoding(String id, String name, Logger log) {
     super(id, name, log);
   }
 
