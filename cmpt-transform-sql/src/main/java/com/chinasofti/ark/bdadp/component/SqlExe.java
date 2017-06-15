@@ -103,18 +103,18 @@ public class SqlExe extends RunnableComponent implements Configureable {
       cstm.execute(); // 执行存储过程
       for (int k = countIn + 1; k <= countSum; k++) {
         if (list_Out[index_get].equals("string")) {
+          String result = cstm.getString(k);
+          if(isNum(result)){
 
-          if(isNum(cstm.getString(k))){
-
-            runCode = cstm.getString(k);
+            runCode = result;
             info("output code is： " + runCode);
           }else{
-            resultMessage = cstm.getString(k);
+            resultMessage = result;
             info("output msg is： " + resultMessage);
           }
           index_get++;
         } else {
-          info("output code is： " + cstm.getInt(k));
+          info("output int is： " + cstm.getInt(k));
           index_get++;
         }
       }

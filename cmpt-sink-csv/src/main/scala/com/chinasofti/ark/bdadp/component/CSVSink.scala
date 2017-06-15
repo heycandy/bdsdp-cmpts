@@ -18,18 +18,13 @@ class CSVSink (id: String, name: String, log: Logger)
   var delimiter: String = null
   var quote: String = null
   var escape: String = null
-  var parserLib: String = null
-  var charset: String = null
-  var inferSchema: String = null
-  var comment: String = null
   var nullValue: String = null
-  var mode: String = null
   var dateFormat: String = null
+  var codec: String = null
   var numPartitions: Int = 0
 
 
   override def apply(inputT: StringData): Unit = {
-    //    info(inputT.getRawData)
   }
 
   override def configure(componentProps: ComponentProps): Unit = {
@@ -38,13 +33,9 @@ class CSVSink (id: String, name: String, log: Logger)
     delimiter = componentProps.getString("delimiter", ",")
     quote = componentProps.getString("quote", "\"")
     escape = componentProps.getString("escape", "\\")
-    parserLib = componentProps.getString("parserLib", "commons")
-    mode = componentProps.getString("mode", "PERMISSIVE")
-    charset = componentProps.getString("charset", "UTF-8")
-    inferSchema = componentProps.getString("inferSchema", "false")
-    comment = componentProps.getString("comment", "#")
     nullValue = componentProps.getString("nullValue")
     dateFormat = componentProps.getString("dateFormat")
+    codec = componentProps.getString("codec")
     numPartitions = componentProps.getInt("numPartitions",8)
 
     StringUtils.assertIsBlank(path);
@@ -56,11 +47,7 @@ class CSVSink (id: String, name: String, log: Logger)
       .option("delimiter", delimiter)
       .option("quote", quote)
       .option("escape", escape)
-      .option("parserLib", parserLib)
-      .option("mode", mode)
-      .option("charset", charset)
-      .option("inferSchema", inferSchema)
-      .option("comment", comment)
+      .option("codec", codec)
       .option("nullValue", nullValue)
       .option("dateFormat", dateFormat).save(path)
 

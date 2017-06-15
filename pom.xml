@@ -33,7 +33,6 @@
     <module>cmpt-source-jdbc</module>
     <module>cmpt-transform-fill</module>
     <module>cmpt-transform-drop</module>
-    <!--<module>cmpt-transform-replace</module>-->
     <module>cmpt-sink-jdbc</module>
     <module>cmpt-sink-csv</module>
     <module>cmpt-transform-group</module>

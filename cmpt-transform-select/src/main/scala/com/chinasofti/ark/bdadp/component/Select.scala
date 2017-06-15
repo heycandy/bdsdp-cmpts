@@ -17,7 +17,9 @@ class Select (id: String, name: String, log: Logger)
 
   override def apply(inputT: SparkData): SparkData = {
     val df: DataFrame = inputT.getRawData
-    val res: DataFrame = df.selectExpr(colExpr.split(","): _*)
+
+//    val res: DataFrame = df.selectExpr(colExpr.split(","): _*)
+    val res: DataFrame = df.selectExpr(colExpr.split("[\\?!/\\,]+(?=[^\\)]*(\\(|$))"): _*)
     Builder.build(res)
   }
 

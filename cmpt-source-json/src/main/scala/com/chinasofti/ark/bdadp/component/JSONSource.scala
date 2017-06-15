@@ -29,6 +29,7 @@ class JSONSource(id: String, name: String, log: Logger)
   }
 
   override def configure(componentProps: ComponentProps): Unit = {
+   info("ssssssssss")
     path = componentProps.getString("path")
     charset = componentProps.getString("charset", "UTF-8")
     StringUtils.assertIsBlank(path);
