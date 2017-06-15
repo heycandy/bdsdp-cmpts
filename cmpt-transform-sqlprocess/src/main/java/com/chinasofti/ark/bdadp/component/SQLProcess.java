@@ -18,9 +18,8 @@ import java.text.SimpleDateFormat;
 /**
  * Created by wumin on 2016/9/23.
  */
-public class SqlExe extends RunnableComponent implements Configureable, Optional {
+public class SQLProcess extends RunnableComponent implements Configureable, Optional {
 
-  private final static String DEST_CHARSET = "UTF-8";
   private final static String DATE_FORMAT = "yyyy-MM-dd";
   private final static String DATE_FORMAT_SHORT = "yyyyMMdd";
   private String driver;
@@ -34,7 +33,7 @@ public class SqlExe extends RunnableComponent implements Configureable, Optional
 
   private String inputDate;
 
-  public SqlExe(String id, String name, Logger log) {
+  public SQLProcess(String id, String name, Logger log) {
     super(id, name, log);
   }
 

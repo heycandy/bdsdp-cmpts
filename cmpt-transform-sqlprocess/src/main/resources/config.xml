@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <component>
-  <componentName>cmpt-transform-sql</componentName>
-  <componentDescription>cmpt-transform-sql</componentDescription>
-  <componentClass>com.chinasofti.ark.bdadp.component.SqlExe</componentClass>
+  <componentName>cmpt-transform-sqlprocess</componentName>
+  <componentDescription>cmpt-transform-sqlprocess</componentDescription>
+  <componentClass>com.chinasofti.ark.bdadp.component.SQLProcess</componentClass>
   <componentIcon>icon-xl.png,icon-xs.png</componentIcon>
   <!-- 60px * 60px, 20px * 20px -->
   <componentPid>component_pid_apply</componentPid>

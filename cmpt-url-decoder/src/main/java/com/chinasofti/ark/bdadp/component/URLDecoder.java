@@ -1,6 +1,5 @@
-package com.chinasofti.ark.bdadp.component.sample;
+package com.chinasofti.ark.bdadp.component;
 
-import com.chinasofti.ark.bdadp.component.ComponentProps;
 import com.chinasofti.ark.bdadp.component.api.Configureable;
 import com.chinasofti.ark.bdadp.component.api.RunnableComponent;
 import com.chinasofti.ark.bdadp.util.hdfs.common.ConfigurationClient;
@@ -21,12 +20,11 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
-import java.net.URLDecoder;
 
 /**
  * Created by Administrator on 2016/9/22.
  */
-public class URLDecoderRunnableComponent extends RunnableComponent implements Configureable {
+public class URLDecoder extends RunnableComponent implements Configureable {
 
   String fileSource = "";
   String filePath = "";
@@ -35,7 +33,7 @@ public class URLDecoderRunnableComponent extends RunnableComponent implements Co
   String fileName = "";
   String destSource = "";
 
-  public URLDecoderRunnableComponent(String id, String name, Logger log) {
+  public URLDecoder(String id, String name, Logger log) {
     super(id, name, log);
   }
 
@@ -175,7 +173,7 @@ public class URLDecoderRunnableComponent extends RunnableComponent implements Co
     BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(out));
 
     while ((str = reader.readLine()) != null) {
-      str = URLDecoder.decode(str, "utf-8");
+      str = java.net.URLDecoder.decode(str, "utf-8");
       writer.write(str + "\n");
     }
     reader.close();
