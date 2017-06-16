@@ -8,57 +8,45 @@
   <params>
     <param>
       <name>hostName</name>
-      <description>Host</description>
+      <description>hostName</description>
       <type>text</type>
       <nullable>false</nullable>
     </param>
     <param>
       <name>port</name>
-      <description>Port</description>
+      <description>port</description>
       <type>text</type>
       <nullable>true</nullable>
     </param>
     <param>
       <name>dbName</name>
-      <description>Database Name</description>
+      <description>dbName</description>
       <type>text</type>
       <nullable>false</nullable>
     </param>
     <param>
       <name>library</name>
-      <description>Library</description>
+      <description>library</description>
       <type>text</type>
       <nullable>false</nullable>
     </param>
     <param>
       <name>file</name>
-      <description>File</description>
+      <description>file</description>
       <type>text</type>
       <nullable>false</nullable>
     </param>
     <param>
       <name>userName</name>
-      <description>User Name</description>
+      <description>userName</description>
       <type>text</type>
       <nullable>false</nullable>
     </param>
     <param>
       <name>passWord</name>
-      <description>Password</description>
+      <description>passWord</description>
       <type>password</type>
       <nullable>false</nullable>
-    </param>
-    <param>
-      <name>records</name>
-      <description>Record Number</description>
-      <type>text</type>
-      <nullable>true</nullable>
-    </param>
-    <param>
-      <name>sql</name>
-      <description>SQL Syntax</description>
-      <type>textarea</type>
-      <nullable>true</nullable>
     </param>
   </params>
 </component>

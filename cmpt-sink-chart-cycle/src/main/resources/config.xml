@@ -18,7 +18,7 @@
             <type>text</type>
             <nullable>true</nullable>
         </param>
-        <param>
+        <!--<param>
             <name>vertexIdColumn</name>
             <description>vertexIdColumn</description>
             <type>text</type>
@@ -47,6 +47,6 @@
             <description>vertexNameColumn</description>
             <type>text</type>
             <nullable>true</nullable>
-        </param>
+        </param>-->
     </params>
 </component>

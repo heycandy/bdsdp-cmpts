@@ -21,6 +21,7 @@ class CSVSink (id: String, name: String, log: Logger)
   var nullValue: String = null
   var dateFormat: String = null
   var codec: String = null
+  var quoteMode: String = null
   var numPartitions: Int = 0
 
 
@@ -36,6 +37,7 @@ class CSVSink (id: String, name: String, log: Logger)
     nullValue = componentProps.getString("nullValue")
     dateFormat = componentProps.getString("dateFormat")
     codec = componentProps.getString("codec")
+    quoteMode = componentProps.getString("quoteMode")
     numPartitions = componentProps.getInt("numPartitions",8)
 
     StringUtils.assertIsBlank(path);
@@ -49,6 +51,7 @@ class CSVSink (id: String, name: String, log: Logger)
       .option("escape", escape)
       .option("codec", codec)
       .option("nullValue", nullValue)
+      .option("quoteMode", quoteMode)
       .option("dateFormat", dateFormat).save(path)
 
   }

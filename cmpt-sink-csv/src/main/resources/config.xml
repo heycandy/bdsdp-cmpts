@@ -61,7 +61,20 @@
         <option name="snappy" desc="snappy" value="snappy"/>
         <option name="compressionCodec" desc="compressionCodec" value="org.apache.hadoop.io.compress.CompressionCodec"/>
       </defaultOptions>
-      <defaultValue>PERMISSIVE</defaultValue>
+      <defaultValue>-</defaultValue>
+    </param>
+    <param>
+      <name>quoteMode</name>
+      <description>quoteMode</description>
+      <type>options</type>
+      <nullable>true</nullable>
+      <defaultOptions>
+        <option name="MINIMAL" desc="MINIMAL" value="MINIMAL"/>
+        <option name="ALL" desc="ALL" value="ALL"/>
+        <option name="NON_NUMERIC" desc="NON_NUMERIC" value="NON_NUMERIC"/>
+        <option name="NONE" desc="NONE" value="NONE"/>
+      </defaultOptions>
+      <defaultValue>MINIMAL</defaultValue>
     </param>
     <param>
       <name>numPartitions</name>
