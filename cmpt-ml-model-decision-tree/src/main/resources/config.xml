@@ -36,5 +36,11 @@
       <type>text</type>
       <nullable>false</nullable>
     </param>
+    <param>
+      <name>trainDataPer</name>
+      <description>trainDataPer</description>
+      <type>text</type>
+      <nullable>false</nullable>
+    </param>
   </params>
 </component>

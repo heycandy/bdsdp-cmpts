@@ -21,6 +21,7 @@ class DecisionSink(id: String, name: String, log: Logger)
   var impurity: String = null
   var maxDepth: Int = 0
   var maxBins: Int = 0
+  var trainDataPer:Double = 0.0
 
   override def apply(inputT: StringData): Unit = {
     //    info(inputT.getRawData)
@@ -32,6 +33,7 @@ class DecisionSink(id: String, name: String, log: Logger)
     impurity = componentProps.getString("impurity", "gini")
     maxDepth = componentProps.getString("maxDepth", "5").toInt
     maxBins = componentProps.getString("maxBins", "32").toInt
+    trainDataPer = componentProps.getString("trainDataPer", "0.7").toDouble
   }
 
   override def apply(inputT: SparkData): Unit = {
@@ -46,7 +48,7 @@ class DecisionSink(id: String, name: String, log: Logger)
     }))
 
     // Split the data into training and test sets (30% held out for testing)
-    val splits = data.randomSplit(Array(0.7, 0.3))
+    val splits = data.randomSplit(Array(trainDataPer, 1-trainDataPer))
     val (trainingData, testData) = (splits(0), splits(1))
 
     // Train a DecisionTree model.
@@ -60,6 +62,10 @@ class DecisionSink(id: String, name: String, log: Logger)
       val prediction = model.predict(point.features)
       (point.label, prediction)
     }
+
+    ("" :: df.toString() ::
+      Nil ++ inputT.getRawData.repartition(8).take(10)).foreach(row => info(row.toString()))
+
     val testAccuracy = labelAndPreds.filter(r => r._1 == r._2).count.toDouble / testData.count()
     info("Test Accuracy = " + testAccuracy)
     //    info("Learned classification tree model:\n" + model.toDebugString)
