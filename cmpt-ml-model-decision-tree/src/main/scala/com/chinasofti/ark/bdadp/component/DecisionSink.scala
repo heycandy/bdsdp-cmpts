@@ -36,7 +36,8 @@ class DecisionSink(id: String, name: String, log: Logger)
 
   override def apply(inputT: SparkData): Unit = {
     // {label, 0, 1, 2, 3, ...}
-    val data = inputT.getRawData.mapPartitions(iterator => iterator.map(row => {
+    val df = inputT.getRawData
+    val data = df.mapPartitions(iterator => iterator.map(row => {
       val label = row.toSeq.head.toString.toDouble
       val values = row.toSeq.tail.map(_.toString).map(_.toDouble).toArray
 
@@ -64,7 +65,7 @@ class DecisionSink(id: String, name: String, log: Logger)
     //    info("Learned classification tree model:\n" + model.toDebugString)
 
     // Save and load model
-    val sc = inputT.getRawData.sqlContext.sparkContext
+    val sc = df.sqlContext.sparkContext
     model.save(sc, path)
   }
 }
