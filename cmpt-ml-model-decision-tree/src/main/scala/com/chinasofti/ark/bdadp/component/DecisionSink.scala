@@ -39,6 +39,10 @@ class DecisionSink(id: String, name: String, log: Logger)
   override def apply(inputT: SparkData): Unit = {
     // {label, 0, 1, 2, 3, ...}
     val df = inputT.getRawData
+
+    ("" :: df.toString() ::
+      Nil ++ inputT.getRawData.repartition(8).take(10)).foreach(row => info(row.toString()))
+
     val data = df.mapPartitions(iterator => iterator.map(row => {
       val label = row.toSeq.head.toString.toDouble
       val values = row.toSeq.tail.map(_.toString).map(_.toDouble).toArray
@@ -62,9 +66,6 @@ class DecisionSink(id: String, name: String, log: Logger)
       val prediction = model.predict(point.features)
       (point.label, prediction)
     }
-
-    ("" :: df.toString() ::
-      Nil ++ inputT.getRawData.repartition(8).take(10)).foreach(row => info(row.toString()))
 
     val testAccuracy = labelAndPreds.filter(r => r._1 == r._2).count.toDouble / testData.count()
     info("Test Accuracy = " + testAccuracy)
