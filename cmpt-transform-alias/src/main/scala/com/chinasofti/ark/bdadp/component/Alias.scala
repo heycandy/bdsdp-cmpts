@@ -6,8 +6,6 @@ import com.chinasofti.ark.bdadp.component.api.transforms.TransformableComponent
 import com.chinasofti.ark.bdadp.util.common.StringUtils
 import org.slf4j.Logger
 
-import scala.collection.mutable.ArrayBuffer
-
 /**
  * Created by Administrator on 2017.1.12.
  */
@@ -22,7 +20,7 @@ class Alias(id: String, name: String, log: Logger)
     val arrExist = existingName.split(",")
     val arrNew = newName.split(",")
 
-    for(m <- 0 until arrExist.length){
+    for (m <- 0 until arrExist.length) {
       df = df.withColumnRenamed(arrExist(m), arrNew(m))
     }
     Builder.build(df)

@@ -10,18 +10,18 @@ import org.slf4j.Logger
 
 
 /**
- * Created by Administrator on 2017.2.16.
- */
+  * Created by Administrator on 2017.2.16.
+  */
 class DecisionSink(id: String, name: String, log: Logger)
   extends SinkComponent[StringData](id, name, log) with Configureable with
-  SparkSinkAdapter[SparkData] with Serializable {
+          SparkSinkAdapter[SparkData] with Serializable {
 
   var path: String = null
   var numClasses: Int = 0
   var impurity: String = null
   var maxDepth: Int = 0
   var maxBins: Int = 0
-  var trainDataPer:Double = 0.0
+  var trainDataPer: Double = 0.0
 
   override def apply(inputT: StringData): Unit = {
     //    info(inputT.getRawData)
@@ -41,7 +41,7 @@ class DecisionSink(id: String, name: String, log: Logger)
     val df = inputT.getRawData
 
     ("" :: df.toString() ::
-      Nil ++ inputT.getRawData.repartition(8).take(10)).foreach(row => info(row.toString()))
+     Nil ++ inputT.getRawData.repartition(8).take(10)).foreach(row => info(row.toString()))
 
     val data = df.mapPartitions(iterator => iterator.map(row => {
       val label = row.toSeq.head.toString.toDouble
@@ -52,20 +52,20 @@ class DecisionSink(id: String, name: String, log: Logger)
     }))
 
     // Split the data into training and test sets (30% held out for testing)
-    val splits = data.randomSplit(Array(trainDataPer, 1-trainDataPer))
+    val splits = data.randomSplit(Array(trainDataPer, 1 - trainDataPer))
     val (trainingData, testData) = (splits(0), splits(1))
 
     // Train a DecisionTree model.
     //  Empty categoricalFeaturesInfo indicates all features are continuous.
     val categoricalFeaturesInfo = Map[Int, Int]()
     val model = DecisionTree.trainClassifier(trainingData, numClasses, categoricalFeaturesInfo,
-      impurity, maxDepth, maxBins)
+                                             impurity, maxDepth, maxBins)
 
     // Evaluate model on test instances and compute test error
     val labelAndPreds = testData.map { point =>
       val prediction = model.predict(point.features)
       (point.label, prediction)
-    }
+                                     }
 
     val testAccuracy = labelAndPreds.filter(r => r._1 == r._2).count.toDouble / testData.count()
     info("Test Accuracy = " + testAccuracy)

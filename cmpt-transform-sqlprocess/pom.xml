@@ -9,7 +9,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>cmpt-transform-sqlprocess</artifactId>
+  <artifactId>cmpt-transform-sqlprocess</artifactId>
 
     <build>
         <plugins>
