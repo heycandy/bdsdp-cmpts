@@ -7,21 +7,22 @@ import org.apache.spark.mllib.linalg.{Vector, Vectors}
 import org.apache.spark.mllib.tree.model.DecisionTreeModel
 import org.apache.spark.rdd.RDD
 import org.apache.spark.sql.Row
-import org.apache.spark.sql.types.{DoubleType, StructField, StructType}
+import org.apache.spark.sql.types.{StructType, DoubleType, StructField}
 import org.slf4j.Logger
 
 /**
-  * Created by Administrator on 2017/1/12.
-  */
+ * Created by Administrator on 2017/1/12.
+ */
 class PredictModel(id: String, name: String, log: Logger)
   extends TransformableComponent[SparkData, SparkData](id, name, log) with Configureable {
 
   var path: String = null
 
   override def apply(inputT: SparkData): SparkData = {
-    val sc = inputT.getRawData.sqlContext.sparkContext
+    val df = inputT.getRawData
+    val sc = df.sqlContext.sparkContext
     val sameModel = DecisionTreeModel.load(sc, path)
-    val data: RDD[Vector] = inputT.getRawData.mapPartitions(
+    val data: RDD[Vector] = df.mapPartitions(
       iterator => iterator.map(row => {
         val values = row.toSeq.map(_.toString).map(_.toDouble).toArray
         Vectors.dense(values)
@@ -36,7 +37,7 @@ class PredictModel(id: String, name: String, log: Logger)
     val structType = StructType(Array(
       StructField("label", DoubleType, true)
     ))
-    val dfResult = inputT.getRawData.toDF().sqlContext.createDataFrame(rddRow, structType)
+    val dfResult = df.toDF().sqlContext.createDataFrame(rddRow, structType)
     Builder.build(dfResult)
   }
 

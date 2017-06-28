@@ -2,7 +2,7 @@
 <component>
   <componentName>component_hdfs_upload</componentName>
   <componentDescription>component_hdfs_upload</componentDescription>
-  <componentClass>com.chinasofti.ark.bdadp.component.sample.UploadToHDFSComponent
+  <componentClass>com.chinasofti.ark.bdadp.component.UploadToHDFS
   </componentClass>
   <componentIcon>icon-xl.png,icon-xs.png</componentIcon>
   <!-- 60px * 60px, 20px * 20px -->

@@ -17,19 +17,13 @@ class Alias(id: String, name: String, log: Logger)
   var existingName: String = null
   var newName: String = null
 
-  var strsExist = new ArrayBuffer[String]()
-  var strsNew = ArrayBuffer[String]()
-  var i:Int = 0
-
   override def apply(inputT: SparkData): SparkData = {
     var df = inputT.getRawData
-    for(m <- 0 until existingName.split(",").length-1){
-      strsNew += existingName.split(",")(m)
-    }
+    val arrExist = existingName.split(",")
+    val arrNew = newName.split(",")
 
-    for(a <- strsExist){
-      df = df.withColumnRenamed(a, strsNew(i))
-      i+=1
+    for(m <- 0 until arrExist.length){
+      df = df.withColumnRenamed(arrExist(m), arrNew(m))
     }
     Builder.build(df)
   }
@@ -38,20 +32,5 @@ class Alias(id: String, name: String, log: Logger)
     existingName = componentProps.getString("existingName")
     newName = componentProps.getString("newName")
     StringUtils.assertIsBlank(existingName, newName);
-  }
-
-  def call(inputT: SparkData, cmptProps: ComponentProps): SparkData = {
-    configure(cmptProps)
-    apply(inputT)
-  }
-
-  def call(inputT: SparkData, existingName: String, newName: String): SparkData = {
-
-    val cmptProps = new ComponentProps()
-    cmptProps.setProperty("existingName", existingName)
-    cmptProps.setProperty("newName", newName)
-
-    configure(cmptProps)
-    apply(inputT)
   }
 }

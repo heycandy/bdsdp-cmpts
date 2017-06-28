@@ -2,7 +2,7 @@
 <component>
   <componentName>component_jdbc_export</componentName>
   <componentDescription>component_jdbc_export</componentDescription>
-  <componentClass>com.chinasofti.ark.bdadp.component.sample.JdbcExportComponent</componentClass>
+  <componentClass>com.chinasofti.ark.bdadp.component.JdbcExport</componentClass>
   <componentIcon>icon-xl.png,icon-xs.png</componentIcon>
   <!-- 60px * 60px, 20px * 20px -->
   <componentPid>component_pid_data_extract</componentPid>

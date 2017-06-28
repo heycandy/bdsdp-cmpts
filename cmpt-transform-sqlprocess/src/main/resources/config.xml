@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component>
+  <componentName>cmpt-transform-sqlprocess</componentName>
+  <componentDescription>cmpt-transform-sqlprocess</componentDescription>
+  <componentClass>com.chinasofti.ark.bdadp.component.SQLProcess</componentClass>
+  <componentIcon>icon-xl.png,icon-xs.png</componentIcon>
+  <!-- 60px * 60px, 20px * 20px -->
+  <componentPid>component_pid_apply</componentPid>
+  <params>
+    <param>
+      <name>jdbc_driver</name>
+      <description>jdbc_driver</description>
+      <type>text</type>
+      <nullable>false</nullable>
+    </param>
+    <param>
+      <name>jdbc_url</name>
+      <description>jdbc_url</description>
+      <type>text</type>
+      <nullable>false</nullable>
+    </param>
+    <param>
+      <name>jdbc_user</name>
+      <description>jdbc_user</description>
+      <type>text</type>
+      <nullable>false</nullable>
+    </param>
+    <param>
+      <name>jdbc_pwd</name>
+      <description>jdbc_pwd</description>
+      <type>password</type>
+      <nullable>false</nullable>
+    </param>
+    <param>
+      <name>jdbc_sql</name>
+      <description>jdbc_sql</description>
+      <type>text</type>
+      <nullable>false</nullable>
+    </param>
+    <param>
+      <name>inputStr</name>
+      <description>inputStr</description>
+      <type>text</type>
+      <nullable>false</nullable>
+    </param>
+    <param>
+      <name>outputStr</name>
+      <description>outputStr</description>
+      <type>text</type>
+      <nullable>false</nullable>
+    </param>
+    <param>
+      <name>resultCode</name>
+      <description>resultCode</description>
+      <type>text</type>
+      <nullable>false</nullable>
+    </param>
+  </params>
+
+</component>

@@ -33,14 +33,13 @@
     <module>cmpt-source-jdbc</module>
     <module>cmpt-transform-fill</module>
     <module>cmpt-transform-drop</module>
-    <!--<module>cmpt-transform-replace</module>-->
     <module>cmpt-sink-jdbc</module>
     <module>cmpt-sink-csv</module>
     <module>cmpt-transform-group</module>
     <module>cmpt-transform-select</module>
     <module>cmpt-source-parquet</module>
     <module>cmpt-transform-union</module>
-    <module>cmpt-transform-sql</module>
+    <module>cmpt-transform-sqlprocess</module>
     <module>cmpt-transform-aggregate</module>
     <module>cmpt-source-jdbc-oracle</module>
     <module>cmpt-ml-model-decision-tree</module>

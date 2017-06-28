@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <component>
-<<<<<<< HEAD
   <componentName>cmpt_sink_decisionTreeModel</componentName>
   <componentDescription>cmpt_sink_decisionTreeModel</componentDescription>
   <componentClass>com.chinasofti.ark.bdadp.component.DecisionSink</componentClass>
@@ -37,44 +36,11 @@
       <type>text</type>
       <nullable>false</nullable>
     </param>
+    <param>
+      <name>trainDataPer</name>
+      <description>trainDataPer</description>
+      <type>text</type>
+      <nullable>false</nullable>
+    </param>
   </params>
-=======
-    <componentName>cmpt_sink_decisionTreeModel</componentName>
-    <componentDescription>cmpt_sink_decisionTreeModel</componentDescription>
-    <componentClass>com.chinasofti.ark.bdadp.component.DecisionSink</componentClass>
-    <componentIcon>icon-xl.png,icon-xs.png</componentIcon>
-    <componentPid>component_pid_sink</componentPid>
-    <params>
-        <param>
-            <name>path</name>
-            <description>path</description>
-            <type>text</type>
-            <nullable>false</nullable>
-        </param>
-        <param>
-            <name>numClasses</name>
-            <description>numClasses</description>
-            <type>text</type>
-            <nullable>false</nullable>
-        </param>
-        <param>
-            <name>impurity</name>
-            <description>impurity</description>
-            <type>text</type>
-            <nullable>false</nullable>
-        </param>
-        <param>
-            <name>maxDepth</name>
-            <description>maxDepth</description>
-            <type>text</type>
-            <nullable>false</nullable>
-        </param>
-        <param>
-            <name>maxBins</name>
-            <description>maxBins</description>
-            <type>text</type>
-            <nullable>false</nullable>
-        </param>
-    </params>
->>>>>>> c5c6e652a6967989a1d0e5a8aa802015dea6fab4
 </component>
