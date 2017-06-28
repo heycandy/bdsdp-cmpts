@@ -49,14 +49,14 @@
       <nullable>false</nullable>
     </param>
     <param>
-      <name>records</name>
-      <description>Record Number</description>
-      <type>text</type>
+      <name>decodingColumn</name>
+      <description>Decoding Column</description>
+      <type>textarea</type>
       <nullable>true</nullable>
     </param>
     <param>
-      <name>sql</name>
-      <description>SQL Syntax</description>
+      <name>charsetColumn</name>
+      <description>Charset Column</description>
       <type>textarea</type>
       <nullable>true</nullable>
     </param>

@@ -4,7 +4,6 @@ import com.chinasofti.ark.bdadp.component.api.Configureable
 import com.chinasofti.ark.bdadp.component.api.data.{Builder, SparkData}
 import com.chinasofti.ark.bdadp.component.api.transforms.TransformableComponent
 import com.chinasofti.ark.bdadp.util.common.StringUtils
-import org.apache.spark.sql.DataFrame
 import org.slf4j.Logger
 
 /**
@@ -13,19 +12,9 @@ import org.slf4j.Logger
 class Select (id: String, name: String, log: Logger)
   extends TransformableComponent[SparkData, SparkData](id, name, log) with Configureable {
 
-  var colExpr: String = null
-
-  override def apply(inputT: SparkData): SparkData = {
-    val df: DataFrame = inputT.getRawData
-    val res: DataFrame = df.selectExpr(colExpr.split(","): _*)
-    Builder.build(res)
-  }
-
-  override def configure(componentProps: ComponentProps): Unit = {
-    colExpr = componentProps.getString("colExpr");
-    StringUtils.assertIsBlank(colExpr)
-  }
-
+  val regex = "[\\?!/\\,]+(?=[^\\)]*(\\(|$))"
+  var colExpr: String = _
+  var exprs: Array[String] = _
 
   def call(inputT: SparkData, cmptProps: ComponentProps): SparkData = {
     configure(cmptProps)
@@ -39,6 +28,21 @@ class Select (id: String, name: String, log: Logger)
 
     configure(cmptProps)
     apply(inputT)
+  }
+
+  override def apply(inputT: SparkData): SparkData = {
+    val df = inputT.getRawData
+    val res = df.selectExpr(exprs: _*)
+    Builder.build(res)
+  }
+
+  override def configure(componentProps: ComponentProps): Unit = {
+    colExpr = componentProps.getString("colExpr")
+    StringUtils.assertIsBlank(colExpr)
+
+    exprs = colExpr.split(regex).map(_.trim)
+    exprs.foreach(f => info(f))
+
   }
 
 }

@@ -48,16 +48,17 @@
       <defaultValue>commons</defaultValue>
     </param>
     <param>
-      <name>mode</name>
-      <description>mode</description>
+      <name>quoteMode</name>
+      <description>quoteMode</description>
       <type>options</type>
       <nullable>true</nullable>
       <defaultOptions>
-        <option name="permissive" desc="PERMISSIVE" value="PERMISSIVE"/>
-        <option name="dropmalformed" desc="DROPMALFORMED" value="DROPMALFORMED"/>
-        <option name="failfast" desc="FAILFAST" value="FAILFAST"/>
+        <option name="all" desc="ALL" value="ALL"/>
+        <option name="minimal" desc="MINIMAL" value="MINIMAL"/>
+        <option name="non_numeric" desc="NON_NUMERIC" value="NON_NUMERIC"/>
+        <option name="none" desc="NONE" value="NONE"/>
       </defaultOptions>
-      <defaultValue>PERMISSIVE</defaultValue>
+      <defaultValue>NONE</defaultValue>
     </param>
     <param>
       <name>charset</name>
@@ -95,5 +96,6 @@
       <type>text</type>
       <nullable>true</nullable>
     </param>
+
   </params>
 </component>
