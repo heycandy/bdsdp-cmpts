@@ -5,13 +5,12 @@ import com.chinasofti.ark.bdadp.component.api.Configureable
 import com.chinasofti.ark.bdadp.component.api.data.{Builder, SparkData}
 import com.chinasofti.ark.bdadp.component.api.transforms.TransformableComponent
 import com.chinasofti.ark.bdadp.util.common.StringUtils
-import org.apache.spark.sql.{Column, DataFrame, GroupedData}
 import org.slf4j.Logger
 
 
 /**
- * Created by Administrator on 2017/1/16.
- */
+  * Created by Administrator on 2017/1/16.
+  */
 class Aggregate (id: String, name: String, log: Logger)
   extends TransformableComponent[SparkData, SparkData](id, name, log) with Configureable {
 
@@ -26,14 +25,14 @@ class Aggregate (id: String, name: String, log: Logger)
     var df = inputT.getRawData
     var tmpStr: String = null
 
-    for(i <- 0 until arrAgg.length){
-      tmpStr = tmpStr + arrAgg(i)  + " as " + arrNew(i) + ","
+    for (i <- 0 until arrAgg.length) {
+      tmpStr = tmpStr + arrAgg(i) + " as " + arrNew(i) + ","
     }
-    tmpStr = tmpStr.substring(4,tmpStr.length-1)
-    info("resultAgg is: "+tmpStr)
+    tmpStr = tmpStr.substring(4, tmpStr.length - 1)
+    info("resultAgg is: " + tmpStr)
     df = df.selectExpr(tmpStr.split(","): _*)
 
-    for(m <- 0 until arrAgg.length){
+    for (m <- 0 until arrAgg.length) {
       df = df.withColumnRenamed(arrAgg(m), arrNew(m))
     }
 

@@ -33,8 +33,19 @@
     <param>
       <name>assertValue</name>
       <description>assertValue</description>
-      <type>textarea</type>
+      <type>text</type>
       <nullable>false</nullable>
+    </param>
+    <param>
+      <name>skip</name>
+      <description>skip</description>
+      <type>radio</type>
+      <nullable>false</nullable>
+      <defaultOptions>
+        <option name="yes" desc="yes" value="yes"/>
+        <option name="no" desc="no" value="no"/>
+      </defaultOptions>
+      <defaultValue>no</defaultValue>
     </param>
 
   </params>

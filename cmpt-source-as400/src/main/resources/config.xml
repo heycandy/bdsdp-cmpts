@@ -8,45 +8,57 @@
   <params>
     <param>
       <name>hostName</name>
-      <description>hostName</description>
+      <description>Host</description>
       <type>text</type>
       <nullable>false</nullable>
     </param>
     <param>
       <name>port</name>
-      <description>port</description>
+      <description>Port</description>
       <type>text</type>
       <nullable>true</nullable>
     </param>
     <param>
       <name>dbName</name>
-      <description>dbName</description>
+      <description>Database Name</description>
       <type>text</type>
       <nullable>false</nullable>
     </param>
     <param>
       <name>library</name>
-      <description>library</description>
+      <description>Library</description>
       <type>text</type>
       <nullable>false</nullable>
     </param>
     <param>
       <name>file</name>
-      <description>file</description>
+      <description>File</description>
       <type>text</type>
       <nullable>false</nullable>
     </param>
     <param>
       <name>userName</name>
-      <description>userName</description>
+      <description>User Name</description>
       <type>text</type>
       <nullable>false</nullable>
     </param>
     <param>
       <name>passWord</name>
-      <description>passWord</description>
+      <description>Password</description>
       <type>password</type>
       <nullable>false</nullable>
+    </param>
+    <param>
+      <name>decodingColumn</name>
+      <description>Decoding Column</description>
+      <type>textarea</type>
+      <nullable>true</nullable>
+    </param>
+    <param>
+      <name>charsetColumn</name>
+      <description>Charset Column</description>
+      <type>textarea</type>
+      <nullable>true</nullable>
     </param>
   </params>
 </component>

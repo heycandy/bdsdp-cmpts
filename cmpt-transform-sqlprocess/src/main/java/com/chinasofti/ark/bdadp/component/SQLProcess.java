@@ -22,6 +22,10 @@ public class SQLProcess extends RunnableComponent implements Configureable, Opti
 
   private final static String DATE_FORMAT = "yyyy-MM-dd";
   private final static String DATE_FORMAT_SHORT = "yyyyMMdd";
+  private final static String
+      DATE_FORMAT_REGEX =
+      "([0-9]{3}[1-9]|[0-9]{2}[1-9][0-9]{1}|[0-9]{1}[1-9][0-9]{2}|[1-9][0-9]{3})-(((0[13578]|1[02])-(0[1-9]|[12][0-9]|3[01]))|((0[469]|11)-(0[1-9]|[12][0-9]|30))|(02-(0[1-9]|[1][0-9]|2[0-8])))";
+
   private String driver;
   private String url;
   private String user;
@@ -81,17 +85,21 @@ public class SQLProcess extends RunnableComponent implements Configureable, Opti
       cstm = con.prepareCall(sql);
 
       for (int i = 1; i <= countIn; i++) {
-        if (i == 1) { // 场景没有时间入参的，取list_In第二个值为时间入参
+        if (i == 1) {
           java.sql.Date sqlDate;
 
-          if (org.apache.commons.lang.StringUtils.isBlank(inputDate)) {
-            SimpleDateFormat sdf = new SimpleDateFormat(DATE_FORMAT);
+          if (StringUtils.isNulOrEmpty(inputDate)) { // 场景没有时间入参的，取list_In第二个值为时间入参
             inputDate = list_In[i - 1].replaceAll(regexp, "");
+          }
+
+          if (inputDate.matches(DATE_FORMAT_REGEX)) { // yyyy-MM-dd
+            SimpleDateFormat sdf = new SimpleDateFormat(DATE_FORMAT);
             sqlDate = new java.sql.Date(sdf.parse(inputDate).getTime());
 
-          } else {  // 场景包含时间入参的，取inputDate作为时间入参
+          } else {  // yyyyMMdd
             SimpleDateFormat sdf = new SimpleDateFormat(DATE_FORMAT_SHORT);
             sqlDate = new java.sql.Date(sdf.parse(inputDate).getTime());
+
           }
 
           info("input date is： " + sqlDate);

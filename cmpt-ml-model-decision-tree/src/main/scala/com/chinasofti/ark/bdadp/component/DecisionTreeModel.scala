@@ -21,7 +21,7 @@ class DecisionTreeModel(id: String, name: String, log: Logger)
   var impurity: String = null
   var maxDepth: Int = 0
   var maxBins: Int = 0
-  var trainDataPer:Double = 0.0
+  var trainDataPer: Double = 0.0
 
   override def apply(inputT: StringData): Unit = {
     //    info(inputT.getRawData)
@@ -52,7 +52,7 @@ class DecisionTreeModel(id: String, name: String, log: Logger)
     }))
 
     // Split the data into training and test sets (30% held out for testing)
-    val splits = data.randomSplit(Array(trainDataPer, 1.0-trainDataPer))
+    val splits = data.randomSplit(Array(trainDataPer, 1 - trainDataPer))
     val (trainingData, testData) = (splits(0), splits(1))
 
     // Train a DecisionTree model.
@@ -69,7 +69,7 @@ class DecisionTreeModel(id: String, name: String, log: Logger)
 
     val testAccuracy = labelAndPreds.filter(r => r._1 == r._2).count.toDouble / testData.count()
     info("Test Accuracy = " + testAccuracy)
-    info("Learned classification tree model:\n" + model.toDebugString)
+    //    info("Learned classification tree model:\n" + model.toDebugString)
 
     // Save and load model
     val sc = df.sqlContext.sparkContext

@@ -4,7 +4,6 @@ import com.chinasofti.ark.bdadp.component.api.Configureable
 import com.chinasofti.ark.bdadp.component.api.data.{Builder, SparkData}
 import com.chinasofti.ark.bdadp.component.api.transforms.TransformableComponent
 import com.chinasofti.ark.bdadp.util.common.StringUtils
-import org.apache.spark.sql.DataFrame
 import org.slf4j.Logger
 
 /**
@@ -23,13 +22,13 @@ class GroupBy (id: String, name: String, log: Logger)
   override def apply(inputT: SparkData): SparkData = {
     var df = inputT.getRawData
     val arrAgg = aggExpr.split(",")
-    for(a <- arrAgg){
+    for (a <- arrAgg) {
       key = a.substring(a.indexOf("(")+1,a.indexOf(")"))
       value = a.substring(0,a.indexOf("("))
       treasureMap += (key -> value)
     }
 
-    df = df.groupBy(colNames.split(",")(0),(colNames.split(",").tail): _*)
+    df = df.groupBy(colNames.split(",")(0), (colNames.split(",").tail): _*)
       .agg(treasureMap.head,(treasureMap.toSeq.tail): _*)
     Builder.build(df)
   }
