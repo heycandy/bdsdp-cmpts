@@ -52,6 +52,12 @@
     <module>cmpt-sink-assert</module>
     <module>cmpt-sink-chart-cycle</module>
     <module>cmpt-transform-graph-cycle</module>
+    <module>cmpt-ml-model-logistic-regression</module>
+    <module>cmpt-ml-model-SVM</module>
+    <module>cmpt-ml-predict-logistic-regression</module>
+    <module>cmpt-ml-model-naivebayes</module>
+    <module>cmpt-ml-predict-naivebayes</module>
+    <module>cmpt-ml-predict-SVM</module>
 
   </modules>
 

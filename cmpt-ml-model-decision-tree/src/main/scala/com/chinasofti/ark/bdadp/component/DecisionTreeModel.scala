@@ -12,7 +12,7 @@ import org.slf4j.Logger
 /**
  * Created by Administrator on 2017.2.16.
  */
-class DecisionSink(id: String, name: String, log: Logger)
+class DecisionTreeModel(id: String, name: String, log: Logger)
   extends SinkComponent[StringData](id, name, log) with Configureable with
   SparkSinkAdapter[SparkData] with Serializable {
 
@@ -52,7 +52,7 @@ class DecisionSink(id: String, name: String, log: Logger)
     }))
 
     // Split the data into training and test sets (30% held out for testing)
-    val splits = data.randomSplit(Array(trainDataPer, 1-trainDataPer))
+    val splits = data.randomSplit(Array(trainDataPer, 1.0-trainDataPer))
     val (trainingData, testData) = (splits(0), splits(1))
 
     // Train a DecisionTree model.
@@ -69,7 +69,7 @@ class DecisionSink(id: String, name: String, log: Logger)
 
     val testAccuracy = labelAndPreds.filter(r => r._1 == r._2).count.toDouble / testData.count()
     info("Test Accuracy = " + testAccuracy)
-    //    info("Learned classification tree model:\n" + model.toDebugString)
+    info("Learned classification tree model:\n" + model.toDebugString)
 
     // Save and load model
     val sc = df.sqlContext.sparkContext

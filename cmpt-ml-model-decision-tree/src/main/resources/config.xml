@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <component>
-  <componentName>cmpt_sink_decisionTreeModel</componentName>
-  <componentDescription>cmpt_sink_decisionTreeModel</componentDescription>
-  <componentClass>com.chinasofti.ark.bdadp.component.DecisionSink</componentClass>
+  <componentName>cmpt_ml_model_decisionTree</componentName>
+  <componentDescription>cmpt_ml_model_decisionTree</componentDescription>
+  <componentClass>com.chinasofti.ark.bdadp.component.DecisionTreeModel</componentClass>
   <componentIcon>icon-xl.png,icon-xs.png</componentIcon>
   <componentPid>component_pid_sink</componentPid>
   <params>

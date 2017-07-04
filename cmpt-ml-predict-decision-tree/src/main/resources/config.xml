@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <component>
-  <componentName>cmpt_transform_predictModel</componentName>
-  <componentDescription>cmpt_transform_predictModel</componentDescription>
-  <componentClass>com.chinasofti.ark.bdadp.component.PredictModel</componentClass>
+  <componentName>cmpt_ml_predict_decisionTree</componentName>
+  <componentDescription>cmpt_ml_predict_decisionTree</componentDescription>
+  <componentClass>com.chinasofti.ark.bdadp.component.DecisionTreePredict</componentClass>
   <componentIcon>icon-xl.png,icon-xs.png</componentIcon>
-  <componentPid>component_pid_apply</componentPid>
+  <componentPid>component_pid_sink</componentPid>
   <params>
     <param>
       <name>path</name>

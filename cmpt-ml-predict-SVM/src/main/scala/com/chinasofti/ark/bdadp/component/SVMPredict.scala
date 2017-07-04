@@ -3,17 +3,18 @@ package com.chinasofti.ark.bdadp.component
 import com.chinasofti.ark.bdadp.component.api.Configureable
 import com.chinasofti.ark.bdadp.component.api.data.{Builder, SparkData}
 import com.chinasofti.ark.bdadp.component.api.transforms.TransformableComponent
-import org.apache.spark.mllib.linalg.{Vector, Vectors}
-import org.apache.spark.mllib.tree.model.DecisionTreeModel
+import org.apache.commons.lang.StringUtils
+import org.apache.spark.mllib.classification.SVMModel
+import org.apache.spark.mllib.linalg.{Vectors, Vector}
 import org.apache.spark.rdd.RDD
 import org.apache.spark.sql.Row
-import org.apache.spark.sql.types.{StructType, DoubleType, StructField}
+import org.apache.spark.sql.types.{DoubleType, StructField, StructType}
 import org.slf4j.Logger
 
 /**
- * Created by Administrator on 2017/1/12.
+ * Created by water on 2017.6.29.
  */
-class PredictModel(id: String, name: String, log: Logger)
+class SVMPredict (id: String, name: String, log: Logger)
   extends TransformableComponent[SparkData, SparkData](id, name, log) with Configureable {
 
   var path: String = null
@@ -21,10 +22,10 @@ class PredictModel(id: String, name: String, log: Logger)
   override def apply(inputT: SparkData): SparkData = {
     val df = inputT.getRawData
     val sc = df.sqlContext.sparkContext
-    val sameModel = DecisionTreeModel.load(sc, path)
+    val sameModel = SVMModel.load(sc, path)
     val data: RDD[Vector] = df.mapPartitions(
       iterator => iterator.map(row => {
-        val values = row.toSeq.map(_.toString).map(_.toDouble).toArray
+        val values = StringUtils.strip(row.toString(),"[]").split(" ").map(_.toDouble)
         Vectors.dense(values)
       }))
     val rddPredict: RDD[Double] = sameModel.predict(data)
