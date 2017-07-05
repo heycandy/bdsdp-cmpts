@@ -3,6 +3,7 @@ package com.chinasofti.ark.bdadp.component
 import com.chinasofti.ark.bdadp.component.api.Configureable
 import com.chinasofti.ark.bdadp.component.api.data.{SparkData, StringData}
 import com.chinasofti.ark.bdadp.component.api.sink.{SparkSinkAdapter, SinkComponent}
+import org.apache.commons.lang.StringUtils
 import org.apache.spark.mllib.classification.SVMWithSGD
 import org.apache.spark.mllib.evaluation.{MulticlassMetrics, BinaryClassificationMetrics}
 import org.apache.spark.mllib.linalg.Vectors
@@ -47,16 +48,16 @@ class SVMModel(id: String, name: String, log: Logger)
 
     printInput(df)
 //    val parsedData = df.mapPartitions(iterator => iterator.map(row => {
-//      val label = row.toSeq.head.toString.toDouble
-//      val values = row.toSeq.tail.map(_.toString).map(_.toDouble).toArray
+//      val str = StringUtils.strip(row.toString(),"[]")
+//      val label = str.substring(0,str.indexOf(" ")).toDouble
+//      val values = str.substring(str.indexOf(" ")+1, str.length()-1).split(" ").map(_.split(":")(1).toDouble)
 //
 //      val features = Vectors.dense(values)
 //      new LabeledPoint(label, features)
 //    }))
-    val parsedData = MLUtils.loadLibSVMFile(df.sqlContext.sparkContext, filePath).cache()
+    val parsedData = MLUtils.loadLibSVMFile(df.sqlContext.sparkContext, filePath)
 
     val splits = parsedData.randomSplit(Array(trainDataPer, 1.0 - trainDataPer), seed)
-
     val (trainingData, testData) = (splits(0), splits(1))
 
     /*
