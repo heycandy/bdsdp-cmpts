@@ -19,19 +19,17 @@ class AS400Source(id: String, name: String, log: Logger)
   SparkSourceAdapter[SparkData] {
 
   val properties = new Properties
+
   var hostName: String = _
   var port: String = _
   var dbName: String = _
-  var userName: String = _
-  var passWord: String = _
   var library: String = _
-  var file: String = _
-  var url: String = _
-  var driver: String = _
 
-  override def call(): StringData = {
-    return null;
-  }
+  var driver: String = _
+  var url: String = _
+  var file: String = _
+
+  override def call(): StringData = Builder.build("")
 
   override def configure(props: ComponentProps): Unit = {
     DriverManager.registerDriver(new AS400JDBCDriver)
@@ -41,11 +39,11 @@ class AS400Source(id: String, name: String, log: Logger)
     dbName = props.getString("dbName")
     library = props.getString("library")
 
-    StringUtils.assertIsBlank(hostName, dbName, library, file)
-
     driver = "com.ibm.as400.access.AS400JDBCDriver"
     url = this.getUrl(props)
     file = props.getString("file")
+
+    StringUtils.assertIsBlank(hostName, dbName, library, file)
 
     properties.put("user", props.getString("userName"))
     properties.put("password", props.getString("passWord"))
@@ -55,10 +53,11 @@ class AS400Source(id: String, name: String, log: Logger)
   }
 
   private def getUrl(props: ComponentProps): String = {
-    // "jdbc:as400://host/library;database name=DBName;naming=sql;prompt=false;translate binary=true"
+    // "jdbc:as400://host/library;database name=DBName;prompt=false;naming=sql;data truncation=false;translate binary=true"
 
     "jdbc:as400://" + hostName + (if (port != null && port.nonEmpty) ":" + port else "") + "/" +
-      library + ";database name=" + dbName + ";naming=sql;prompt=false;translate binary=true"
+    library + ";database name=" + dbName +
+    ";prompt=false;naming=sql;data truncation=false;translate binary=true"
 
   }
 

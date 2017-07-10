@@ -15,11 +15,14 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.LinkedList;
 import java.util.List;
 
 /**
  * Created by wumin on 2016/9/23.
+ *
+ * Fixed by white on 2017/7/7.
  */
 public class JdbcExport extends RunnableComponent implements Configureable {
 
@@ -34,6 +37,15 @@ public class JdbcExport extends RunnableComponent implements Configureable {
   private String destName;
   private String separator;
   private String dbCharset;
+
+  private int retryCount;
+  private int retryPeriod;
+  private int failedTimes;
+  private boolean success;
+
+  private ResultSet rs = null;
+  private Statement stmt = null;
+  private Connection conn = null;
 
   public JdbcExport(String id, String name, Logger log) {
     super(id, name, log);
@@ -52,6 +64,10 @@ public class JdbcExport extends RunnableComponent implements Configureable {
     destName = props.getString("dest_name");
     separator = props.getString("separator", ",");
     dbCharset = props.getString("charset", "UTF-8");
+
+    retryCount = props.getInt("retryCount", 4);
+    retryPeriod = props.getInt("retryPeriod", 60);
+
     checkParams();
 
     File tempDir = new File(destPath);
@@ -63,20 +79,66 @@ public class JdbcExport extends RunnableComponent implements Configureable {
 
   @Override
   public void run() {
-    Connection con = getConnection(driver, url, user, pwd);
-    if (con == null) {
-      throw new RuntimeException(getName() + " can not work since it can not retrieve connection.");
-    }
-    ResultSet rs = null;
     try {
-      rs = con.createStatement().executeQuery(sql);
-      if (fileRecordNum.equals(Long.valueOf(-1))) {
+      conn = getConnection(driver, url, user, pwd);
+      stmt = conn.createStatement();
+      rs = stmt.executeQuery(sql);
+      if (fileRecordNum == -1) {
         writeToFile(rs, new File(FileUtil.toPath(destPath) + destName));
       } else {
         writeToFiles(rs, new File(FileUtil.toPath(destPath) + destName), fileRecordNum);
       }
-    } catch (SQLException e) {
-      throw new RuntimeException(getName() + " execute sql failed, sql is: " + sql);
+
+      success = true;
+    } catch (Exception e) {
+      failedTimes += 1;
+      error(String.format("Task %s failed %s times, most recent failure: %s", getId(), failedTimes,
+                          e.getMessage()));
+
+    } finally {
+      close();
+    }
+
+    if (!success) {
+      if (failedTimes > retryCount) {
+        throw new RuntimeException(
+            "Task aborted due to the number of attempts to retry has exceeded.");
+      } else {
+        info(String.format("Try again after %s seconds...", retryPeriod));
+        try {
+          Thread.sleep(retryPeriod * 1000);
+        } catch (InterruptedException e1) {
+          e1.printStackTrace();
+        }
+
+        run();
+      }
+
+    }
+
+  }
+
+  private void close() {
+    if (rs != null) {
+      try {
+        rs.close();
+      } catch (SQLException e) {
+        e.printStackTrace();
+      }
+    }
+    if (stmt != null) {
+      try {
+        stmt.close();
+      } catch (SQLException e) {
+        e.printStackTrace();
+      }
+    }
+    if (conn != null) {
+      try {
+        conn.close();
+      } catch (SQLException e) {
+        e.printStackTrace();
+      }
     }
   }
 
@@ -122,18 +184,34 @@ public class JdbcExport extends RunnableComponent implements Configureable {
   @SuppressWarnings("finally")
   private Long writeToFile(ResultSet rs, File to, Long fileRecordNum) {
 
+    if (to.exists() && to.delete()) {
+      info("delete file: " + to);
+    }
+
     if (!to.exists()) {
       // to.mkdirs();
       BufferedWriter bw = null;
       try {
         to.createNewFile();
-        Long rowCnt = Long.valueOf(0);
+        Long rowCnt = 0L;
         bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(to), DEST_CHARSET));
-        while (rs.next()) {
 
-          StringBuilder sb = new StringBuilder();
+        // Field
+        StringBuilder sb = new StringBuilder();
+        for (int i = 1; i <= rs.getMetaData().getColumnCount(); i++) {
+          sb.append(rs.getMetaData().getColumnName(i));
+          sb.append(separator);
+        }
+        sb.deleteCharAt(sb.length() - 1);
+        bw.write(sb.toString());
+        bw.newLine();
+
+        // Data
+        while (rs.next()) {
+          sb = new StringBuilder();
           for (int i = 1; i <= rs.getMetaData().getColumnCount(); i++) {
-            sb.append(rs.getString(i) + separator);
+            sb.append(rs.getString(i).trim());
+            sb.append(separator);
           }
           sb.deleteCharAt(sb.length() - 1);
           bw.write(sb.toString());
@@ -160,11 +238,11 @@ public class JdbcExport extends RunnableComponent implements Configureable {
         } catch (IOException e) {
           throw new RuntimeException("Export to file failed, details are: " + e.getMessage());
         }
-        return Long.valueOf(0);
+        return 0L;
       }
     }
 
-    return Long.valueOf(0);
+    return 0L;
   }
 
   private Connection getConnection(String driver, String url, String user, String pwd) {

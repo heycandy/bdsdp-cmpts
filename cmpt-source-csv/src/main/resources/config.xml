@@ -89,5 +89,17 @@
       <type>text</type>
       <nullable>true</nullable>
     </param>
+    <param>
+      <name>schemaName</name>
+      <description>Schema Name</description>
+      <type>text</type>
+      <nullable>true</nullable>
+    </param>
+    <param>
+      <name>dataType</name>
+      <description>Data Type</description>
+      <type>text</type>
+      <nullable>true</nullable>
+    </param>
   </params>
 </component>
