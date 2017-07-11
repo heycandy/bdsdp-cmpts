@@ -1,18 +1,13 @@
 package com.chinasofti.ark.bdadp.component
 
-//import java.sql.DriverManager
-
 import java.sql.Connection
 import java.util.Properties
 
 import com.chinasofti.ark.bdadp.component.api.Configureable
-import com.chinasofti.ark.bdadp.component.api.data.{SparkData, StringData}
+import com.chinasofti.ark.bdadp.component.api.data.SparkData
 import com.chinasofti.ark.bdadp.component.api.sink.{SinkComponent, SparkSinkAdapter}
 import com.chinasofti.ark.bdadp.util.common.StringUtils
 import org.apache.spark.sql.execution.datasources.jdbc.JdbcUtils
-
-//import oracle.jdbc.OracleDriver
-
 import org.slf4j.Logger
 
 /**
@@ -22,20 +17,18 @@ class OracleSink(id: String, name: String, log: Logger)
   extends SinkComponent[SparkData](id, name, log) with Configureable with
   SparkSinkAdapter[SparkData] {
 
-  var conUrl: String = null
-  var table: String = null
-  var userName: String = null
-  var passWord: String = null
+  var conUrl: String = _
+  var table: String = _
+  var userName: String = _
+  var passWord: String = _
   var numPartitions: Int = 0
-  var mode: String = null
-  var driver = ""
-  var truncate: String = null
-  var properties = new Properties();
+  var mode: String = _
+  var truncate: String = _
 
-
+  var driver: String = _
+  var properties = new Properties
 
   override def configure(componentProps: ComponentProps): Unit = {
-
     conUrl = componentProps.getString("conUrl")
     table = componentProps.getString("table")
     userName = componentProps.getString("userName")
@@ -43,13 +36,12 @@ class OracleSink(id: String, name: String, log: Logger)
     numPartitions = componentProps.getInt("numPartitions", 8)
     mode = componentProps.getString("mode", "append")
     truncate = componentProps.getString("truncate")
-    this.driver = "oracle.jdbc.OracleDriver"
 
-    StringUtils.assertIsBlank(conUrl, table, userName, passWord);
+    StringUtils.assertIsBlank(conUrl, table, userName, passWord)
 
-    properties.put("user", userName);
-    properties.put("password", passWord);
-
+    driver = "oracle.jdbc.OracleDriver"
+    properties.put("user", userName)
+    properties.put("password", passWord)
 
   }
 
@@ -59,7 +51,11 @@ class OracleSink(id: String, name: String, log: Logger)
       truncateTable(conn, table)
     }
 
-    inputT.getRawData.repartition(numPartitions).write.option("driver", driver).option("truncate", truncate).mode(mode).jdbc(conUrl, table, properties)
+    inputT.getRawData.repartition(numPartitions).write
+        .option("driver", driver)
+        .option("truncate", truncate)
+        .mode(mode)
+        .jdbc(conUrl, table, properties)
 
   }
 
@@ -72,6 +68,7 @@ class OracleSink(id: String, name: String, log: Logger)
       statement.executeUpdate(s"TRUNCATE TABLE $table")
     } finally {
       statement.close()
+      conn.close()
     }
   }
 }

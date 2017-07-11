@@ -7,13 +7,14 @@ import com.chinasofti.ark.bdadp.component.api.options.ScenarioOptions
 import com.chinasofti.ark.bdadp.component.api.sink.SinkComponent
 import com.chinasofti.ark.bdadp.component.api.{Configureable, Optional}
 import org.apache.commons.lang.StringUtils
+import org.apache.spark.sql.DataFrame
 import org.slf4j.Logger
 
 /**
  * Created by White on 2017/5/10.
  */
 class Assert(id: String, name: String, log: Logger)
-  extends SinkComponent[SparkData](id, name, log) with Configureable with Optional {
+    extends SinkComponent[SparkData](id, name, log) with Configureable with Optional {
 
   var conditionExpr: String = _
   var deadline: String = _
@@ -21,42 +22,45 @@ class Assert(id: String, name: String, log: Logger)
   var assertKey: String = _
   var assertValue: String = _
 
+  var deadlineTimeMillis: Long = _
+  var skip: Boolean = false
   var assertFlag: Boolean = false
 
   var options: ScenarioOptions = _
 
   override def apply(inputT: SparkData): Unit = {
-
-    val Array(hour, minute, second) = deadline.split(":")
-    val assertTime = () => {
-      val calendar = Calendar.getInstance()
-
-      calendar.get(Calendar.HOUR_OF_DAY) <= hour.toInt &&
-        calendar.get(Calendar.MINUTE) <= minute.toInt &&
-        calendar.get(Calendar.SECOND) <= second.toInt
-    }
-
+    var df: DataFrame = null
     do {
+      df = inputT.getRawData
+      val totalCount = df.count()
+      val filterCount = df.filter(conditionExpr).count()
+      assertFlag = totalCount != 0 && totalCount == filterCount
 
-      assertFlag = inputT.getRawData.filter(conditionExpr).count() != 0
-
-      if (assertFlag) {
+      if (!assertFlag) {
+        debug(String.format("sleep: %ss", String.valueOf(period.toInt * 60)))
         Thread.sleep(period.toInt * 60 * 1000)
       }
 
-    } while (assertFlag && assertTime())
+    } while (!assertFlag && System.currentTimeMillis() <= deadlineTimeMillis)
 
 
-    if (!assertFlag) {
+    if (assertFlag) {
       if (assertValue.startsWith("$")) {
-        options.getSettings.put(assertKey, inputT.getRawData.first().getAs(assertValue.tail))
+        val value = df.first().getAs(assertValue.tail).toString
+        info(String.format("setting: %s -> %s", assertKey, value))
+        options.getSettings.put(assertKey, value)
       } else {
+        info(String.format("setting: %s -> %s", assertKey, assertValue))
         options.getSettings.put(assertKey, assertValue)
       }
 
-    }
+    } else if (skip) {
+      info(String.format("setting: %s -> %s", "scenario.assert.flag", "false"))
+      options.getSettings.put("scenario.assert.flag", "false")
 
-    options.getSettings.put("scenario.assert.flag", String.valueOf(assertFlag))
+    } else {
+      throw new RuntimeException(getName)
+    }
 
   }
 
@@ -66,6 +70,7 @@ class Assert(id: String, name: String, log: Logger)
     period = componentProps.getString("period", "1")
     assertKey = componentProps.getString("assertKey", "scenario.assert.key")
     assertValue = componentProps.getString("assertValue", "scenario.assert.value")
+    skip = componentProps.getString("skip", "no").equals("yes")
 
     val splits = deadline.split(":")
     if (splits.length != 3) {
@@ -77,6 +82,15 @@ class Assert(id: String, name: String, log: Logger)
         throw new IllegalArgumentException(
           "Incorrect format for 'deadline', For example: 20:00:00.")
       })
+
+    val Array(hour, minute, second) = deadline.split(":")
+    val calendar = Calendar.getInstance()
+
+    calendar.set(Calendar.HOUR_OF_DAY, hour.toInt)
+    calendar.set(Calendar.MINUTE, minute.toInt)
+    calendar.set(Calendar.SECOND, second.toInt)
+
+    deadlineTimeMillis = calendar.getTimeInMillis
 
   }
 

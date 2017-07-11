@@ -42,7 +42,7 @@ class JDBCSource(id: String, name: String, log: Logger)
     passWord = componentProps.getString("passWord")
     partitionColumn = componentProps.getString("partitionColumn")
 
-    StringUtils.assertIsBlank(conUrl, table, userName, passWord,partitionColumn);
+    StringUtils.assertIsBlank(conUrl, table, userName, passWord);
     lowerBound = componentProps.getInt("lowerBound", 1)
     upperBound = componentProps.getInt("upperBound", 10000000)
     numPartitions = componentProps.getInt("numPartitions", 8)

@@ -21,19 +21,19 @@
     </param>
     <param>
       <name>jdbc_user</name>
-      <description>username</description>
+      <description>jdbc_user</description>
       <type>text</type>
       <nullable>false</nullable>
     </param>
     <param>
       <name>jdbc_pwd</name>
-      <description>password</description>
+      <description>jdbc_pwd</description>
       <type>password</type>
       <nullable>false</nullable>
     </param>
     <param>
       <name>jdbc_sql</name>
-      <description>SQL</description>
+      <description>jdbc_sql</description>
       <type>text</type>
       <nullable>false</nullable>
     </param>

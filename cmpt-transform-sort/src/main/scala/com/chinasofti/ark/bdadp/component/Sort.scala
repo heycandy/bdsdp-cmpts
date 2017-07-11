@@ -4,7 +4,6 @@ import com.chinasofti.ark.bdadp.component.api.Configureable
 import com.chinasofti.ark.bdadp.component.api.data.{Builder, SparkData}
 import com.chinasofti.ark.bdadp.component.api.transforms.TransformableComponent
 import com.chinasofti.ark.bdadp.util.common.StringUtils
-import org.apache.spark.sql.DataFrame
 import org.slf4j.Logger;
 
 /**
@@ -17,15 +16,14 @@ class Sort(id: String, name: String, log: Logger)
   var sortDirection: String = null;
 
   override def apply(inputT: SparkData): SparkData = {
-    val df = inputT.getRawData
-    var buildDataFrame: DataFrame = null
+    var df = inputT.getRawData
     if ("desc".equalsIgnoreCase(sortDirection)) {
-      buildDataFrame = df.sort(df.col(colName).desc)
+      df = df.sort(df.col(colName).desc)
     }
     else {
-      buildDataFrame = df.sort(df.col(colName).asc)
+      df = df.sort(df.col(colName).asc)
     }
-    Builder.build(buildDataFrame)
+    Builder.build(df)
   }
 
   override def configure(componentProps: ComponentProps): Unit = {
@@ -33,18 +31,5 @@ class Sort(id: String, name: String, log: Logger)
     sortDirection = componentProps.getString("sortDirection");
 
     StringUtils.assertIsBlank(colName);
-  }
-
-  def call(inputT: SparkData, cmptProps: ComponentProps): SparkData = {
-    configure(cmptProps)
-    apply(inputT)
-  }
-
-  def call(inputT: SparkData, colName: String, sortDirection: String): SparkData = {
-    val cmptProps = new ComponentProps()
-    cmptProps.setProperty("colName", colName)
-    cmptProps.setProperty("sortDirection", sortDirection)
-    configure(cmptProps)
-    apply(inputT)
   }
 }

@@ -37,6 +37,48 @@
       <nullable>true</nullable>
     </param>
     <param>
+      <name>parserLib</name>
+      <description>parserLib</description>
+      <type>options</type>
+      <nullable>true</nullable>
+      <defaultOptions>
+        <option name="commons" desc="COMMONS" value="commons"/>
+        <option name="univocity" desc="UNIVOCITY" value="univocity"/>
+      </defaultOptions>
+      <defaultValue>commons</defaultValue>
+    </param>
+    <param>
+      <name>quoteMode</name>
+      <description>quoteMode</description>
+      <type>options</type>
+      <nullable>true</nullable>
+      <defaultOptions>
+        <option name="all" desc="ALL" value="ALL"/>
+        <option name="minimal" desc="MINIMAL" value="MINIMAL"/>
+        <option name="non_numeric" desc="NON_NUMERIC" value="NON_NUMERIC"/>
+        <option name="none" desc="NONE" value="NONE"/>
+      </defaultOptions>
+      <defaultValue>NONE</defaultValue>
+    </param>
+    <param>
+      <name>charset</name>
+      <description>charset</description>
+      <type>text</type>
+      <nullable>true</nullable>
+    </param>
+    <param>
+      <name>inferSchema</name>
+      <description>inferSchema</description>
+      <type>text</type>
+      <nullable>true</nullable>
+    </param>
+    <param>
+      <name>comment</name>
+      <description>comment</description>
+      <type>text</type>
+      <nullable>true</nullable>
+    </param>
+    <param>
       <name>nullValue</name>
       <description>nullValue</description>
       <type>text</type>
@@ -49,25 +91,11 @@
       <nullable>true</nullable>
     </param>
     <param>
-      <name>codec</name>
-      <description>codec</description>
-      <type>options</type>
-      <nullable>true</nullable>
-      <defaultOptions>
-        <option name="-" desc="-" value=""/>
-        <option name="bzip2" desc="bzip2" value="bzip2"/>
-        <option name="gzip" desc="gzip" value="gzip"/>
-        <option name="lz4" desc="lz4" value="lz4"/>
-        <option name="snappy" desc="snappy" value="snappy"/>
-        <option name="compressionCodec" desc="compressionCodec" value="org.apache.hadoop.io.compress.CompressionCodec"/>
-      </defaultOptions>
-      <defaultValue>PERMISSIVE</defaultValue>
-    </param>
-    <param>
       <name>numPartitions</name>
       <description>numPartitions</description>
       <type>text</type>
       <nullable>true</nullable>
     </param>
+
   </params>
 </component>

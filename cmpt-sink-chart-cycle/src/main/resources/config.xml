@@ -18,35 +18,35 @@
             <type>text</type>
             <nullable>true</nullable>
         </param>
-        <param>
-            <name>vertexIdColumn</name>
-            <description>vertexIdColumn</description>
-            <type>text</type>
-            <nullable>true</nullable>
-        </param>
-        <param>
-            <name>vertexNameColumn</name>
-            <description>vertexNameColumn</description>
-            <type>text</type>
-            <nullable>true</nullable>
-        </param>
-        <param>
-            <name>srcIdColumn</name>
-            <description>vertexNameColumn</description>
-            <type>text</type>
-            <nullable>true</nullable>
-        </param>
-        <param>
-            <name>dstIdColumn</name>
-            <description>vertexNameColumn</description>
-            <type>text</type>
-            <nullable>true</nullable>
-        </param>
-        <param>
-            <name>valueColumn</name>
-            <description>vertexNameColumn</description>
-            <type>text</type>
-            <nullable>true</nullable>
-        </param>
+      <!--<param>
+          <name>vertexIdColumn</name>
+          <description>vertexIdColumn</description>
+          <type>text</type>
+          <nullable>true</nullable>
+      </param>
+      <param>
+          <name>vertexNameColumn</name>
+          <description>vertexNameColumn</description>
+          <type>text</type>
+          <nullable>true</nullable>
+      </param>
+      <param>
+          <name>srcIdColumn</name>
+          <description>vertexNameColumn</description>
+          <type>text</type>
+          <nullable>true</nullable>
+      </param>
+      <param>
+          <name>dstIdColumn</name>
+          <description>vertexNameColumn</description>
+          <type>text</type>
+          <nullable>true</nullable>
+      </param>
+      <param>
+          <name>valueColumn</name>
+          <description>vertexNameColumn</description>
+          <type>text</type>
+          <nullable>true</nullable>
+      </param>-->
     </params>
 </component>
