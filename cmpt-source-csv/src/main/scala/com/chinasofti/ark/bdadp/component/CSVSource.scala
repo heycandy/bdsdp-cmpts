@@ -8,7 +8,7 @@ import com.chinasofti.ark.bdadp.component.api.data.{Builder, SparkData, StringDa
 import com.chinasofti.ark.bdadp.component.api.options.SparkScenarioOptions
 import com.chinasofti.ark.bdadp.component.api.source.{SourceComponent, SparkSourceAdapter}
 import com.chinasofti.ark.bdadp.util.common.StringUtils
-import org.apache.spark.sql.types.{IntegerType, StringType, StructField, StructType}
+import org.apache.spark.sql.types._
 import org.slf4j.Logger
 
 import scala.collection.JavaConversions._
@@ -65,7 +65,7 @@ class CSVSource(id: String, name: String, log: Logger)
       val types = dataType.split(",")
       val fields = names.indices.map(i => {
         val dataType = types(i) match {
-          case "decimal" => IntegerType
+          case "double" => DoubleType
           case "integer" => IntegerType
           case "string" => StringType
           case _ => StringType
