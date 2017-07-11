@@ -13,14 +13,26 @@
       <nullable>false</nullable>
     </param>
     <param>
-      <name>lambda</name>
-      <description>lambda</description>
+      <name>trainDataPer</name>
+      <description>trainDataPer</description>
       <type>text</type>
       <nullable>false</nullable>
     </param>
     <param>
-      <name>trainDataPer</name>
-      <description>trainDataPer</description>
+      <name>labelCol</name>
+      <description>labelCol</description>
+      <type>text</type>
+      <nullable>false</nullable>
+    </param>
+    <param>
+      <name>featuresCol</name>
+      <description>featuresCol</description>
+      <type>text</type>
+      <nullable>false</nullable>
+    </param>
+    <param>
+      <name>lambda</name>
+      <description>lambda</description>
       <type>text</type>
       <nullable>false</nullable>
     </param>
@@ -34,12 +46,6 @@
         <option name="bernoulli" desc="bernoulli" value="bernoulli"/>
       </defaultOptions>
       <defaultValue>multinomial</defaultValue>
-    </param>
-    <param>
-      <name>seed</name>
-      <description>seed</description>
-      <type>text</type>
-      <nullable>false</nullable>
     </param>
   </params>
 </component>

@@ -23,11 +23,7 @@ class LogisticRegressionPredict(id: String, name: String, log: Logger)
     val df = inputT.getRawData
     val sc = df.sqlContext.sparkContext
     val sameModel = LogisticRegressionModel.load(sc, path)
-    //    val data: RDD[Vector] = df.mapPartitions(
-    //      iterator => iterator.map(row => {
-    //        val values = row.toSeq.map(_.toString).map(_.toDouble).toArray
-    //        Vectors.dense(values)
-    //      }))
+
     val data: RDD[Vector] = df.mapPartitions(
       iterator => iterator.map(row => {
         val values = StringUtils.strip(row.toString(), "[]").split(" ").map(_.toDouble)
@@ -39,7 +35,6 @@ class LogisticRegressionPredict(id: String, name: String, log: Logger)
         Row(row)
       })
     )
-    //rdd转换为dataframe
     val structType = StructType(Array(
       StructField("label", DoubleType, true)
     ))

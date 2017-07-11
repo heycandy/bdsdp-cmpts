@@ -13,8 +13,20 @@
       <nullable>false</nullable>
     </param>
     <param>
-      <name>numClasses</name>
-      <description>numClasses</description>
+      <name>trainDataPer</name>
+      <description>trainDataPer</description>
+      <type>text</type>
+      <nullable>false</nullable>
+    </param>
+    <param>
+      <name>labelCol</name>
+      <description>labelCol</description>
+      <type>text</type>
+      <nullable>false</nullable>
+    </param>
+    <param>
+      <name>featuresCol</name>
+      <description>featuresCol</description>
       <type>text</type>
       <nullable>false</nullable>
     </param>
@@ -37,8 +49,8 @@
       <nullable>false</nullable>
     </param>
     <param>
-      <name>trainDataPer</name>
-      <description>trainDataPer</description>
+      <name>numClasses</name>
+      <description>numClasses</description>
       <type>text</type>
       <nullable>false</nullable>
     </param>

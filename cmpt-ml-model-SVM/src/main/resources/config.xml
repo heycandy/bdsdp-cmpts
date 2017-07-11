@@ -7,20 +7,8 @@
   <componentPid>component_pid_sink</componentPid>
   <params>
     <param>
-      <name>filePath</name>
-      <description>filePath</description>
-      <type>text</type>
-      <nullable>false</nullable>
-    </param>
-    <param>
       <name>path</name>
       <description>path</description>
-      <type>text</type>
-      <nullable>false</nullable>
-    </param>
-    <param>
-      <name>iters</name>
-      <description>iters</description>
       <type>text</type>
       <nullable>false</nullable>
     </param>
@@ -31,26 +19,38 @@
       <nullable>false</nullable>
     </param>
     <param>
+      <name>labelCol</name>
+      <description>labelCol</description>
+      <type>text</type>
+      <nullable>false</nullable>
+    </param>
+    <param>
+      <name>featuresCol</name>
+      <description>featuresCol</description>
+      <type>text</type>
+      <nullable>false</nullable>
+    </param>
+    <param>
+      <name>numIterations</name>
+      <description>numIterations</description>
+      <type>text</type>
+      <nullable>false</nullable>
+    </param>
+    <param>
+      <name>stepSize</name>
+      <description>stepSize</description>
+      <type>text</type>
+      <nullable>false</nullable>
+    </param>
+    <param>
       <name>regParam</name>
       <description>regParam</description>
       <type>text</type>
       <nullable>false</nullable>
     </param>
     <param>
-      <name>seed</name>
-      <description>seed</description>
-      <type>text</type>
-      <nullable>false</nullable>
-    </param>
-    <param>
-      <name>step</name>
-      <description>step</description>
-      <type>text</type>
-      <nullable>false</nullable>
-    </param>
-    <param>
-      <name>fraction</name>
-      <description>fraction</description>
+      <name>miniBatchFraction</name>
+      <description>miniBatchFraction</description>
       <type>text</type>
       <nullable>false</nullable>
     </param>

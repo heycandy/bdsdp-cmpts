@@ -33,7 +33,6 @@ class DecisionTreePredict(id: String, name: String, log: Logger)
         Row(row)
       })
     )
-    //rdd转换为dataframe
     val structType = StructType(Array(
       StructField("label", DoubleType, true)
     ))
