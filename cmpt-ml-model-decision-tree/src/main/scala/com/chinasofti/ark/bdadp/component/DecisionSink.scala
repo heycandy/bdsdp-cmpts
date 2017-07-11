@@ -38,8 +38,8 @@ class DecisionSink(id: String, name: String, log: Logger)
     // {label, 0, 1, 2, 3, ...}
     val data = inputT.getRawData.mapPartitions(iterator => iterator.map(row => {
       val label = row.toSeq.head.toString.toDouble
+     // println("rowLabel: " + row.toSeq.toVector)
       val values = row.toSeq.tail.map(_.toString).map(_.toDouble).toArray
-
       val features = Vectors.dense(values)
       new LabeledPoint(label, features)
     }))

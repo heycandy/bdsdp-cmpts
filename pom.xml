@@ -52,6 +52,16 @@
     <module>cmpt-sink-assert</module>
     <module>cmpt-sink-chart-cycle</module>
     <module>cmpt-transform-graph-cycle</module>
+    <module>cmpt-ml-model-regression-decision-tree</module>
+    <module>cmpt-ml-model-regression-linear</module>
+    <module>cmpt-ml-predict-regression-linear</module>
+    <module>cmpt-ml-model-regression-linear-lasso</module>
+    <module>cmpt-ml-predict-regression-lasso</module>
+    <module>cmpt-ml-model-regression-linear-ridge</module>
+    <module>cmpt-ml-predict-regression-ridge</module>
+    <module>cmpt-ml-model-clustering-k-means</module>
+    <module>cmpt-ml-predict-clustering-k-means</module>
+    <module>cmpt-ml-model-collaborative-filtering-als</module>
 
   </modules>
 

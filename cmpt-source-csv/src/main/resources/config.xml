@@ -42,8 +42,8 @@
       <type>options</type>
       <nullable>true</nullable>
       <defaultOptions>
-        <option name="commons" desc="COMMONS" value="commons"/>
-        <option name="univocity" desc="UNIVOCITY" value="univocity"/>
+        <option value="commons" desc="COMMONS" name="commons"/>
+        <option value="univocity" desc="UNIVOCITY" name="univocity"/>
       </defaultOptions>
       <defaultValue>commons</defaultValue>
     </param>
@@ -53,9 +53,9 @@
       <type>options</type>
       <nullable>true</nullable>
       <defaultOptions>
-        <option name="permissive" desc="PERMISSIVE" value="PERMISSIVE"/>
-        <option name="dropmalformed" desc="DROPMALFORMED" value="DROPMALFORMED"/>
-        <option name="failfast" desc="FAILFAST" value="FAILFAST"/>
+        <option value="PERMISSIVE" desc="PERMISSIVE" name="permissive"/>
+        <option value="DROPMALFORMED" desc="DROPMALFORMED" name="dropmalformed"/>
+        <option value="FAILFAST" desc="FAILFAST" name="failfast"/>
       </defaultOptions>
       <defaultValue>PERMISSIVE</defaultValue>
     </param>
@@ -86,6 +86,18 @@
     <param>
       <name>dateFormat</name>
       <description>dateFormat</description>
+      <type>text</type>
+      <nullable>true</nullable>
+    </param>
+    <param>
+      <name>schemaName</name>
+      <description>Schema Name</description>
+      <type>text</type>
+      <nullable>true</nullable>
+    </param>
+    <param>
+      <name>dataType</name>
+      <description>Data Type</description>
       <type>text</type>
       <nullable>true</nullable>
     </param>
