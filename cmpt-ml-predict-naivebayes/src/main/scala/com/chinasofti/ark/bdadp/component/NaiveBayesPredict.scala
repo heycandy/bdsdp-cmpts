@@ -22,9 +22,9 @@ class NaiveBayesPredict(id: String, name: String, log: Logger)
     val df = inputT.getRawData
     val sc = df.sqlContext.sparkContext
     val model = NaiveBayesModel.load(sc, path)
-    val data = df.mapPartitions(
+    val data: RDD[Vector] = df.mapPartitions(
       iterator => iterator.map(row => {
-        val values = StringUtils.strip(row.toString(),"[]").split(",").map(_.toDouble)
+        val values = row.toSeq.map(_.toString).map(_.toDouble).toArray
         Vectors.dense(values)
       }))
     val rddPredict: RDD[Double] = model.predict(data)

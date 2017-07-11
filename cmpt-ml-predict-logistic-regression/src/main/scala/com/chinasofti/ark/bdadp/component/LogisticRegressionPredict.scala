@@ -26,7 +26,7 @@ class LogisticRegressionPredict(id: String, name: String, log: Logger)
 
     val data: RDD[Vector] = df.mapPartitions(
       iterator => iterator.map(row => {
-        val values = StringUtils.strip(row.toString(), "[]").split(" ").map(_.toDouble)
+        val values = row.toSeq.map(_.toString).map(_.toDouble).toArray
         Vectors.dense(values)
       }))
     val rddPredict: RDD[Double] = sameModel.predict(data)
