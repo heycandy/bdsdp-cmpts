@@ -50,9 +50,10 @@ class DecisionTreeModel(id: String, name: String, log: Logger)
     val df = inputT.getRawData
     printInput(df)
 
-    val labelDF = df.select(labelCol)
-    val featuresDF = df.selectExpr(featuresCol: _*)
-    val parsedData = labelDF.join(featuresDF).mapPartitions(iterator => iterator.map(row => {
+    val allArr = labelCol +: featuresCol
+    val allDF = df.selectExpr(allArr: _*)
+
+    val parsedData = allDF.mapPartitions(iterator => iterator.map(row => {
       val label = row.toSeq.head.toString.toDouble
       val values = row.toSeq.tail.map(_.toString).map(_.toDouble).toArray
       LabeledPoint(label, Vectors.dense(values))
@@ -72,6 +73,8 @@ class DecisionTreeModel(id: String, name: String, log: Logger)
     val testAccuracy = labelAndPreds.filter(r =>
       r._1 == r._2).count.toDouble / testData.count
 
+    info("====== model is ======")
+    info(model.toDebugString)
     info("Test Accuracy = " + testAccuracy)
     val sc = df.sqlContext.sparkContext
     model.save(sc, path)
@@ -79,7 +82,7 @@ class DecisionTreeModel(id: String, name: String, log: Logger)
   }
 
   def printInput(df: DataFrame): Unit = {
-    ("" :: df.toString() ::
+    ("====== trainingData is ======" :: df.toString() ::
       Nil ++ df.repartition(8).take(10)).foreach(row => info(row.toString()))
   }
 }

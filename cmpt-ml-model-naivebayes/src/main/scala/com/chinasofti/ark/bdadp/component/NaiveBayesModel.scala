@@ -43,10 +43,9 @@ NaiveBayesModel(id: String, name: String, log: Logger)
 
     printInput(df)
 
-    val labelDF = df.select(labelCol)
-    val featuresDF = df.selectExpr(featuresCol: _*)
-
-    val parsedData = labelDF.join(featuresDF).mapPartitions(iterator => iterator.map(row => {
+    val allArr = labelCol +: featuresCol
+    val allDF = df.selectExpr(allArr: _*)
+    val parsedData = allDF.mapPartitions(iterator => iterator.map(row => {
       val label = row.toSeq.head.toString.toDouble
       val values = row.toSeq.tail.map(_.toString).map(_.toDouble).toArray
       LabeledPoint(label, Vectors.dense(values))
@@ -60,15 +59,17 @@ NaiveBayesModel(id: String, name: String, log: Logger)
 
     val predictionAndLabel = testData.map(p => (model.predict(p.features), p.label))
     val testAccuracy = 1.0 * predictionAndLabel.filter(x => x._1 == x._2).count() / testData.count()
-    info("Test Accuracy = " + testAccuracy)
 
+    info("====== model is ======")
+    info(model.toString)
+    info("Test Accuracy = " + testAccuracy)
     val sc = df.sqlContext.sparkContext
     model.save(sc, path)
 
   }
 
   def printInput(df: DataFrame): Unit = {
-    ("" :: df.toString() ::
+    ("====== trainingData is ======" :: df.toString() ::
       Nil ++ df.repartition(8).take(10)).foreach(row => info(row.toString()))
   }
 }

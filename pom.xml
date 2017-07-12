@@ -58,6 +58,7 @@
     <module>cmpt-ml-model-naivebayes</module>
     <module>cmpt-ml-predict-naivebayes</module>
     <module>cmpt-ml-predict-SVM</module>
+    <module>cmpt-ml-model-clustering-k-means</module>
 
   </modules>
 
