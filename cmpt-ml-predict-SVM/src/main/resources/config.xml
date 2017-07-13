@@ -12,5 +12,11 @@
       <type>text</type>
       <nullable>false</nullable>
     </param>
+    <param>
+      <name>featuresCol</name>
+      <description>featuresCol</description>
+      <type>text</type>
+      <nullable>false</nullable>
+    </param>
   </params>
 </component>
