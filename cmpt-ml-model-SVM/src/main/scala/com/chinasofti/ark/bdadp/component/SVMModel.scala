@@ -3,7 +3,7 @@ package com.chinasofti.ark.bdadp.component
 import com.chinasofti.ark.bdadp.component.api.Configureable
 import com.chinasofti.ark.bdadp.component.api.data.{SparkData, StringData}
 import com.chinasofti.ark.bdadp.component.api.sink.{SparkSinkAdapter, SinkComponent}
-import org.apache.commons.lang.StringUtils
+import org.apache.commons.io.FileUtils
 import org.apache.spark.mllib.classification.SVMWithSGD
 import org.apache.spark.mllib.linalg.Vectors
 import org.apache.spark.mllib.regression.LabeledPoint
@@ -38,6 +38,7 @@ class SVMModel(id: String, name: String, log: Logger)
     stepSize = componentProps.getString("stepSize", "1.0").toDouble
     regParam = componentProps.getString("regParam", "0.01").toDouble
     miniBatchFraction = componentProps.getString("miniBatchFraction", "1.0").toDouble
+    checkDirExists(path)
   }
 
   override def apply(inputT: SparkData): Unit = {
@@ -69,12 +70,20 @@ class SVMModel(id: String, name: String, log: Logger)
     info(model.toString())
     info("Test Accuracy = " + testAccuracy)
     val sc = df.sqlContext.sparkContext
-    model.save(sc, path)
 
+
+    model.save(sc, path)
   }
 
   def printInput(df: DataFrame): Unit = {
     ("====== trainingData is ======" :: df.toString() ::
       Nil ++ df.repartition(8).take(10)).foreach(row => info(row.toString()))
+  }
+
+  def checkDirExists(path: String): Unit = {
+    val file = new java.io.File(path)
+    if (file.exists()) {
+      FileUtils.deleteDirectory(file)
+    }
   }
 }

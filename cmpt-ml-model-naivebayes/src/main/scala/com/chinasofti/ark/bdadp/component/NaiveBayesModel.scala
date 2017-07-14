@@ -3,13 +3,12 @@ package com.chinasofti.ark.bdadp.component
 import com.chinasofti.ark.bdadp.component.api.Configureable
 import com.chinasofti.ark.bdadp.component.api.data.{SparkData, StringData}
 import com.chinasofti.ark.bdadp.component.api.sink.{SparkSinkAdapter, SinkComponent}
+import org.apache.commons.io.FileUtils
 import org.apache.spark.mllib.classification.NaiveBayes
-import org.apache.spark.mllib.evaluation.BinaryClassificationMetrics
 import org.apache.spark.mllib.linalg.Vectors
 import org.apache.spark.mllib.regression.LabeledPoint
 import org.apache.spark.sql.DataFrame
 import org.slf4j.Logger
-import org.apache.commons.lang.StringUtils
 
 /**
  * Created by water on 2017.6.28.
@@ -36,6 +35,7 @@ NaiveBayesModel(id: String, name: String, log: Logger)
     featuresCol = componentProps.getString("featuresCol").split(",")
     lambda = componentProps.getString("lambda", "0.0").toDouble
     modelType = componentProps.getString("modelType")
+    checkDirExists(path)
   }
 
   override def apply(inputT: SparkData): Unit = {
@@ -71,6 +71,13 @@ NaiveBayesModel(id: String, name: String, log: Logger)
   def printInput(df: DataFrame): Unit = {
     ("====== trainingData is ======" :: df.toString() ::
       Nil ++ df.repartition(8).take(10)).foreach(row => info(row.toString()))
+  }
+
+  def checkDirExists(path: String): Unit = {
+    val file = new java.io.File(path)
+    if (file.exists()) {
+      FileUtils.deleteDirectory(file)
+    }
   }
 }
 

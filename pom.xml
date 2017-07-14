@@ -42,8 +42,6 @@
     <module>cmpt-transform-sqlprocess</module>
     <module>cmpt-transform-aggregate</module>
     <module>cmpt-source-jdbc-oracle</module>
-    <module>cmpt-ml-model-decision-tree</module>
-    <module>cmpt-ml-predict-decision-tree</module>
     <module>cmpt-sink-chart-pie</module>
     <module>cmpt-sink-chart-bar</module>
     <module>cmpt-source-as400</module>
@@ -52,13 +50,25 @@
     <module>cmpt-sink-assert</module>
     <module>cmpt-sink-chart-cycle</module>
     <module>cmpt-transform-graph-cycle</module>
+    <module>cmpt-ml-model-decision-tree</module>
     <module>cmpt-ml-model-logistic-regression</module>
     <module>cmpt-ml-model-SVM</module>
-    <module>cmpt-ml-predict-logistic-regression</module>
     <module>cmpt-ml-model-naivebayes</module>
+    <module>cmpt-ml-model-clustering-k-means</module>
+    <module>cmpt-ml-model-collaborative-filtering-als</module>
+    <module>cmpt-ml-model-regression-decision-tree</module>
+    <module>cmpt-ml-model-regression-linear</module>
+    <module>cmpt-ml-model-regression-linear-lasso</module>
+    <module>cmpt-ml-model-regression-linear-ridge</module>
+
+    <module>cmpt-ml-predict-decision-tree</module>
+    <module>cmpt-ml-predict-logistic-regression</module>
     <module>cmpt-ml-predict-naivebayes</module>
     <module>cmpt-ml-predict-SVM</module>
-    <module>cmpt-ml-model-clustering-k-means</module>
+    <module>cmpt-ml-predict-clustering-k-means</module>
+    <module>cmpt-ml-predict-regression-lasso</module>
+    <module>cmpt-ml-predict-regression-linear</module>
+    <module>cmpt-ml-predict-regression-ridge</module>
 
   </modules>
 

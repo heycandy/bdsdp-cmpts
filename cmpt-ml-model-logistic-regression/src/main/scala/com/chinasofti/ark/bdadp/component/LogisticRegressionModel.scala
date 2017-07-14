@@ -3,10 +3,7 @@ package com.chinasofti.ark.bdadp.component
 import com.chinasofti.ark.bdadp.component.api.Configureable
 import com.chinasofti.ark.bdadp.component.api.data.{SparkData, StringData}
 import com.chinasofti.ark.bdadp.component.api.sink.{SparkSinkAdapter, SinkComponent}
-import org.apache.spark.ml.PipelineModel
-import org.apache.spark.ml.classification._
-import org.apache.spark.ml.evaluation.MulticlassClassificationEvaluator
-import org.apache.spark.ml.feature._
+import org.apache.commons.io.FileUtils
 import org.apache.spark.mllib.classification.LogisticRegressionWithLBFGS
 import org.apache.spark.mllib.linalg.Vectors
 import org.apache.spark.mllib.regression.LabeledPoint
@@ -40,6 +37,7 @@ class LogisticRegressionModel(id: String, name: String, log: Logger)
     numClasses = componentProps.getString("numClasses", "2").toInt
     addIntercept = componentProps.getString("addIntercept", "false").toBoolean
     validateData = componentProps.getString("validateData", "true").toBoolean
+    checkDirExists(path)
   }
 
 
@@ -83,5 +81,12 @@ class LogisticRegressionModel(id: String, name: String, log: Logger)
   def printInput(df: DataFrame): Unit = {
     ("====== trainingData is ======" :: df.toString() ::
       Nil ++ df.repartition(8).take(10)).foreach(row => info(row.toString()))
+  }
+
+  def checkDirExists(path: String): Unit = {
+    val file = new java.io.File(path)
+    if (file.exists()) {
+      FileUtils.deleteDirectory(file)
+    }
   }
 }

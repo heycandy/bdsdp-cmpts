@@ -37,6 +37,7 @@ class LogisticRegressionPredict(id: String, name: String, log: Logger)
     val predictRDD = sampleModel.predict(featuresData)
     val resultRDD = featuresData.zip(predictRDD)
     info("====== predict data and result is ======")
+    info("[ " + df.columns.mkString(",") + " ] label" )
     resultRDD.repartition(8).collect().foreach(row => info(row.toString()))
   }
 
