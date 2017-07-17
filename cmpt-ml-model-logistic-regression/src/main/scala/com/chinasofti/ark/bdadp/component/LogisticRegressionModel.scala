@@ -3,7 +3,7 @@ package com.chinasofti.ark.bdadp.component
 import com.chinasofti.ark.bdadp.component.api.Configureable
 import com.chinasofti.ark.bdadp.component.api.data.{SparkData, StringData}
 import com.chinasofti.ark.bdadp.component.api.sink.{SparkSinkAdapter, SinkComponent}
-import org.apache.commons.io.FileUtils
+import com.chinasofti.ark.bdadp.util.common.FileUtils
 import org.apache.spark.mllib.classification.LogisticRegressionWithLBFGS
 import org.apache.spark.mllib.linalg.Vectors
 import org.apache.spark.mllib.regression.LabeledPoint
@@ -37,7 +37,7 @@ class LogisticRegressionModel(id: String, name: String, log: Logger)
     numClasses = componentProps.getString("numClasses", "2").toInt
     addIntercept = componentProps.getString("addIntercept", "false").toBoolean
     validateData = componentProps.getString("validateData", "true").toBoolean
-    checkDirExists(path)
+    FileUtils.checkDirExists(path)
   }
 
 
@@ -83,10 +83,4 @@ class LogisticRegressionModel(id: String, name: String, log: Logger)
       Nil ++ df.repartition(8).take(10)).foreach(row => info(row.toString()))
   }
 
-  def checkDirExists(path: String): Unit = {
-    val file = new java.io.File(path)
-    if (file.exists()) {
-      FileUtils.deleteDirectory(file)
-    }
-  }
 }

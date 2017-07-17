@@ -3,7 +3,7 @@ package com.chinasofti.ark.bdadp.component
 import com.chinasofti.ark.bdadp.component.api.Configureable
 import com.chinasofti.ark.bdadp.component.api.data.{SparkData, StringData}
 import com.chinasofti.ark.bdadp.component.api.sink.{SinkComponent, SparkSinkAdapter}
-import org.apache.commons.io.FileUtils
+import com.chinasofti.ark.bdadp.util.common.FileUtils
 import org.apache.spark.mllib.linalg.Vectors
 import org.apache.spark.mllib.regression.LabeledPoint
 import org.apache.spark.mllib.tree.DecisionTree
@@ -40,7 +40,7 @@ class DecisionTreeModel(id: String, name: String, log: Logger)
     maxDepth = componentProps.getString("maxDepth", "5").toInt
     maxBins = componentProps.getString("maxBins", "32").toInt
     numClasses = componentProps.getString("numClasses", "2").toInt
-    checkDirExists(path)
+    FileUtils.checkDirExists(path)
   }
 
   override def apply(inputT: SparkData): Unit = {
@@ -82,12 +82,5 @@ class DecisionTreeModel(id: String, name: String, log: Logger)
   def printInput(df: DataFrame): Unit = {
     ("====== trainingData is ======" :: df.toString() ::
       Nil ++ df.repartition(8).take(10)).foreach(row => info(row.toString()))
-  }
-
-  def checkDirExists(path: String): Unit = {
-    val file = new java.io.File(path)
-    if (file.exists()) {
-      FileUtils.deleteDirectory(file)
-    }
   }
 }
