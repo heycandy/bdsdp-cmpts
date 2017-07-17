@@ -60,8 +60,8 @@ NaiveBayesModel(id: String, name: String, log: Logger)
     val predictionAndLabel = testData.map(p => (model.predict(p.features), p.label))
     val testAccuracy = 1.0 * predictionAndLabel.filter(x => x._1 == x._2).count() / testData.count()
 
-    info("====== model is ======")
-    info(model.toString)
+//    info("====== the model modelType is ======")
+//    info(model.modelType)
     info("Test Accuracy = " + testAccuracy)
     val sc = df.sqlContext.sparkContext
     model.save(sc, path)
