@@ -15,8 +15,13 @@
     <param>
       <name>header</name>
       <description>header</description>
-      <type>text</type>
-      <nullable>true</nullable>
+      <type>options</type>
+      <nullable>false</nullable>
+      <defaultOptions>
+        <option value="false" desc="FALSE" name="false"/>
+        <option value="true" desc="TRUE" name="true"/>
+      </defaultOptions>
+      <defaultValue>false</defaultValue>
     </param>
     <param>
       <name>delimiter</name>
@@ -68,8 +73,13 @@
     <param>
       <name>inferSchema</name>
       <description>inferSchema</description>
-      <type>text</type>
-      <nullable>true</nullable>
+      <type>options</type>
+      <nullable>false</nullable>
+      <defaultOptions>
+        <option value="false" desc="FALSE" name="false"/>
+        <option value="true" desc="TRUE" name="true"/>
+      </defaultOptions>
+      <defaultValue>false</defaultValue>
     </param>
     <param>
       <name>comment</name>

@@ -19,6 +19,7 @@ class LogisticRegressionModel(id: String, name: String, log: Logger)
   SparkSinkAdapter[SparkData] with Serializable {
 
   var path: String = null
+  var isCover: Boolean = false
   var trainDataPer: Double = 0.0
   var labelCol: String = null
   var featuresCol: Array[String] = null
@@ -31,13 +32,16 @@ class LogisticRegressionModel(id: String, name: String, log: Logger)
 
   override def configure(componentProps: ComponentProps): Unit = {
     path = componentProps.getString("path")
+    isCover = componentProps.getString("isCover","false").toBoolean
+    if(isCover){
+      FileUtils.checkDirExists(path)
+    }
     trainDataPer = componentProps.getString("trainDataPer", "0.7").toDouble
     labelCol = componentProps.getString("labelCol")
     featuresCol = componentProps.getString("featuresCol").split(",")
     numClasses = componentProps.getString("numClasses", "2").toInt
     addIntercept = componentProps.getString("addIntercept", "false").toBoolean
     validateData = componentProps.getString("validateData", "true").toBoolean
-    FileUtils.checkDirExists(path)
   }
 
 

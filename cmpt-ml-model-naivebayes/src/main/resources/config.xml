@@ -13,6 +13,17 @@
       <nullable>false</nullable>
     </param>
     <param>
+      <name>isCover</name>
+      <description>isCover</description>
+      <type>options</type>
+      <nullable>false</nullable>
+      <defaultOptions>
+        <option value="false" desc="FALSE" name="false"/>
+        <option value="true" desc="TRUE" name="true"/>
+      </defaultOptions>
+      <defaultValue>false</defaultValue>
+    </param>
+    <param>
       <name>trainDataPer</name>
       <description>trainDataPer</description>
       <type>text</type>
