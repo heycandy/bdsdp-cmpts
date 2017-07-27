@@ -3,7 +3,7 @@ package com.chinasofti.ark.bdadp.component
 import com.chinasofti.ark.bdadp.component.api.Configureable
 import com.chinasofti.ark.bdadp.component.api.data.{SparkData, StringData}
 import com.chinasofti.ark.bdadp.component.api.sink.{SinkComponent, SparkSinkAdapter}
-import com.chinasofti.ark.bdadp.util.common.StringUtils
+import com.chinasofti.ark.bdadp.util.common.{FileUtils, StringUtils}
 import org.slf4j.Logger
 
 /**
@@ -14,6 +14,7 @@ class CSVSink(id: String, name: String, log: Logger)
             SparkSinkAdapter[SparkData] {
 
   var numPartitions = 0
+  var isCover: Boolean = false
   var path: String = _
   var header: String = _
   var delimiter: String = _
@@ -32,6 +33,7 @@ class CSVSink(id: String, name: String, log: Logger)
     numPartitions = componentProps.getInt("numPartitions", 8)
 
     path = componentProps.getString("path")
+    isCover = componentProps.getString("isCover","false").toBoolean
     header = componentProps.getString("header", "false")
     delimiter = componentProps.getString("delimiter", ",")
     quote = componentProps.getString("quote", "\"")
@@ -43,6 +45,9 @@ class CSVSink(id: String, name: String, log: Logger)
     quoteMode = componentProps.getString("quoteMode", "NONE")
 
     StringUtils.assertIsBlank(path)
+    if(isCover){
+      FileUtils.checkDirExists(path)
+    }
   }
 
   override def apply(inputT: SparkData): Unit = {

@@ -70,6 +70,7 @@
     <module>cmpt-ml-predict-regression-linear</module>
     <module>cmpt-ml-predict-regression-ridge</module>
     <module>cmpt-source-masking-mysql</module>
+    <module>cmpt-source-jdbc-postgresql</module>
 
   </modules>
 
