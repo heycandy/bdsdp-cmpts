@@ -8,17 +8,17 @@ import com.chinasofti.ark.bdadp.component.api.data.{Builder, SparkData, StringDa
 import com.chinasofti.ark.bdadp.component.api.options.SparkScenarioOptions
 import com.chinasofti.ark.bdadp.component.api.source.{SourceComponent, SparkSourceAdapter}
 import com.chinasofti.ark.bdadp.util.common.StringUtils
-import org.apache.spark.sql.types.{IntegerType, StringType, StructField, StructType}
+import org.apache.spark.sql.types._
 import org.slf4j.Logger
 
 import scala.collection.JavaConversions._
 
 /**
- * Created by White on 2017/1/17.
- */
+  * Created by White on 2017/1/17.
+  */
 class CSVSource(id: String, name: String, log: Logger)
-    extends SourceComponent[StringData](id, name, log) with Configureable with
-            SparkSourceAdapter[SparkData] {
+  extends SourceComponent[StringData](id, name, log) with Configureable with
+    SparkSourceAdapter[SparkData] {
 
   var path: String = _
   var header: String = _
@@ -40,7 +40,7 @@ class CSVSource(id: String, name: String, log: Logger)
   override def call(): StringData = {
     Builder.build(
       ("" +: Files.readAllLines(Paths.get(path.replace("file:///", "")), Charset.forName(charset)))
-          .mkString("\n"))
+        .mkString("\n"))
   }
 
   override def configure(componentProps: ComponentProps): Unit = {
@@ -65,7 +65,7 @@ class CSVSource(id: String, name: String, log: Logger)
       val types = dataType.split(",")
       val fields = names.indices.map(i => {
         val dataType = types(i) match {
-          case "decimal" => IntegerType
+          case "double" => DoubleType
           case "integer" => IntegerType
           case "string" => StringType
           case _ => StringType
@@ -83,20 +83,20 @@ class CSVSource(id: String, name: String, log: Logger)
 
   override def spark(sparkScenarioOptions: SparkScenarioOptions): SparkData = {
     Builder.build(sparkScenarioOptions.sqlContext().read
-                      .format("com.databricks.spark.csv")
-                      .option("path", path)
-                      .option("header", header)
-                      .option("delimiter", delimiter)
-                      .option("quote", quote)
-                      .option("escape", escape)
-                      .option("parserLib", parserLib)
-                      .option("mode", mode)
-                      .option("charset", charset)
-                      .option("inferSchema", inferSchema)
-                      .option("comment", comment)
-                      .option("nullValue", nullValue)
-                      .option("dateFormat", dateFormat)
-                      .schema(schema)
-                      .load())
+      .format("com.databricks.spark.csv")
+      .option("path", path)
+      .option("header", header)
+      .option("delimiter", delimiter)
+      .option("quote", quote)
+      .option("escape", escape)
+      .option("parserLib", parserLib)
+      .option("mode", mode)
+      .option("charset", charset)
+      .option("inferSchema", inferSchema)
+      .option("comment", comment)
+      .option("nullValue", nullValue)
+      .option("dateFormat", dateFormat)
+      .schema(schema)
+      .load())
   }
 }

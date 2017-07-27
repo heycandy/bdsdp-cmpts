@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component>
+  <componentName>cmpt_ml_predict_clustering_k_means</componentName>
+  <componentDescription>cmpt_ml_predict_clustering_k_means</componentDescription>
+  <componentClass>com.chinasofti.ark.bdadp.component.PredictClusteringKmeans</componentClass>
+  <componentIcon>icon-xl.png,icon-xs.png</componentIcon>
+  <componentPid>component_pid_apply</componentPid>
+  <params>
+    <param>
+      <name>path</name>
+      <description>path</description>
+      <type>text</type>
+      <nullable>false</nullable>
+    </param>
+    <param>
+      <name>features</name>
+      <description>features</description>
+      <type>text</type>
+      <nullable>false</nullable>
+    </param>
+  </params>
+</component>

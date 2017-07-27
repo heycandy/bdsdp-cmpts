@@ -7,6 +7,7 @@ import com.chinasofti.ark.bdadp.component.api.data.{Builder, SparkData, StringDa
 import com.chinasofti.ark.bdadp.component.api.options.SparkScenarioOptions
 import com.chinasofti.ark.bdadp.component.api.source.{SourceComponent, SparkSourceAdapter}
 import com.chinasofti.ark.bdadp.util.common.StringUtils
+import org.apache.spark.sql.DataFrame
 import org.slf4j.Logger
 
 
@@ -52,6 +53,12 @@ class JDBCSource(id: String, name: String, log: Logger)
   }
 
   override def spark(sparkScenarioOptions: SparkScenarioOptions): SparkData = {
-    Builder.build(sparkScenarioOptions.sqlContext().read.jdbc(conUrl, table, partitionColumn, lowerBound, upperBound, numPartitions, properties))
+
+    if(StringUtils.isBlank(partitionColumn)){
+      Builder.build(sparkScenarioOptions.sqlContext().read.jdbc(conUrl, table, properties))
+    }else{
+      Builder.build(sparkScenarioOptions.sqlContext().read.jdbc(conUrl, table, partitionColumn, lowerBound, upperBound, numPartitions, properties))
+    }
+
   }
 }

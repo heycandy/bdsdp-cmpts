@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component>
+  <componentName>cmpt_source_mysql</componentName>
+  <componentDescription>cmpt_source_mysql</componentDescription>
+  <componentClass>com.chinasofti.ark.bdadp.component.MaskingMysql</componentClass>
+  <componentIcon>icon-xl.png,icon-xs.png</componentIcon>
+  <componentPid>component_pid_source</componentPid>
+  <params>
+    <param>
+      <name>conUrl</name>
+      <description>conUrl</description>
+      <type>text</type>
+      <nullable>false</nullable>
+    </param>
+    <param>
+      <name>table</name>
+      <description>table</description>
+      <type>text</type>
+      <nullable>true</nullable>
+    </param>
+    <param>
+      <name>userName</name>
+      <description>userName</description>
+      <type>text</type>
+      <nullable>true</nullable>
+    </param>
+    <param>
+      <name>passWord</name>
+      <description>passWord</description>
+      <type>password</type>
+      <nullable>true</nullable>
+    </param>
+  </params>
+</component>

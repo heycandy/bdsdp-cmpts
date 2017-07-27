@@ -15,8 +15,13 @@
     <param>
       <name>header</name>
       <description>header</description>
-      <type>text</type>
-      <nullable>true</nullable>
+      <type>options</type>
+      <nullable>false</nullable>
+      <defaultOptions>
+        <option value="false" desc="FALSE" name="false"/>
+        <option value="true" desc="TRUE" name="true"/>
+      </defaultOptions>
+      <defaultValue>false</defaultValue>
     </param>
     <param>
       <name>delimiter</name>
@@ -42,8 +47,8 @@
       <type>options</type>
       <nullable>true</nullable>
       <defaultOptions>
-        <option name="commons" desc="COMMONS" value="commons"/>
-        <option name="univocity" desc="UNIVOCITY" value="univocity"/>
+        <option value="commons" desc="COMMONS" name="commons"/>
+        <option value="univocity" desc="UNIVOCITY" name="univocity"/>
       </defaultOptions>
       <defaultValue>commons</defaultValue>
     </param>
@@ -53,9 +58,9 @@
       <type>options</type>
       <nullable>true</nullable>
       <defaultOptions>
-        <option name="permissive" desc="PERMISSIVE" value="PERMISSIVE"/>
-        <option name="dropmalformed" desc="DROPMALFORMED" value="DROPMALFORMED"/>
-        <option name="failfast" desc="FAILFAST" value="FAILFAST"/>
+        <option value="PERMISSIVE" desc="PERMISSIVE" name="permissive"/>
+        <option value="DROPMALFORMED" desc="DROPMALFORMED" name="dropmalformed"/>
+        <option value="FAILFAST" desc="FAILFAST" name="failfast"/>
       </defaultOptions>
       <defaultValue>PERMISSIVE</defaultValue>
     </param>
@@ -68,8 +73,13 @@
     <param>
       <name>inferSchema</name>
       <description>inferSchema</description>
-      <type>text</type>
-      <nullable>true</nullable>
+      <type>options</type>
+      <nullable>false</nullable>
+      <defaultOptions>
+        <option value="false" desc="FALSE" name="false"/>
+        <option value="true" desc="TRUE" name="true"/>
+      </defaultOptions>
+      <defaultValue>false</defaultValue>
     </param>
     <param>
       <name>comment</name>

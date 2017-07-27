@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component>
+  <componentName>cmpt_ml_model_regression_linear_ridge</componentName>
+  <componentDescription>cmpt_ml_model_regression_linear_ridge</componentDescription>
+  <componentClass>com.chinasofti.ark.bdadp.component.RegressionRidgeL2</componentClass>
+  <componentIcon>icon-xl.png,icon-xs.png</componentIcon>
+  <componentPid>component_pid_sink</componentPid>
+  <params>
+    <param>
+      <name>path</name>
+      <description>path</description>
+      <type>text</type>
+      <nullable>false</nullable>
+    </param>
+    <param>
+      <name>trainDataSplit</name>
+      <description>trainDataSplit</description>
+      <type>text</type>
+      <nullable>false</nullable>
+    </param>
+    <param>
+      <name>testDataSplit</name>
+      <description>testDataSplit</description>
+      <type>text</type>
+      <nullable>false</nullable>
+    </param>
+    <param>
+      <name>numIterations</name>
+      <description>numIterations</description>
+      <type>text</type>
+      <nullable>false</nullable>
+    </param>
+    <param>
+      <name>stepSize</name>
+      <description>stepSize</description>
+      <type>text</type>
+      <nullable>false</nullable>
+    </param>
+    <param>
+      <name>miniBatchFraction</name>
+      <description>miniBatchFraction</description>
+      <type>text</type>
+      <nullable>false</nullable>
+    </param>
+  </params>
+</component>

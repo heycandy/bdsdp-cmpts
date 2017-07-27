@@ -4,14 +4,8 @@
   <componentDescription>cmpt_ml_model_SVM</componentDescription>
   <componentClass>com.chinasofti.ark.bdadp.component.SVMModel</componentClass>
   <componentIcon>icon-xl.png,icon-xs.png</componentIcon>
-  <componentPid>component_pid_sink</componentPid>
+  <componentPid>component_pid_ml_model</componentPid>
   <params>
-    <param>
-      <name>filePath</name>
-      <description>filePath</description>
-      <type>text</type>
-      <nullable>false</nullable>
-    </param>
     <param>
       <name>path</name>
       <description>path</description>
@@ -19,14 +13,43 @@
       <nullable>false</nullable>
     </param>
     <param>
-      <name>iters</name>
-      <description>iters</description>
-      <type>text</type>
+      <name>isCover</name>
+      <description>isCover</description>
+      <type>options</type>
       <nullable>false</nullable>
+      <defaultOptions>
+        <option value="false" desc="FALSE" name="false"/>
+        <option value="true" desc="TRUE" name="true"/>
+      </defaultOptions>
+      <defaultValue>false</defaultValue>
     </param>
     <param>
       <name>trainDataPer</name>
       <description>trainDataPer</description>
+      <type>text</type>
+      <nullable>false</nullable>
+    </param>
+    <param>
+      <name>labelCol</name>
+      <description>labelCol</description>
+      <type>text</type>
+      <nullable>false</nullable>
+    </param>
+    <param>
+      <name>featuresCol</name>
+      <description>featuresCol</description>
+      <type>text</type>
+      <nullable>false</nullable>
+    </param>
+    <param>
+      <name>numIterations</name>
+      <description>numIterations</description>
+      <type>text</type>
+      <nullable>false</nullable>
+    </param>
+    <param>
+      <name>stepSize</name>
+      <description>stepSize</description>
       <type>text</type>
       <nullable>false</nullable>
     </param>
@@ -37,20 +60,8 @@
       <nullable>false</nullable>
     </param>
     <param>
-      <name>seed</name>
-      <description>seed</description>
-      <type>text</type>
-      <nullable>false</nullable>
-    </param>
-    <param>
-      <name>step</name>
-      <description>step</description>
-      <type>text</type>
-      <nullable>false</nullable>
-    </param>
-    <param>
-      <name>fraction</name>
-      <description>fraction</description>
+      <name>miniBatchFraction</name>
+      <description>miniBatchFraction</description>
       <type>text</type>
       <nullable>false</nullable>
     </param>

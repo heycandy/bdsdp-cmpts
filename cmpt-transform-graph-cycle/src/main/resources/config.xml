@@ -4,7 +4,7 @@
     <componentDescription>component_transform_cycle</componentDescription>
     <componentClass>com.chinasofti.ark.bdadp.component.CycleGraph</componentClass>
     <componentIcon>icon-xl.png,icon-xs.png</componentIcon>
-    <componentPid>component_pid_apply</componentPid>
+    <componentPid>component_pid_visualization</componentPid>
     <params>
 
     </params>
