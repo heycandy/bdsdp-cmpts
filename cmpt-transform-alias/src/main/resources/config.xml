@@ -7,14 +7,14 @@
   <componentPid>component_pid_apply</componentPid>
   <params>
     <param>
-      <name>existingName</name>
-      <description>existingName</description>
+      <name>existingCol</name>
+      <description>existingCol</description>
       <type>text</type>
       <nullable>false</nullable>
     </param>
     <param>
-      <name>newName</name>
-      <description>newName</description>
+      <name>newCol</name>
+      <description>newCol</description>
       <type>text</type>
       <nullable>false</nullable>
     </param>

@@ -11,20 +11,24 @@ import org.slf4j.Logger
 
 
 /**
-  * Created by Administrator on 2017.2.8.
-  */
+ * Created by Administrator on 2017.2.8.
+ */
 class JDBCOracleSource(id: String, name: String, log: Logger)
   extends SourceComponent[StringData](id, name, log) with Configureable with
-    SparkSourceAdapter[SparkData] {
+  SparkSourceAdapter[SparkData] {
 
   var conUrl: String = null
   var table: String = null
   var userName: String = null
   var passWord: String = null
-  var partitionColumn: String = null    // 根据该字段分区，需要为整形，比如id等
-  var lowerBound: Long = 0   // 分区的下界
-  var upperBound: Long = 0    // 分区的上界
-  var numPartitions: Int = 0    // 分区的个数
+  var partitionColumn: String = null
+  // 根据该字段分区，需要为整形，比如id等
+  var lowerBound: Long = 0
+  // 分区的下界
+  var upperBound: Long = 0
+  // 分区的上界
+  var numPartitions: Int = 0
+  // 分区的个数
   var properties = new Properties();
   var driver: String = null
 
@@ -40,17 +44,22 @@ class JDBCOracleSource(id: String, name: String, log: Logger)
 
     partitionColumn = componentProps.getString("partitionColumn")
     StringUtils.assertIsBlank(conUrl, table, userName, passWord);
-    lowerBound = componentProps.getInt("lowerBound",1)
-    upperBound = componentProps.getInt("upperBound",10000000)
-    numPartitions = componentProps.getInt("numPartitions",8)
+    lowerBound = componentProps.getInt("lowerBound", 1)
+    upperBound = componentProps.getInt("upperBound", 10000000)
+    numPartitions = componentProps.getInt("numPartitions", 8)
 
     properties.put("user", userName);
     properties.put("password", passWord);
-    properties.put("driver","oracle.jdbc.driver.OracleDriver");
+    properties.put("driver", "oracle.jdbc.driver.OracleDriver");
 
   }
 
   override def spark(sparkScenarioOptions: SparkScenarioOptions): SparkData = {
-    Builder.build(sparkScenarioOptions.sqlContext().read.jdbc(conUrl,table,properties))
+
+    if(StringUtils.isBlank(partitionColumn)){
+      Builder.build(sparkScenarioOptions.sqlContext().read.jdbc(conUrl, table, properties))
+    }else{
+      Builder.build(sparkScenarioOptions.sqlContext().read.jdbc(conUrl, table, partitionColumn, lowerBound, upperBound, numPartitions, properties))
+    }
   }
 }

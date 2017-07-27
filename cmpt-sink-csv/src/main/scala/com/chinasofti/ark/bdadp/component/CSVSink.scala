@@ -14,7 +14,6 @@ class CSVSink(id: String, name: String, log: Logger)
             SparkSinkAdapter[SparkData] {
 
   var numPartitions = 0
-
   var path: String = _
   var header: String = _
   var delimiter: String = _
@@ -27,7 +26,6 @@ class CSVSink(id: String, name: String, log: Logger)
   var quoteMode: String = _
 
   override def apply(inputT: StringData): Unit = {
-    //    info(inputT.getRawData)
   }
 
   override def configure(componentProps: ComponentProps): Unit = {

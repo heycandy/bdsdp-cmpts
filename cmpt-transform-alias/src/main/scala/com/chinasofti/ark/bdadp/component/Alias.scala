@@ -12,13 +12,13 @@ import org.slf4j.Logger
 class Alias(id: String, name: String, log: Logger)
   extends TransformableComponent[SparkData, SparkData](id, name, log) with Configureable {
 
-  var existingName: String = null
-  var newName: String = null
+  var existingCol: String = null
+  var newCol: String = null
 
   override def apply(inputT: SparkData): SparkData = {
     var df = inputT.getRawData
-    val arrExist = existingName.split(",")
-    val arrNew = newName.split(",")
+    val arrExist = existingCol.split(",")
+    val arrNew = newCol.split(",")
 
     for (m <- 0 until arrExist.length) {
       df = df.withColumnRenamed(arrExist(m), arrNew(m))
@@ -27,8 +27,8 @@ class Alias(id: String, name: String, log: Logger)
   }
 
   override def configure(componentProps: ComponentProps): Unit = {
-    existingName = componentProps.getString("existingName")
-    newName = componentProps.getString("newName")
-    StringUtils.assertIsBlank(existingName, newName);
+    existingCol = componentProps.getString("existingCol")
+    newCol = componentProps.getString("newCol")
+    StringUtils.assertIsBlank(existingCol, newCol);
   }
 }
