@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component>
+  <componentName>component_sink_mongodb</componentName>
+  <componentDescription>component_sink_mongodb</componentDescription>
+  <componentClass>com.chinasofti.ark.bdadp.component.MongodbSink</componentClass>
+  <componentIcon>icon-xl.png,icon-xs.png</componentIcon>
+  <componentPid>component_pid_sink</componentPid>
+  <params>
+    <param>
+      <name>uri</name>
+      <description>uri</description>
+      <type>textarea</type>
+      <nullable>false</nullable>
+    </param>
+    <param>
+      <name>userName</name>
+      <description>userName</description>
+      <type>text</type>
+      <nullable>true</nullable>
+    </param>
+    <param>
+      <name>password</name>
+      <description>password</description>
+      <type>password</type>
+      <nullable>true</nullable>
+    </param>
+    <param>
+      <name>database</name>
+      <description>database</description>
+      <type>text</type>
+      <nullable>true</nullable>
+    </param>
+    <param>
+      <name>collection</name>
+      <description>collection</description>
+      <type>text</type>
+      <nullable>true</nullable>
+    </param>
+    <param>
+      <name>localThreshold</name>
+      <description>localThreshold</description>
+      <type>number</type>
+      <nullable>true</nullable>
+    </param>
+    <param>
+      <name>replaceDocument</name>
+      <description>replaceDocument</description>
+      <type>options</type>
+      <nullable>true</nullable>
+      <defaultOptions>
+        <option name="true" desc="true" value="true"/>
+        <option name="false" desc="false" value="false"/>
+      </defaultOptions>
+      <defaultValue>true</defaultValue>
+    </param>
+    <param>
+      <name>maxBatchSize</name>
+      <description>maxBatchSize</description>
+      <type>number</type>
+      <nullable>true</nullable>
+    </param>
+    <param>
+      <name>mode</name>
+      <description>mode</description>
+      <type>options</type>
+      <nullable>true</nullable>
+      <defaultOptions>
+        <option name="error" desc="error" value="error"/>
+        <option name="append" desc="append" value="append"/>
+        <option name="overwrite" desc="overwrite" value="overwrite"/>
+        <option name="ignore" desc="ignore" value="ignore"/>
+      </defaultOptions>
+      <defaultValue>override</defaultValue>
+    </param>
+    <param>
+      <name>numPartitions</name>
+      <description>numPartitions</description>
+      <type>number</type>
+      <nullable>true</nullable>
+    </param>
+  </params>
+</component>

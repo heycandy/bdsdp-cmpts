@@ -60,7 +60,6 @@
     <module>cmpt-ml-model-regression-linear</module>
     <module>cmpt-ml-model-regression-linear-lasso</module>
     <module>cmpt-ml-model-regression-linear-ridge</module>
-
     <module>cmpt-ml-predict-decision-tree</module>
     <module>cmpt-ml-predict-logistic-regression</module>
     <module>cmpt-ml-predict-naivebayes</module>
@@ -71,6 +70,7 @@
     <module>cmpt-ml-predict-regression-ridge</module>
     <module>cmpt-source-masking-mysql</module>
     <module>cmpt-source-jdbc-postgresql</module>
+    <module>cmpt-sink-mongodb</module>
 
   </modules>
 
@@ -169,6 +169,11 @@
         <groupId>com.databricks</groupId>
         <artifactId>spark-xml_${scala.binary.version}</artifactId>
         <version>0.4.1</version>
+      </dependency>
+      <dependency>
+        <groupId>org.mongodb.spark</groupId>
+        <artifactId>mongo-spark-connector_${scala.binary.version}</artifactId>
+        <version>1.1.0</version>
       </dependency>
 
       <!-- jackson -->
