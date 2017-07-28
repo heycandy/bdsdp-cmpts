@@ -60,7 +60,7 @@ class CSVSource(id: String, name: String, log: Logger)
     schemaName = componentProps.getString("schemaName")
     dataType = componentProps.getString("dataType")
 
-    if (schemaName != null) {
+    if (schemaName != null && schemaName.nonEmpty) {
       val names = schemaName.split(",")
       val types = dataType.split(",")
       val fields = names.indices.map(i => {
