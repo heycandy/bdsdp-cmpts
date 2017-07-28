@@ -3,6 +3,7 @@ package com.chinasofti.ark.bdadp.component
 import com.chinasofti.ark.bdadp.component.api.Configureable
 import com.chinasofti.ark.bdadp.component.api.data.{StringData, SparkData}
 import com.chinasofti.ark.bdadp.component.api.sink.{SparkSinkAdapter, SinkComponent}
+import com.chinasofti.ark.bdadp.util.common.StringUtils
 import org.apache.spark.mllib.classification.SVMModel
 import org.apache.spark.mllib.linalg.Vectors
 import org.slf4j.Logger
@@ -24,7 +25,7 @@ class SVMPredict(id: String, name: String, log: Logger)
     var df = inputT.getRawData
     var featuresColArr: Array[String] = null
     val sampleModel = SVMModel.load(df.sqlContext.sparkContext, path)
-    if (null != featuresCol && !"".equals(featuresCol)) {
+    if (!StringUtils.isBlank(featuresCol)) {
       featuresColArr = featuresCol.split(",")
       df = df.selectExpr(featuresColArr: _*)
     }
