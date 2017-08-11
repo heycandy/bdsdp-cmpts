@@ -26,7 +26,7 @@ class PostgresqlSource(id: String, name: String, log: Logger)
   var upperBound: Long = 0
   var numPartitions: Int = 0
   var properties = new Properties();
-  var driver: String = null
+  var driver: String = "org.postgresql.Driver"
 
   override def call(): StringData = {
     Builder.build("")
@@ -34,7 +34,7 @@ class PostgresqlSource(id: String, name: String, log: Logger)
 
   override def configure(componentProps: ComponentProps): Unit = {
     conUrl = componentProps.getString("conUrl")
-    table = componentProps.getString("table", "*")
+    table = componentProps.getString("table")
     userName = componentProps.getString("userName")
     passWord = componentProps.getString("passWord")
 
@@ -46,16 +46,16 @@ class PostgresqlSource(id: String, name: String, log: Logger)
 
     properties.put("user", userName);
     properties.put("password", passWord);
-    properties.put("driver", "org.postgresql.Driver");
+    properties.put("driver", driver);
 
   }
 
   override def spark(sparkScenarioOptions: SparkScenarioOptions): SparkData = {
-
+    val dfReader = sparkScenarioOptions.sqlContext().read
     if(StringUtils.isBlank(partitionColumn)){
-      Builder.build(sparkScenarioOptions.sqlContext().read.jdbc(conUrl, table, properties))
+      Builder.build(dfReader.jdbc(conUrl, table, properties))
     }else{
-      Builder.build(sparkScenarioOptions.sqlContext().read.jdbc(conUrl, table, partitionColumn, lowerBound, upperBound, numPartitions, properties))
+      Builder.build(dfReader.jdbc(conUrl, table, partitionColumn, lowerBound, upperBound, numPartitions, properties))
     }
   }
 }
