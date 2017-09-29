@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component>
+  <componentName>cmpt-ml-predict-collaborative-filtering-als-user-recommend</componentName>
+  <componentDescription>cmpt-ml-predict-collaborative-filtering-als-user-recommend</componentDescription>
+  <componentClass>com.chinasofti.ark.bdadp.component.ALSUserRecommend</componentClass>
+  <componentIcon>icon-xl.png,icon-xs.png</componentIcon>
+  <componentPid>component_pid_ml_predict</componentPid>
+  <params>
+    <param>
+      <name>path</name>
+      <description>path</description>
+      <type>text</type>
+      <nullable>false</nullable>
+    </param>
+    <param>
+      <name>userArr</name>
+      <description>userArr</description>
+      <type>text</type>
+      <nullable>false</nullable>
+    </param>
+    <param>
+      <name>topKArr</name>
+      <description>topKArr</description>
+      <type>text</type>
+      <nullable>false</nullable>
+    </param>
+  </params>
+</component>

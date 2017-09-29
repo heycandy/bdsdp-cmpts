@@ -58,6 +58,16 @@
     <module>cmpt-ml-model-naivebayes</module>
     <module>cmpt-ml-predict-naivebayes</module>
     <module>cmpt-ml-predict-SVM</module>
+    <module>cmpt-ml-model-clustering-k-means</module>
+    <module>cmpt-ml-model-regression-linear-lasso</module>
+    <module>cmpt-ml-predict-regression-lasso</module>
+    <module>cmpt-ml-model-regression-linear</module>
+    <module>cmpt-ml-predict-clustering-k-means</module>
+    <module>cmpt-ml-predict-regression-linear</module>
+    <module>cmpt-ml-model-regression-decision-tree</module>
+    <module>cmpt-ml-model-collaborative-filtering-als</module>
+    <module>cmpt-ml-predict-collaborative-filtering-als-user-recommend</module>
+    <module>cmpt-ml-predict-collaborative-filtering-products-recommend</module>
 
   </modules>
 

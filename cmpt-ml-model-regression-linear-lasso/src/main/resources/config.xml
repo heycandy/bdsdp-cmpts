@@ -4,7 +4,7 @@
   <componentDescription>cmpt_ml_model_regression_linear_lasso</componentDescription>
   <componentClass>com.chinasofti.ark.bdadp.component.RegressionLassoL1</componentClass>
   <componentIcon>icon-xl.png,icon-xs.png</componentIcon>
-  <componentPid>component_pid_sink</componentPid>
+  <componentPid>component_pid_ml_model</componentPid>
   <params>
     <param>
       <name>path</name>
@@ -15,12 +15,6 @@
     <param>
       <name>trainDataSplit</name>
       <description>trainDataSplit</description>
-      <type>text</type>
-      <nullable>false</nullable>
-    </param>
-    <param>
-      <name>testDataSplit</name>
-      <description>testDataSplit</description>
       <type>text</type>
       <nullable>false</nullable>
     </param>
@@ -39,6 +33,18 @@
     <param>
       <name>miniBatchFraction</name>
       <description>miniBatchFraction</description>
+      <type>text</type>
+      <nullable>false</nullable>
+    </param>
+    <param>
+      <name>labelCol</name>
+      <description>labelCol</description>
+      <type>text</type>
+      <nullable>false</nullable>
+    </param>
+    <param>
+      <name>featuresCol</name>
+      <description>featuresCol</description>
       <type>text</type>
       <nullable>false</nullable>
     </param>

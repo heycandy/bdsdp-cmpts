@@ -4,11 +4,29 @@
   <componentDescription>cmpt_ml_model_collaborativeFilteringALS</componentDescription>
   <componentClass>com.chinasofti.ark.bdadp.component.CollaborativeFilteringALS</componentClass>
   <componentIcon>icon-xl.png,icon-xs.png</componentIcon>
-  <componentPid>component_pid_sink</componentPid>
+  <componentPid>component_pid_ml_model</componentPid>
   <params>
     <param>
       <name>path</name>
       <description>path</description>
+      <type>text</type>
+      <nullable>true</nullable>
+    </param>
+    <param>
+      <name>trainDataSplit</name>
+      <description>trainDataSplit</description>
+      <type>text</type>
+      <nullable>false</nullable>
+    </param>
+    <param>
+      <name>rank</name>
+      <description>rank</description>
+      <type>text</type>
+      <nullable>false</nullable>
+    </param>
+    <param>
+      <name>numIterations</name>
+      <description>numIterations</description>
       <type>text</type>
       <nullable>false</nullable>
     </param>

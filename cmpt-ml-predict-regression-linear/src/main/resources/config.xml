@@ -4,7 +4,7 @@
   <componentDescription>cmpt_transform_predict_regression_linear</componentDescription>
   <componentClass>com.chinasofti.ark.bdadp.component.PredictRegressionLinear</componentClass>
   <componentIcon>icon-xl.png,icon-xs.png</componentIcon>
-  <componentPid>component_pid_apply</componentPid>
+  <componentPid>component_pid_ml_predict</componentPid>
   <params>
     <param>
       <name>path</name>

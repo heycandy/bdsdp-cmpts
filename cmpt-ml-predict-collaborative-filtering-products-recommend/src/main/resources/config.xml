@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component>
+  <componentName>cmpt-ml-predict-collaborative-filtering-products-recommend</componentName>
+  <componentDescription>cmpt-ml-predict-collaborative-filtering-products-recommend</componentDescription>
+  <componentClass>com.chinasofti.ark.bdadp.component.ALSProductsRecommend</componentClass>
+  <componentIcon>icon-xl.png,icon-xs.png</componentIcon>
+  <componentPid>component_pid_ml_predict</componentPid>
+  <params>
+    <param>
+      <name>path</name>
+      <description>path</description>
+      <type>text</type>
+      <nullable>false</nullable>
+    </param>
+    <param>
+      <name>productsArr</name>
+      <description>productsArr</description>
+      <type>text</type>
+      <nullable>false</nullable>
+    </param>
+    <param>
+      <name>topK</name>
+      <description>topK</description>
+      <type>text</type>
+      <nullable>false</nullable>
+    </param>
+  </params>
+</component>

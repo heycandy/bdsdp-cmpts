@@ -16,7 +16,7 @@ class K_means (id: String, name: String, log: Logger)
 
   var path: String = null
   var trainDataSplit:Double = 0.0
-  var testDataSplit:Double = 0.0
+ // var testDataSplit:Double = 0.0
   var numClusters:Int = 0
   var numIterations:Int = 0
   var features:Array[String] =null
@@ -25,7 +25,7 @@ class K_means (id: String, name: String, log: Logger)
   override def configure(componentProps: ComponentProps):Unit = {
     path = componentProps.getString("path")
     trainDataSplit = componentProps.getString("trainDataSplit", "1").toDouble
-    testDataSplit = componentProps.getString("testDataSplit", "0").toDouble
+   // testDataSplit = componentProps.getString("testDataSplit", "0").toDouble
     numClusters = componentProps.getString("numClusters","3").toInt
     numIterations = componentProps.getString("numIterations", "33").toInt
     features = componentProps.getString("features","C0").split(",")
@@ -46,7 +46,7 @@ class K_means (id: String, name: String, log: Logger)
     .setInputCols(features)
     .setOutputCol("features")
 
-  val splits = df.randomSplit(Array(trainDataSplit,testDataSplit))
+  val splits = df.randomSplit(Array(trainDataSplit,1-trainDataSplit))
   val (trainingData, testData) = (splits(0), splits(1))
   val output = assembler.transform(trainingData)
 

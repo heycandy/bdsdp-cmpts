@@ -4,11 +4,17 @@
   <componentDescription>cmpt_ml_predict_regression_lasso</componentDescription>
   <componentClass>com.chinasofti.ark.bdadp.component.PredictRegressionLasso</componentClass>
   <componentIcon>icon-xl.png,icon-xs.png</componentIcon>
-  <componentPid>component_pid_apply</componentPid>
+  <componentPid>component_pid_ml_predict</componentPid>
   <params>
     <param>
       <name>path</name>
       <description>path</description>
+      <type>text</type>
+      <nullable>false</nullable>
+    </param>
+    <param>
+      <name>features</name>
+      <description>features</description>
       <type>text</type>
       <nullable>false</nullable>
     </param>

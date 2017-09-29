@@ -22,7 +22,7 @@ class RegressionLinear (id: String, name: String, log: Logger)
   var path: String = null
 
   var trainDataSplit:Double = 0.0
-  var testDataSplit:Double = 0.0
+ // var testDataSplit:Double = 0.0
   var maxIter:Int = 0
   var regParam:Double = 0
   var elasticNetParam:Double = 0.0
@@ -33,7 +33,7 @@ class RegressionLinear (id: String, name: String, log: Logger)
     path = componentProps.getString("path")
 
     trainDataSplit = componentProps.getString("trainDataSplit", "0.8").toDouble
-    testDataSplit = componentProps.getString("testDataSplit", "0.2").toDouble
+   // testDataSplit = componentProps.getString("testDataSplit", "0.2").toDouble
     maxIter = componentProps.getString("maxIter","10").toInt
     regParam = componentProps.getString("regParam", "0.3").toDouble
     elasticNetParam = componentProps.getString("elasticNetParam","0.8").toDouble
@@ -68,7 +68,7 @@ class RegressionLinear (id: String, name: String, log: Logger)
       .setInputCols(featureCols)
       .setOutputCol("features")
 
-    val splits = dfResult.randomSplit(Array(trainDataSplit,testDataSplit))
+    val splits = dfResult.randomSplit(Array(trainDataSplit,1-trainDataSplit))
     val (trainingData, testData) = (splits(0), splits(1))
     val output = assembler.transform(trainingData)
 
