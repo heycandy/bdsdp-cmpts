@@ -24,7 +24,6 @@ class JDBCSink (id: String, name: String, log: Logger)
   var properties = new Properties();
 
   override def apply(inputT: StringData): Unit = {
-//    info(inputT.getRawData)
   }
 
   override def configure(componentProps: ComponentProps): Unit = {

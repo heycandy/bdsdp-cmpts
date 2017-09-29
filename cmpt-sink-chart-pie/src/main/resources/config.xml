@@ -4,7 +4,7 @@
   <componentDescription>component_sink_pie</componentDescription>
   <componentClass>com.chinasofti.ark.bdadp.component.PieChartSink</componentClass>
   <componentIcon>icon-xl.png,icon-xs.png</componentIcon>
-  <componentPid>component_pid_sink</componentPid>
+  <componentPid>component_pid_visualization</componentPid>
   <params>
     <param>
       <name>title</name>

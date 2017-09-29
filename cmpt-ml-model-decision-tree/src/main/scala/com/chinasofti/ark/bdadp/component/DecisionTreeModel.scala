@@ -3,10 +3,7 @@ package com.chinasofti.ark.bdadp.component
 import com.chinasofti.ark.bdadp.component.api.Configureable
 import com.chinasofti.ark.bdadp.component.api.data.{SparkData, StringData}
 import com.chinasofti.ark.bdadp.component.api.sink.{SinkComponent, SparkSinkAdapter}
-import org.apache.spark.ml.Pipeline
-import org.apache.spark.ml.classification.{DecisionTreeClassificationModel, DecisionTreeClassifier}
-import org.apache.spark.ml.evaluation.MulticlassClassificationEvaluator
-import org.apache.spark.ml.feature.{IndexToString, VectorAssembler, StringIndexer}
+import com.chinasofti.ark.bdadp.util.common.FileUtils
 import org.apache.spark.mllib.linalg.Vectors
 import org.apache.spark.mllib.regression.LabeledPoint
 import org.apache.spark.mllib.tree.DecisionTree
@@ -22,6 +19,7 @@ class DecisionTreeModel(id: String, name: String, log: Logger)
   SparkSinkAdapter[SparkData] with Serializable {
 
   var path: String = null
+  var isCover: Boolean = false
   var trainDataPer: Double = 0.0
   var labelCol: String = null
   var featuresCol: Array[String] = null
@@ -36,6 +34,10 @@ class DecisionTreeModel(id: String, name: String, log: Logger)
 
   override def configure(componentProps: ComponentProps): Unit = {
     path = componentProps.getString("path")
+    isCover = componentProps.getString("isCover","false").toBoolean
+    if(isCover){
+      FileUtils.checkDirExists(path)
+    }
     trainDataPer = componentProps.getString("trainDataPer", "0.7").toDouble
     labelCol = componentProps.getString("labelCol")
     featuresCol = componentProps.getString("featuresCol").split(",")
@@ -43,6 +45,7 @@ class DecisionTreeModel(id: String, name: String, log: Logger)
     maxDepth = componentProps.getString("maxDepth", "5").toInt
     maxBins = componentProps.getString("maxBins", "32").toInt
     numClasses = componentProps.getString("numClasses", "2").toInt
+
   }
 
   override def apply(inputT: SparkData): Unit = {
@@ -50,9 +53,10 @@ class DecisionTreeModel(id: String, name: String, log: Logger)
     val df = inputT.getRawData
     printInput(df)
 
-    val labelDF = df.select(labelCol)
-    val featuresDF = df.selectExpr(featuresCol: _*)
-    val parsedData = labelDF.join(featuresDF).mapPartitions(iterator => iterator.map(row => {
+    val allArr = labelCol +: featuresCol
+    val allDF = df.selectExpr(allArr: _*)
+
+    val parsedData = allDF.mapPartitions(iterator => iterator.map(row => {
       val label = row.toSeq.head.toString.toDouble
       val values = row.toSeq.tail.map(_.toString).map(_.toDouble).toArray
       LabeledPoint(label, Vectors.dense(values))
@@ -72,6 +76,8 @@ class DecisionTreeModel(id: String, name: String, log: Logger)
     val testAccuracy = labelAndPreds.filter(r =>
       r._1 == r._2).count.toDouble / testData.count
 
+    info("====== model is ======")
+    info(model.toDebugString)
     info("Test Accuracy = " + testAccuracy)
     val sc = df.sqlContext.sparkContext
     model.save(sc, path)
@@ -79,7 +85,7 @@ class DecisionTreeModel(id: String, name: String, log: Logger)
   }
 
   def printInput(df: DataFrame): Unit = {
-    ("" :: df.toString() ::
+    ("====== trainingData is ======" :: df.toString() ::
       Nil ++ df.repartition(8).take(10)).foreach(row => info(row.toString()))
   }
 }

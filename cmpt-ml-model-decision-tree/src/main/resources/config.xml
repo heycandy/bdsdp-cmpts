@@ -4,13 +4,24 @@
   <componentDescription>cmpt_ml_model_decisionTree</componentDescription>
   <componentClass>com.chinasofti.ark.bdadp.component.DecisionTreeModel</componentClass>
   <componentIcon>icon-xl.png,icon-xs.png</componentIcon>
-  <componentPid>component_pid_sink</componentPid>
+  <componentPid>component_pid_ml_model</componentPid>
   <params>
     <param>
       <name>path</name>
       <description>path</description>
       <type>text</type>
       <nullable>false</nullable>
+    </param>
+    <param>
+      <name>isCover</name>
+      <description>isCover</description>
+      <type>options</type>
+      <nullable>false</nullable>
+      <defaultOptions>
+        <option value="false" desc="FALSE" name="false"/>
+        <option value="true" desc="TRUE" name="true"/>
+      </defaultOptions>
+      <defaultValue>false</defaultValue>
     </param>
     <param>
       <name>trainDataPer</name>

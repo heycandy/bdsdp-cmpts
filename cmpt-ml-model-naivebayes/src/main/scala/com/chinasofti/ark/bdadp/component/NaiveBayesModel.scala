@@ -3,13 +3,12 @@ package com.chinasofti.ark.bdadp.component
 import com.chinasofti.ark.bdadp.component.api.Configureable
 import com.chinasofti.ark.bdadp.component.api.data.{SparkData, StringData}
 import com.chinasofti.ark.bdadp.component.api.sink.{SparkSinkAdapter, SinkComponent}
+import com.chinasofti.ark.bdadp.util.common.FileUtils
 import org.apache.spark.mllib.classification.NaiveBayes
-import org.apache.spark.mllib.evaluation.BinaryClassificationMetrics
 import org.apache.spark.mllib.linalg.Vectors
 import org.apache.spark.mllib.regression.LabeledPoint
 import org.apache.spark.sql.DataFrame
 import org.slf4j.Logger
-import org.apache.commons.lang.StringUtils
 
 /**
  * Created by water on 2017.6.28.
@@ -20,6 +19,7 @@ NaiveBayesModel(id: String, name: String, log: Logger)
   SparkSinkAdapter[SparkData] with Serializable {
 
   var path: String = null
+  var isCover: Boolean = false
   var trainDataPer: Double = 0.0
   var labelCol: String = null
   var featuresCol: Array[String] = null
@@ -31,6 +31,10 @@ NaiveBayesModel(id: String, name: String, log: Logger)
 
   override def configure(componentProps: ComponentProps): Unit = {
     path = componentProps.getString("path")
+    isCover = componentProps.getString("isCover","false").toBoolean
+    if(isCover){
+      FileUtils.checkDirExists(path)
+    }
     trainDataPer = componentProps.getString("trainDataPer", "0.7").toDouble
     labelCol = componentProps.getString("labelCol")
     featuresCol = componentProps.getString("featuresCol").split(",")
@@ -43,10 +47,9 @@ NaiveBayesModel(id: String, name: String, log: Logger)
 
     printInput(df)
 
-    val labelDF = df.select(labelCol)
-    val featuresDF = df.selectExpr(featuresCol: _*)
-
-    val parsedData = labelDF.join(featuresDF).mapPartitions(iterator => iterator.map(row => {
+    val allArr = labelCol +: featuresCol
+    val allDF = df.selectExpr(allArr: _*)
+    val parsedData = allDF.mapPartitions(iterator => iterator.map(row => {
       val label = row.toSeq.head.toString.toDouble
       val values = row.toSeq.tail.map(_.toString).map(_.toDouble).toArray
       LabeledPoint(label, Vectors.dense(values))
@@ -60,15 +63,17 @@ NaiveBayesModel(id: String, name: String, log: Logger)
 
     val predictionAndLabel = testData.map(p => (model.predict(p.features), p.label))
     val testAccuracy = 1.0 * predictionAndLabel.filter(x => x._1 == x._2).count() / testData.count()
-    info("Test Accuracy = " + testAccuracy)
 
+//    info("====== the model modelType is ======")
+//    info(model.modelType)
+    info("Test Accuracy = " + testAccuracy)
     val sc = df.sqlContext.sparkContext
     model.save(sc, path)
 
   }
 
   def printInput(df: DataFrame): Unit = {
-    ("" :: df.toString() ::
+    ("====== trainingData is ======" :: df.toString() ::
       Nil ++ df.repartition(8).take(10)).foreach(row => info(row.toString()))
   }
 }

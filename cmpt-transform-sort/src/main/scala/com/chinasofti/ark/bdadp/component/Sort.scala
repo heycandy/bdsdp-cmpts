@@ -17,11 +17,12 @@ class Sort(id: String, name: String, log: Logger)
 
   override def apply(inputT: SparkData): SparkData = {
     var df = inputT.getRawData
+    val col = df.col(colName)
     if ("desc".equalsIgnoreCase(sortDirection)) {
-      df = df.sort(df.col(colName).desc)
+      df = df.sort(col.desc)
     }
     else {
-      df = df.sort(df.col(colName).asc)
+      df = df.sort(col.asc)
     }
     Builder.build(df)
   }

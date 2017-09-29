@@ -47,6 +47,9 @@ public class Mail extends RunnableComponent implements Configureable {
       String subject = "";
       sendMail(subject,context,receiver);
     }
+    else{
+      sendMail("日志","错误日志",receiver);
+    }
 
   }
 

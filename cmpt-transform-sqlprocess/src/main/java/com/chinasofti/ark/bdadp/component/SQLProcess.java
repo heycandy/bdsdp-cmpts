@@ -50,7 +50,7 @@ public class SQLProcess extends RunnableComponent implements Configureable, Opti
     sql = props.getString("jdbc_sql");
     inputStr = props.getString("inputStr");
     outputStr = props.getString("outputStr");
-    resultCode = props.getString("resultCode","0").trim();
+    resultCode = props.getString("resultCode").trim();
 
     StringUtils.assertIsBlank(driver, url, user, pwd, sql, inputStr, outputStr);
 
@@ -152,10 +152,10 @@ public class SQLProcess extends RunnableComponent implements Configureable, Opti
 
         index_get++;
       }
-
-      if (!resultCode.equals(runCode)) {
+      if (!StringUtils.isNulOrEmpty(resultCode) && !resultCode.equals(runCode)) {
         throw new SQLException(String.format("Code: %s, Msg: %s", runCode, resultMessage));
       }
+
 
     } catch (Exception e) {
       throw new RuntimeException(e.getMessage(), e);
