@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component>
+  <componentName>component_transform_graph_x</componentName>
+  <componentDescription>component_transform_graph_x</componentDescription>
+  <componentClass>com.chinasofti.ark.bdadp.component.GraphXComponent</componentClass>
+  <componentIcon>icon-xl.png,icon-xs.png</componentIcon>
+  <componentPid>component_pid_apply</componentPid>
+  <params>
+    <param>
+      <name>sourceIdField</name>
+      <description>Source Field</description>
+      <type>text</type>
+      <nullable>false</nullable>
+    </param>
+    <param>
+      <name>targetIdField</name>
+      <description>Target Field</description>
+      <type>text</type>
+      <nullable>false</nullable>
+    </param>
+    <param>
+      <name>attrIdField</name>
+      <description>Attr. Field</description>
+      <type>text</type>
+      <nullable>false</nullable>
+    </param>
+    <param>
+      <name>minDepth</name>
+      <description>Min. Depth</description>
+      <type>number</type>
+      <nullable>false</nullable>
+    </param>
+    <param>
+      <name>maxDepth</name>
+      <description>Max. Depth</description>
+      <type>number</type>
+      <nullable>false</nullable>
+    </param>
+    <param>
+      <name>maxIterations</name>
+      <description>Max. Iterations</description>
+      <type>number</type>
+      <nullable>false</nullable>
+    </param>
+
+  </params>
+</component>

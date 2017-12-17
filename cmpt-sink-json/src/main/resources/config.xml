@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component>
+  <componentName>component_sink_json</componentName>
+  <componentDescription>component_sink_json</componentDescription>
+  <componentClass>com.chinasofti.ark.bdadp.component.JSONSink</componentClass>
+  <componentIcon>icon-xl.png,icon-xs.png</componentIcon>
+  <componentPid>component_pid_sink</componentPid>
+  <params>
+    <param>
+      <name>path</name>
+      <description>path</description>
+      <type>text</type>
+      <nullable>true</nullable>
+    </param>
+    <param>
+      <name>saveMode</name>
+      <description>saveMode</description>
+      <type>options</type>
+      <nullable>true</nullable>
+      <defaultOptions>
+        <option name="error" desc="error" value="error"/>
+        <option name="append" desc="append" value="append"/>
+        <option name="overwrite" desc="overwrite" value="overwrite"/>
+        <option name="ignore" desc="ignore" value="ignore"/>
+      </defaultOptions>
+      <defaultValue>error</defaultValue>
+    </param>
+    <param>
+      <name>numPartitions</name>
+      <description>numPartitions</description>
+      <type>text</type>
+      <nullable>true</nullable>
+    </param>
+
+  </params>
+</component>

@@ -68,7 +68,8 @@
     <module>cmpt-ml-model-collaborative-filtering-als</module>
     <module>cmpt-ml-predict-collaborative-filtering-als-user-recommend</module>
     <module>cmpt-ml-predict-collaborative-filtering-products-recommend</module>
-
+    <module>cmpt-sink-parquet</module>
+    <module>cmpt-sink-json</module>
   </modules>
 
   <artifactId>bdsdp-cmpts</artifactId>

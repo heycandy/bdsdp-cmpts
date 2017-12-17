@@ -6,37 +6,27 @@
     <groupId>com.chinasofti.ark</groupId>
     <version>1.0-SNAPSHOT</version>
   </parent>
+  <properties>
+    <scala.version>2.10.6</scala.version>
+  </properties>
   <modelVersion>4.0.0</modelVersion>
-  <artifactId>cmpt-sink-logger</artifactId>
-  <inceptionYear>2008</inceptionYear>
-
-  <repositories>
-    <repository>
-      <id>scala-tools.org</id>
-      <name>Scala-Tools Maven2 Repository</name>
-      <url>http://scala-tools.org/repo-releases</url>
-    </repository>
-  </repositories>
-
-  <pluginRepositories>
-    <pluginRepository>
-      <id>scala-tools.org</id>
-      <name>Scala-Tools Maven2 Repository</name>
-      <url>http://scala-tools.org/repo-releases</url>
-    </pluginRepository>
-  </pluginRepositories>
-
+  <artifactId>cmpt-transform-graph-x</artifactId>
   <dependencies>
+    <dependency>
+      <groupId>org.scala-lang</groupId>
+      <artifactId>scala-library</artifactId>
+      <version>${scala.version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.apache.spark</groupId>
+      <artifactId>spark-graphx_${scala.binary.version}</artifactId>
+      <version>1.6.3</version>
+    </dependency>
     <dependency>
       <groupId>org.apache.spark</groupId>
       <artifactId>spark-sql_${scala.binary.version}</artifactId>
     </dependency>
-
-    <dependency>
-      <groupId>org.apache.spark</groupId>
-      <artifactId>spark-streaming_${scala.binary.version}</artifactId>
-    </dependency>
-
   </dependencies>
 
   <build>
